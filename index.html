@@ -10,9 +10,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
+  <!-- Leaflet CSS & JS para Cartografía Satelital Dinámica -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
   <style>
     /* ==========================================================================
-       SISTEMA VISUAL ARQUITECTÓNICO: MINIMALISMO PURO, CERO TEXTO DE MÁS
+       ESTÉTICA EDITORIAL: MONOGRAFÍA ARQUITECTÓNICA PURA (BLANCO NÍVEO & LUZ)
        ========================================================================== */
     :root {
       --bg-pure: #ffffff;
@@ -20,6 +24,7 @@
       --bg-subtle: #f4f6fb;
       
       --text-main: #0c121e;
+      --text-body: #2d3748;
       --text-muted: #5a6a85;
       --text-faint: #94a3b8;
       
@@ -30,6 +35,7 @@
       --accent-alert: #e11d48;
       
       --border-delicate: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.16);
       
       --font-serif: "Playfair Display", Georgia, serif;
       --font-sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -50,28 +56,28 @@
 
     body {
       background-color: var(--bg-pure);
-      color: var(--text-main);
+      color: var(--text-body);
       font-family: var(--font-sans);
-      font-size: 1rem;
-      line-height: 1.6;
+      font-size: 1.05rem;
+      line-height: 1.7;
       position: relative;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
     /* ==========================================================================
-       CABECERA DISCRETA DE ENTREGA DE MAESTRÍA
+       BARRA DE AUTORÍA Y CONTROL DE SUSTENTACIÓN
        ========================================================================== */
-    .arch-header {
+    .arch-nav {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 56px;
+      height: 58px;
       padding: 0 4vw;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-delicate);
       z-index: 1000;
       display: flex;
@@ -79,15 +85,15 @@
       justify-content: space-between;
     }
 
-    .header-left {
+    .nav-brand {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.2rem;
     }
 
-    .arch-badge {
+    .nav-thesis-tag {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       font-weight: 600;
@@ -98,14 +104,14 @@
       border-radius: 4px;
     }
 
-    .authors-title {
+    .nav-authors {
       font-family: var(--font-sans);
-      font-size: 0.86rem;
+      font-size: 0.88rem;
       font-weight: 600;
       color: var(--text-main);
     }
 
-    .header-nav {
+    .nav-stepper {
       display: flex;
       align-items: center;
       gap: 0.6rem;
@@ -113,21 +119,21 @@
       font-size: 0.76rem;
     }
 
-    .slide-badge {
+    .step-badge {
       font-weight: 600;
       color: var(--accent-hk);
       background: rgba(2, 132, 199, 0.08);
-      padding: 2px 8px;
+      padding: 3px 9px;
       border-radius: 4px;
       border: 1px solid rgba(2, 132, 199, 0.2);
     }
 
-    .nav-arrow {
+    .nav-arrow-btn {
       background: #ffffff;
       border: 1px solid var(--border-delicate);
       color: var(--text-main);
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       border-radius: 6px;
       display: inline-flex;
       align-items: center;
@@ -136,14 +142,14 @@
       transition: all 0.15s ease;
     }
 
-    .nav-arrow:hover {
+    .nav-arrow-btn:hover {
       border-color: var(--accent-hk);
       color: var(--accent-hk);
     }
 
     .progress-bar-line {
       position: fixed;
-      top: 55px;
+      top: 57px;
       left: 0;
       height: 2px;
       width: 0%;
@@ -153,112 +159,284 @@
     }
 
     /* ==========================================================================
-       ROLL-UP ARQUITECTÓNICO LINEAL (SLIDE 1 A 62)
+       ROLL-UP NARRATIVO ARQUITECTÓNICO (DESPLIEGUE CONTINUO)
        ========================================================================== */
-    .arch-stream {
-      max-width: 1080px;
+    .monograph-stream {
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 80px 1.5rem 8rem;
+      padding: 85px 2rem 10rem;
     }
 
-    .arch-slide-block {
-      padding: 3.5rem 0 4rem;
+    .monograph-beat {
+      padding: 4.5rem 0 5rem;
       border-bottom: 1px solid var(--border-delicate);
       position: relative;
     }
 
-    .arch-slide-block:last-child {
+    .monograph-beat:last-child {
       border-bottom: none;
     }
 
-    .slide-meta {
+    .beat-kicker-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 1rem;
       font-family: var(--font-mono);
       font-size: 0.72rem;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--text-muted);
     }
 
-    .slide-num-tag {
+    .beat-num {
       font-weight: 600;
       color: var(--accent-hk);
     }
 
-    .slide-heading {
+    .beat-title {
       font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      font-size: clamp(2rem, 3.4vw, 2.6rem);
       font-weight: 600;
-      line-height: 1.25;
+      line-height: 1.2;
       color: var(--text-main);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.8rem;
     }
 
-    .slide-subtitle {
-      font-size: 1.05rem;
+    .beat-subtitle {
+      font-size: 1.15rem;
+      line-height: 1.7;
       color: var(--text-muted);
       font-weight: 400;
-      margin-bottom: 1.5rem;
-      max-width: 900px;
+      margin-bottom: 2rem;
+      max-width: 960px;
     }
 
-    .slide-subtitle strong {
+    .beat-subtitle strong {
       color: var(--text-main);
       font-weight: 600;
     }
 
-    /* Lámina Gráfica Grande y Clara */
-    .arch-plate-frame {
-      border-radius: 8px;
-      overflow: hidden;
-      background: #f8fafc;
-      border: 1px solid var(--border-delicate);
-      box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.06);
-      cursor: zoom-in;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* Portada Monumental Hero */
+    .hero-thesis-cover {
+      min-height: 75vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border-delicate);
     }
 
-    .arch-plate-frame:hover {
-      box-shadow: 0 12px 30px -6px rgba(2, 132, 199, 0.15);
-      transform: translateY(-2px);
+    .hero-thesis-tag {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-hk);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
     }
 
-    .arch-plate-frame img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
+    .hero-thesis-title {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 5.5vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+      margin-bottom: 2rem;
+    }
+
+    .hero-thesis-question {
+      font-family: var(--font-serif);
+      font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+      font-style: italic;
+      color: var(--accent-hk);
+      line-height: 1.5;
+      padding-left: 1.5rem;
+      border-left: 3px solid var(--accent-hk);
+      margin-bottom: 3rem;
+      max-width: 880px;
+    }
+
+    .hero-authors-block {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border-delicate);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-authors-block strong {
+      color: var(--text-main);
     }
 
     /* ==========================================================================
-       CANVAS 3D INTERACTIVOS INTEGRADOS EN SUS MOMENTOS EXACTOS
+       CARTOGRAFÍA SATELITAL NATIVA INTEGRADA EN TIEMPO REAL
        ========================================================================== */
-    .network-stage-frame {
-      border-radius: 10px;
+    .map-frame-block {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-delicate);
+      box-shadow: 0 8px 30px -5px rgba(15, 23, 42, 0.08);
+      background: #0c121e;
+      margin: 2rem 0;
+      position: relative;
+    }
+
+    .map-header-tab {
+      padding: 0.75rem 1.25rem;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-delicate);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--text-main);
+    }
+
+    .map-leaflet-box {
+      width: 100%;
+      height: 480px;
+      position: relative;
+    }
+
+    .map-floating-pill {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      z-index: 500;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(8px);
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border-delicate);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-main);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ==========================================================================
+       ESQUEMAS ARQUITECTÓNICOS NATIVOS & MATRICES VECTORIALES
+       ========================================================================== */
+    .arch-diagram-card {
+      border-radius: 12px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-delicate);
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .diagram-title {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .matrix-grid-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .matrix-grid-duo { grid-template-columns: 1fr; }
+    }
+
+    .matrix-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      padding: 1.5rem;
       background: #ffffff;
       border: 1px solid var(--border-delicate);
-      box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.05);
+      border-radius: 8px;
+    }
+
+    .matrix-col-head {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid;
+    }
+
+    .matrix-item {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-body);
+    }
+
+    .matrix-item strong {
+      color: var(--text-main);
+    }
+
+    /* Tarjeta de Cita Textual de Impacto */
+    .quote-plate {
+      margin: 2.5rem 0;
+      padding: 2rem 2.5rem;
+      background: linear-gradient(90deg, rgba(2, 132, 199, 0.04), transparent);
+      border-left: 4px solid var(--accent-hk);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .quote-plate-text {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--text-main);
+      margin-bottom: 0.75rem;
+    }
+
+    .quote-plate-source {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-hk);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       CANVAS 3D INTERACTIVOS PARA REDES TOPOLÓGICAS
+       ========================================================================== */
+    .network-stage-frame {
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid var(--border-delicate);
+      box-shadow: 0 8px 25px -4px rgba(15, 23, 42, 0.06);
       overflow: hidden;
-      margin-top: 1.5rem;
+      margin: 2rem 0;
     }
 
     .stage-bar {
-      padding: 0.6rem 1rem;
+      padding: 0.75rem 1.25rem;
       background: var(--bg-surface);
       border-bottom: 1px solid var(--border-delicate);
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 0.6rem;
+      gap: 0.8rem;
     }
 
     .stage-label {
       font-family: var(--font-mono);
-      font-size: 0.74rem;
+      font-size: 0.76rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -267,18 +445,18 @@
     .stage-controls {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
     }
 
     .speed-box {
       display: flex;
       align-items: center;
-      gap: 0.3rem;
+      gap: 0.4rem;
       font-family: var(--font-mono);
       font-size: 0.7rem;
       color: var(--text-muted);
       background: #ffffff;
-      padding: 2px 6px;
+      padding: 2px 7px;
       border-radius: 4px;
       border: 1px solid var(--border-delicate);
     }
@@ -296,8 +474,8 @@
     .speed-range::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 10px;
-      height: 10px;
+      width: 11px;
+      height: 11px;
       border-radius: 50%;
       background: var(--accent-hk);
       cursor: pointer;
@@ -305,11 +483,11 @@
 
     .stage-btn {
       font-family: var(--font-mono);
-      font-size: 0.68rem;
+      font-size: 0.7rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       font-weight: 600;
-      padding: 3px 8px;
+      padding: 3px 9px;
       border-radius: 4px;
       background: #ffffff;
       border: 1px solid var(--border-delicate);
@@ -332,7 +510,7 @@
     .canvas-box {
       position: relative;
       width: 100%;
-      height: 420px;
+      height: 450px;
       background: radial-gradient(circle at center, #ffffff 40%, #f8fafc 100%);
       cursor: grab;
       overflow: hidden;
@@ -349,13 +527,13 @@
 
     .canvas-note {
       position: absolute;
-      bottom: 8px;
-      left: 10px;
+      bottom: 10px;
+      left: 12px;
       font-family: var(--font-mono);
-      font-size: 0.68rem;
+      font-size: 0.7rem;
       color: var(--text-faint);
       background: rgba(255, 255, 255, 0.9);
-      padding: 2px 6px;
+      padding: 3px 8px;
       border-radius: 4px;
       border: 1px solid var(--border-delicate);
       pointer-events: none;
@@ -363,17 +541,17 @@
 
     .canvas-inspector {
       position: absolute;
-      top: 10px;
-      right: 10px;
-      max-width: 280px;
+      top: 12px;
+      right: 12px;
+      max-width: 300px;
       background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(10px);
       border: 1px solid var(--border-delicate);
       border-radius: 8px;
-      padding: 8px 12px;
+      padding: 10px 14px;
       box-shadow: 0 6px 20px -4px rgba(15, 23, 42, 0.08);
-      font-size: 0.8rem;
-      line-height: 1.45;
+      font-size: 0.82rem;
+      line-height: 1.5;
       pointer-events: none;
       opacity: 0;
       transform: translateY(-4px);
@@ -387,7 +565,7 @@
 
     .inspector-title {
       font-family: var(--font-mono);
-      font-size: 0.72rem;
+      font-size: 0.74rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       font-weight: 700;
@@ -395,90 +573,28 @@
     }
 
     /* ==========================================================================
-       MODAL LIGHTBOX
-       ========================================================================== */
-    .lightbox-wrap {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(12, 18, 30, 0.95);
-      backdrop-filter: blur(16px);
-      z-index: 2000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 3vw;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .lightbox-wrap.active {
-      display: flex;
-      opacity: 1;
-    }
-
-    .lightbox-content {
-      max-width: 92vw;
-      max-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-    }
-
-    .lightbox-img {
-      max-width: 100%;
-      max-height: 82vh;
-      object-fit: contain;
-      border-radius: 4px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    }
-
-    .lightbox-title {
-      margin-top: 0.8rem;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-      color: #e2e8f0;
-    }
-
-    .lightbox-close {
-      position: absolute;
-      top: -36px;
-      right: 0;
-      background: none;
-      border: none;
-      color: #ffffff;
-      font-family: var(--font-mono);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    /* ==========================================================================
        COLOFÓN FINAL
        ========================================================================== */
     .colophon-sec {
-      padding: 5rem 0 2rem;
+      padding: 6rem 0 3rem;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
+      gap: 2rem;
     }
 
     .colophon-quote {
-      max-width: 720px;
+      max-width: 780px;
       font-family: var(--font-serif);
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-style: italic;
       line-height: 1.6;
       color: var(--text-main);
     }
 
     .colophon-card {
-      padding: 1rem 2rem;
+      padding: 1.25rem 2.5rem;
       background: var(--bg-surface);
       border: 1px solid var(--border-delicate);
       border-radius: 8px;
@@ -488,555 +604,470 @@
 <body>
 
   <!-- CABECERA SUPERIOR DISCRETA -->
-  <header class="arch-header">
-    <div class="header-left">
-      <span class="arch-badge">Investigación de Maestría</span>
-      <div class="authors-title">Alejandra Gómez • Ana Casas • Juan Trujillo</div>
+  <header class="arch-nav">
+    <div class="nav-brand">
+      <span class="nav-thesis-tag">Investigación de Maestría</span>
+      <div class="nav-authors">Alejandra Gómez • Ana Casas • Juan Trujillo</div>
     </div>
 
-    <div class="header-nav">
-      <span>Diapositiva</span>
-      <span class="slide-badge" id="slideBadge">01 / 62</span>
-      <button class="nav-arrow" onclick="prevSlide()" title="Anterior">←</button>
-      <button class="nav-arrow" onclick="nextSlide()" title="Siguiente">→</button>
+    <div class="nav-stepper">
+      <span>Capítulo</span>
+      <span class="step-badge" id="stepBadge">01 / 10</span>
+      <button class="nav-arrow-btn" onclick="prevChapter()" title="Capítulo Anterior">←</button>
+      <button class="nav-arrow-btn" onclick="nextChapter()" title="Siguiente Capítulo">→</button>
     </div>
   </header>
 
-  <!-- BARRA DE PROGRESO DE LECTURA -->
+  <!-- LÍNEA DE PROGRESO DE LECTURA -->
   <div class="progress-bar-line" id="progressBar"></div>
 
-  <!-- STREAM DEL ROLL-UP COMPLETO (SLIDE 1 A 62) -->
-  <main class="arch-stream" id="archStream">
-    <!-- Render dinámico minimalista -->
+  <!-- CONTENEDOR PRINCIPAL DE LA MONOGRAFÍA -->
+  <main class="monograph-stream">
+
+    <!-- 00. PORTADA HERO MONUMENTAL (SLIDE 1) -->
+    <section class="hero-thesis-cover" id="cap-01">
+      <div class="hero-thesis-tag">✦ Tesis de Maestría • Topologías de la Densidad y el Poder</div>
+      <h1 class="hero-thesis-title">Hong Kong & Shenzhen</h1>
+      <div class="hero-thesis-question">
+        ¿Qué modelo de ciudad es mejor: el de Hong Kong o el de Shenzhen?
+      </div>
+      <div class="hero-authors-block">
+        <div>Autoría Colectiva: <strong>Alejandra Gómez • Ana Casas • Juan Trujillo</strong></div>
+        <div>Área: <strong>Urbanismo, Densidad & Infraestructuras Críticas</strong></div>
+        <div>Casos de Estudio: <strong>Delta del Río Perla • Çatalhöyük • Bogotá (Kennedy)</strong></div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         01. HONG KONG: RELIEVE CONFINADO & RÉGIMEN FINANCIERO (SLIDES 2 A 7)
+         ========================================================================== -->
+    <article class="monograph-beat" id="cap-02">
+      <div class="beat-kicker-bar">
+        <span class="beat-num">01. Hong Kong</span>
+        <span>Guangdong → Desembocadura del Río Perla</span>
+      </div>
+
+      <h2 class="beat-title">Morfología Insular & Confinamiento de la Densidad</h2>
+      <p class="beat-subtitle">
+        De territorio pesquero cedido en <strong>1842 tras la Primera Guerra del Opio</strong> a metrópolis vertical hipercompacta. <strong>Casi el 40% del territorio está protegido como parques rurales</strong>, concentrando todo el desarrollo en una franja reducida sobre estaciones de transporte masivo (TOD).
+      </p>
+
+      <!-- MAPA SATELITAL REAL: HONG KONG & PARQUES RURALES -->
+      <div class="map-frame-block">
+        <div class="map-header-tab">
+          <span>🛰️ Cartografía Satelital: Victoria Harbour, Kowloon & Parques Orográficos</span>
+          <span style="color: var(--accent-hk);">22.2855° N, 114.1577° E</span>
+        </div>
+        <div class="map-leaflet-box" id="mapHK"></div>
+        <div class="map-floating-pill">40% Parques Rurales Protegidos • Relieve Insular</div>
+      </div>
+
+      <!-- RED SISTÉMICA 3D DE HONG KONG (SLIDE 7) -->
+      <div class="network-stage-frame">
+        <div class="stage-bar">
+          <div class="stage-label" style="color: var(--accent-hk);">✦ Topología 3D: Red Sistémica de Hong Kong (5 Dimensiones)</div>
+          <div class="stage-controls">
+            <div class="speed-box">
+              <span>Vel:</span>
+              <input type="range" class="speed-range" id="speed0" min="0.2" max="3" step="0.1" value="1.0" />
+              <span id="speedVal0">1.0x</span>
+            </div>
+            <button class="stage-btn" onclick="triggerStagePulse(0)">⚡ Pulso</button>
+            <button class="stage-btn" onclick="toggleAutoRotate(0, this)">🌀 Órbita</button>
+            <button class="stage-btn" onclick="resetStageNodes(0)">⟲ Reset</button>
+          </div>
+        </div>
+        <div class="canvas-box" id="viewBox0">
+          <canvas id="stageCanvas0"></canvas>
+          <div class="canvas-note">🖱️ Rotar 360° • Arrastrar Nodos con física elástica • Clic para fijar datos</div>
+          <div class="canvas-inspector" id="inspect0">
+            <div class="inspector-title" id="inspectTitle0" style="color: var(--accent-hk);">Nodo</div>
+            <div id="inspectDesc0" style="color: var(--text-muted);">Detalles.</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ==========================================================================
+         02. SHENZHEN: ZONA ECONÓMICA ESPECIAL & METAMORFOSIS (SLIDES 8 A 13)
+         ========================================================================== -->
+    <article class="monograph-beat" id="cap-03">
+      <div class="beat-kicker-bar">
+        <span class="beat-num" style="color: var(--accent-sz);">02. Shenzhen</span>
+        <span>Al Norte del Río Shenzhen</span>
+      </div>
+
+      <h2 class="beat-title">La Metamorfosis Estatal: De Pueblo Rural a +17M de Habitantes</h2>
+      <p class="beat-subtitle">
+        Declarada <strong>Zona Económica Especial en 1980</strong> y facultada con <strong>poder legislativo delegado en 1992</strong>. De pocas decenas de miles de habitantes en cuatro décadas pasó a albergar las sedes globales de <strong>Huawei, Tencent, DJI, BYD</strong> y la infraestructura financiera de <strong>ChiNext</strong>.
+      </p>
+
+      <!-- MAPA SATELITAL REAL: SHENZHEN CBD & NANSHAN -->
+      <div class="map-frame-block">
+        <div class="map-header-tab">
+          <span>🛰️ Cartografía Satelital: Futian, Nanshan & Eje Tecnológico</span>
+          <span style="color: var(--accent-sz);">22.5350° N, 114.0550° E</span>
+        </div>
+        <div class="map-leaflet-box" id="mapSZ"></div>
+        <div class="map-floating-pill">Bolsa ChiNext • Conglomerados Ancla • Aldeas Urbanas</div>
+      </div>
+
+      <!-- RED SISTÉMICA 3D DE SHENZHEN (SLIDE 13) -->
+      <div class="network-stage-frame">
+        <div class="stage-bar">
+          <div class="stage-label" style="color: var(--accent-sz);">✦ Topología 3D: Red Sistémica de Shenzhen (5 Dimensiones)</div>
+          <div class="stage-controls">
+            <div class="speed-box">
+              <span>Vel:</span>
+              <input type="range" class="speed-range" id="speed1" min="0.2" max="3" step="0.1" value="1.0" />
+              <span id="speedVal1">1.0x</span>
+            </div>
+            <button class="stage-btn" onclick="triggerStagePulse(1)">⚡ Pulso</button>
+            <button class="stage-btn" onclick="toggleAutoRotate(1, this)">🌀 Órbita</button>
+            <button class="stage-btn" onclick="resetStageNodes(1)">⟲ Reset</button>
+          </div>
+        </div>
+        <div class="canvas-box" id="viewBox1">
+          <canvas id="stageCanvas1"></canvas>
+          <div class="canvas-note">🖱️ Rotar 360° • Arrastrar Nodos • Clic para fijar datos</div>
+          <div class="canvas-inspector" id="inspect1">
+            <div class="inspector-title" id="inspectTitle1" style="color: var(--accent-sz);">Nodo</div>
+            <div id="inspectDesc1" style="color: var(--text-muted);">Detalles.</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ==========================================================================
+         03. DOS SOLUCIONES OPUESTAS & SMART CITIES (SLIDES 14 A 19)
+         ========================================================================== -->
+    <article class="monograph-beat" id="cap-04">
+      <div class="beat-kicker-bar">
+        <span class="beat-num">03. Gobernanza & Datos</span>
+        <span>Comparativa Institucional</span>
+      </div>
+
+      <h2 class="beat-title">Dos Soluciones Distintas a un Mismo Problema</h2>
+      <p class="beat-subtitle">
+        <strong>¿Quién concentra la capacidad de decisión sobre datos, infraestructura y riesgo cuando la ciudad se digitaliza?</strong> Hong Kong y Shenzhen no son dos versiones con distinta velocidad: son <strong>dos respuestas institucionales opuestas</strong> al dilema de la Smart City.
+      </p>
+
+      <!-- MATRIZ COMPARATIVA NATIVA -->
+      <div class="arch-diagram-card">
+        <div class="diagram-title">Matriz Comparada de Gobernanza Urbana y Digital</div>
+        <div class="matrix-grid-duo">
+          <div class="matrix-col" style="border-top: 3px solid var(--accent-hk);">
+            <div class="matrix-col-head" style="color: var(--accent-hk); border-color: var(--accent-hk);">
+              Hong Kong (Hub de 4 Pilares)
+            </div>
+            <div class="matrix-item"><strong>Marco Jurídico:</strong> Common Law, mercados abiertos y Ordenanza de Protección de Datos (PDPO: hasta 2 años de prisión y HK$50k).</div>
+            <div class="matrix-item"><strong>Estructura Económica:</strong> Comercio/Logística (21.2%), Finanzas (19.7%), Serv. Profesionales (12.0%), Turismo (4.5%).</div>
+            <div class="matrix-item"><strong>Inversión en I+D:</strong> 0.99% del PIB (2020) con gestión fragmentada.</div>
+          </div>
+
+          <div class="matrix-col" style="border-top: 3px solid var(--accent-sz);">
+            <div class="matrix-col-head" style="color: var(--accent-sz); border-color: var(--accent-sz);">
+              Shenzhen (Modelo Estatal-Corporativo)
+            </div>
+            <div class="matrix-item"><strong>Marco Jurídico:</strong> Poder legislativo delegado y zona piloto de socialismo con características chinas.</div>
+            <div class="matrix-item"><strong>Estructura Económica:</strong> 20 clústeres estratégicos estatales ejecutados por gigantes ancla (Huawei, Tencent, DJI, BYD, ZTE).</div>
+            <div class="matrix-item"><strong>Inversión en I+D:</strong> 6.46% del PIB (2024) liderando patentes globales por 21 años consecutivos.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CITA TEXTUAL CRÍTICA (SLIDES 18 Y 19) -->
+      <div class="quote-plate">
+        <div class="quote-plate-text">
+          «Embrace innovation and technology to build a world-famed Smart Hong Kong characterised by a strong economy and high quality of living.»
+        </div>
+        <div class="quote-plate-source">Blueprint de Innovación y Tecnología de Hong Kong (2022) — Jerarquía: Economía fuerte primero, calidad de vida después.</div>
+      </div>
+    </article>
+
+    <!-- ==========================================================================
+         04. ZONAS DE SUTURA: «UNA ZONA, DOS PARQUES» (SLIDES 20 A 30)
+         ========================================================================== -->
+    <article class="monograph-beat" id="cap-05">
+      <div class="beat-kicker-bar">
+        <span class="beat-num">04. Sutura Territorial</span>
+        <span>«Una Zona, Dos Parques»</span>
+      </div>
+
+      <h2 class="beat-title">Qianhai & Lok Ma Chau Loop: La Interfaz Diseñada</h2>
+      <p class="beat-subtitle">
+        Enclaves físicos diseñados para conectar ambos mundos jurídicos. <strong>Qianhai</strong> opera bajo reglas híbridas con <strong>67 menciones a Hong Kong</strong> en su Plan 2021. El <strong>HSITP (Lok Ma Chau Loop)</strong> es tierra ganada al río dedicada <strong>100% a investigación y desarrollo productivo</strong> sin vivienda.
+      </p>
+
+      <!-- MAPA SATELITAL REAL: QIANHAI Y LOK MA CHAU LOOP -->
+      <div class="map-frame-block">
+        <div class="map-header-tab">
+          <span>🛰️ Cartografía Satelital: Zonas de Sutura (Qianhai & Lok Ma Chau Loop)</span>
+          <span style="color: var(--accent-hk);">Frontera Fluvial Shenzhen-HK</span>
+        </div>
+        <div class="map-leaflet-box" id="mapSutura"></div>
+        <div class="map-floating-pill">Qianhai Zone • Lok Ma Chau Loop • HSITP</div>
+      </div>
+    </article>
+
+    <!-- ==========================================================================
+         05. EL SISTEMA CIRCULATORIO CONJUNTO & PARADOJAS (SLIDES 31 A 40)
+         ========================================================================== -->
+    <article class="monograph-beat" id="cap-06">
+      <div class="beat-kicker-bar">
+        <span class="beat-num">05. Simbiosis Regional</span>
+        <span>Un Solo Sistema Circulatorio</span>
+      </div>
+
+      <h2 class="beat-title">El Sistema Circulatorio Conjunto & Sus Paradojas</h2>
+      <p class="beat-subtitle">
+        No es una simple comparación: <strong>es un solo sistema circulatorio con dos centros de decisión</strong>. Integración hídrica (Río Dongjiang), energética (Central Nuclear Daya Bay), ecológica (manglares Mai Po-Futian) y financiera (Fondo Gran Bahía).
+      </p>
+
+      <!-- RED CONJUNTA 3D INTERACTIVA (SLIDE 31) -->
+      <div class="network-stage-frame">
+        <div class="stage-bar">
+          <div class="stage-label" style="color: var(--accent-hk);">✦ Topología 3D: Corredor Simbiótico Transfronterizo (HK ⇄ SZ)</div>
+          <div class="stage-controls">
+            <div class="speed-box">
+              <span>Vel:</span>
+              <input type="range" class="speed-range" id="speed2" min="0.2" max="3" step="0.1" value="1.0" />
+              <span id="speedVal2">1.0x</span>
+            </div>
+            <button class="stage-btn" onclick="triggerStagePulse(2)">⚡ Pulso</button>
+            <button class="stage-btn" onclick="toggleAutoRotate(2, this)">🌀 Órbita</button>
+            <button class="stage-btn" onclick="resetStageNodes(2)">⟲ Reset</button>
+          </div>
+        </div>
+        <div class="canvas-box" id="viewBox2">
+          <canvas id="stageCanvas2"></canvas>
+          <div class="canvas-note">🖱️ Rotar 360° • Arrastrar Nodos • Clic para fijar datos</div>
+          <div class="canvas-inspector" id="inspect2">
+            <div class="inspector-title" id="inspectTitle2" style="color: var(--accent-hk);">Nodo</div>
+            <div id="inspectDesc2" style="color: var(--text-muted);">Detalles.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRINCIPIOS TEÓRICOS & RIESGO HÍDRICO (SLIDES 37 A 40) -->
+      <div class="matrix-grid-duo" style="margin-top: 2rem;">
+        <div class="matrix-col" style="border-top: 3px solid var(--accent-sz);">
+          <div class="matrix-col-head" style="color: var(--accent-sz); border-color: var(--accent-sz);">Principio de Innovación (Slide 37)</div>
+          <div class="matrix-item">
+            <strong>La innovación surge de la diversidad y la incertidumbre;</strong> la planificación centralizada tiende a reducir ambas en nombre de la eficiencia. Caso: Huaqiangbei orgánico (22 mercados en 1.45 km²) vs. éxodo de 140.000 profesionales tras la Ley de Seguridad Nacional en HK.
+          </div>
+        </div>
+
+        <div class="matrix-col" style="border-top: 3px solid var(--accent-alert);">
+          <div class="matrix-col-head" style="color: var(--accent-alert); border-color: var(--accent-alert);">Riesgo Centralizado (Slide 38–40)</div>
+          <div class="matrix-item">
+            <strong>Centralizar la infraestructura para ganar eficiencia concentra también el riesgo.</strong> El trasvase del Río Dongjiang abastece 70–90% del agua de ambas megaciudades. La sequía de 2021–2022 (-55% en embalses) generó riesgo de déficit diario de >1.000.000 m³ para ambas.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ==========================================================================
+         06. ÇATALHÖYÜK: EL ESPEJO NEOLÍTICO INVERSO (SLIDES 41 Y 42)
+         ========================================================================== -->
+    <article class="monograph-beat" id="cap-07">
+      <div class="beat-kicker-bar">
+        <span class="beat-num" style="color: var(--accent-ct);">06. Arqueología Celular</span>
+        <span>Anatolia 7500 a.C.</span>
+      </div>
+
+      <h2 class="beat-title">Çatalhöyük: Malla Celular Continua Sin Calles</h2>
+      <p class="beat-subtitle">
+        En Çatalhöyük la alta densidad prescindió de calles y de jerarquías espaciales: circulación por cubiertas y células domésticas adosadas. <strong>No tenía fronteras internas que administrar:</strong> su cohesión venía de la ausencia de diferenciación jerárquica, a diferencia de las complejas zonas de sutura diseñadas de Hong Kong y Shenzhen.
+      </p>
+
+      <!-- MALLA 3D ÇATALHÖYÜK (SLIDE 42) -->
+      <div class="network-stage-frame">
+        <div class="stage-bar">
+          <div class="stage-label" style="color: var(--accent-ct);">✦ Topología 3D: Malla Peer-to-Peer Sin Jerarquía (Çatalhöyük)</div>
+          <div class="stage-controls">
+            <div class="speed-box">
+              <span>Vel:</span>
+              <input type="range" class="speed-range" id="speed3" min="0.2" max="3" step="0.1" value="0.9" />
+              <span id="speedVal3">0.9x</span>
+            </div>
+            <button class="stage-btn" onclick="triggerStagePulse(3)">⚡ Pulso</button>
+            <button class="stage-btn" onclick="toggleAutoRotate(3, this)">🌀 Órbita</button>
+            <button class="stage-btn" onclick="resetStageNodes(3)">⟲ Reset</button>
+          </div>
+        </div>
+        <div class="canvas-box" id="viewBox3">
+          <canvas id="stageCanvas3"></canvas>
+          <div class="canvas-note">🖱️ Rotar 360° • Arrastrar Células domésticas • Clic para fijar datos</div>
+          <div class="canvas-inspector" id="inspect3">
+            <div class="inspector-title" id="inspectTitle3" style="color: var(--accent-ct);">Nodo</div>
+            <div id="inspectDesc3" style="color: var(--text-muted);">Detalles.</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ==========================================================================
+         07. CONCLUSIONES, BOGOTÁ & CORABASTOS (SLIDES 43 A 62)
+         ========================================================================== -->
+    <article class="monograph-beat" id="cap-08">
+      <div class="beat-kicker-bar">
+        <span class="beat-num" style="color: var(--accent-bg);">07. Transferencia Territorial</span>
+        <span>Bogotá (Kennedy, Patio Bonito & Corabastos)</span>
+      </div>
+
+      <h2 class="beat-title">¿Absorción por Jerarquía o Cooperación Diseñada?</h2>
+      <p class="beat-subtitle">
+        En Kennedy, <strong>Patio Bonito y El Amparo nacieron de autoorganización popular (1985–2006)</strong> y fueron posteriormente absorbidos por instrumentos normativos del POT (Art. 9, 566–568). Las <strong>Actuaciones Estratégicas deben ser zonas de interfaz con las JAC</strong> dotadas de exigibilidad jurídica y presupuestal real.
+      </p>
+
+      <!-- MAPA SATELITAL REAL: KENNEDY, PATIO BONITO & CORABASTOS -->
+      <div class="map-frame-block">
+        <div class="map-header-tab">
+          <span>🛰️ Cartografía Satelital: Patio Bonito, El Amparo & Nodo Central de Corabastos</span>
+          <span style="color: var(--accent-bg);">4.6280° N, 74.1530° W</span>
+        </div>
+        <div class="map-leaflet-box" id="mapBogota"></div>
+        <div class="map-floating-pill">12.000 ton/día de Alimentos • Concentración Silenciosa</div>
+      </div>
+
+      <!-- RED TERRITORIAL 3D DE BOGOTÁ Y CORABASTOS (SLIDE 61) -->
+      <div class="network-stage-frame">
+        <div class="stage-bar">
+          <div class="stage-label" style="color: var(--accent-bg);">✦ Topología 3D: Red Territorial, Autoorganización y Corabastos (Bogotá)</div>
+          <div class="stage-controls">
+            <div class="speed-box">
+              <span>Vel:</span>
+              <input type="range" class="speed-range" id="speed4" min="0.2" max="3" step="0.1" value="1.2" />
+              <span id="speedVal4">1.2x</span>
+            </div>
+            <button class="stage-btn" onclick="triggerStagePulse(4)">⚡ Pulso</button>
+            <button class="stage-btn" onclick="toggleAutoRotate(4, this)">🌀 Órbita</button>
+            <button class="stage-btn" onclick="resetStageNodes(4)">⟲ Reset</button>
+          </div>
+        </div>
+        <div class="canvas-box" id="viewBox4">
+          <canvas id="stageCanvas4"></canvas>
+          <div class="canvas-note">🖱️ Rotar 360° • Arrastrar Nodos • Clic para fijar datos</div>
+          <div class="canvas-inspector" id="inspect4">
+            <div class="inspector-title" id="inspectTitle4" style="color: var(--accent-bg);">Nodo</div>
+            <div id="inspectDesc4" style="color: var(--text-muted);">Detalles.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LA PREGUNTA CORRECTA (SLIDES 60 Y 61) -->
+      <div class="quote-plate" style="border-left-color: var(--accent-bg); margin-top: 2rem;">
+        <div class="quote-plate-text">
+          «La pregunta no debería ser: <em>¿Qué está mal en Corabastos?</em><br>
+          Sino: <strong>¿En qué otros nodos de la red de Kennedy ya ocurrió esa misma concentración silenciosa de poder de decisión?</strong>»
+        </div>
+        <div class="quote-plate-source" style="color: var(--accent-bg);">Tarea Institucional Urgente: Crear el nodo de gestión interjurisdiccional de Corabastos hoy ausente en el modelo.</div>
+      </div>
+
+      <!-- COLOFÓN FINAL (SLIDE 62) -->
+      <footer class="colophon-sec">
+        <blockquote class="colophon-quote">
+          «Pensar la densidad no es contar rascacielos; es comprender la arquitectura y sus redes como la capacidad viva de una sociedad para negociar su propio destino en el espacio.»
+        </blockquote>
+        <div class="colophon-card">
+          <div style="font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--accent-hk); text-transform: uppercase; margin-bottom: 4px; font-weight: 600;">Autores & Equipo de Investigación</div>
+          <div style="font-weight: 700; font-size: 1.15rem; color: var(--text-main);">Alejandra Gómez • Ana Casas • Juan Trujillo</div>
+        </div>
+      </footer>
+    </article>
+
   </main>
 
-  <!-- LIGHTBOX MODAL EN ALTA RESOLUCIÓN -->
-  <div class="lightbox-wrap" id="lightboxModal" onclick="closeFullPlate(event)">
-    <div class="lightbox-content" onclick="event.stopPropagation()">
-      <button class="lightbox-close" onclick="closeFullPlate(event)">✕</button>
-      <img id="lightboxImg" class="lightbox-img" src="" alt="Lámina en Alta Resolución" />
-      <div id="lightboxCaption" class="lightbox-title">Lámina</div>
-    </div>
-  </div>
-
+  <!-- SCRIPTS: MAPAS SATELITALES LEAFLET REALES & MOTORES 3D NATIVOS -->
   <script>
     // ==========================================================================
-    // 1. DATA DE LAS 62 DIAPOSITIVAS: TÍTULO, SUBTÍTULO CONCISO Y VISUALES
+    // 1. INICIALIZACIÓN DE LOS 4 MAPAS SATELITALES NATIVOS
     // ==========================================================================
-    const SLIDES = [
-      {
-        num: 1,
-        title: "Hong Kong & Shenzhen",
-        subtitle: "¿Qué modelo de ciudad es mejor: el de Hong Kong o el de Shenzhen?",
-        has3D: false
-      },
-      {
-        num: 2,
-        title: "Hong Kong",
-        subtitle: "Región Administrativa Especial • Modelo Financiero y Relieve Confinado",
-        has3D: false
-      },
-      {
-        num: 3,
-        title: "Ubicación Regional",
-        subtitle: "China → Provincia de Cantón (Guangdong) → Hong Kong • Desembocadura del Río Perla",
-        has3D: false
-      },
-      {
-        num: 4,
-        title: "Génesis Colonial & Verticalidad",
-        subtitle: "De enclave pesquero (1842) a metrópolis vertical por escasez de suelo plano",
-        has3D: false
-      },
-      {
-        num: 5,
-        title: "Confinamiento Orográfico",
-        subtitle: "40% del territorio protegido como parques rurales concentra la hiperdensidad urbana",
-        has3D: false
-      },
-      {
-        num: 6,
-        title: "Distrito Central de Negocios",
-        subtitle: "Sede de la Bolsa HKEX, servicios financieros globales, comercio y logística",
-        has3D: false
-      },
-      {
-        num: 7,
-        title: "Red Sistémica de Hong Kong",
-        subtitle: "5 Dimensiones: Modelo urbano (TOD), gobernanza (PDPO), economía, vivienda y dependencia socioecológica",
-        has3D: true,
-        stageId: 0,
-        stageLabel: "Topología 3D: Red Sistémica de Hong Kong",
-        accentColor: "#0284c7"
-      },
-      {
-        num: 8,
-        title: "Shenzhen",
-        subtitle: "Zona Económica Especial • Metamorfosis Estatal y Tecnológica",
-        has3D: false
-      },
-      {
-        num: 9,
-        title: "Contigüidad Fluvial",
-        subtitle: "China → Provincia de Cantón → Shenzhen • Colindante al norte de Hong Kong",
-        has3D: false
-      },
-      {
-        num: 10,
-        title: "Zona Económica Especial (1980)",
-        subtitle: "Poder legislativo delegado (1992) para experimentación regulatoria acelerada",
-        has3D: false
-      },
-      {
-        num: 11,
-        title: "Escala Metropolitana",
-        subtitle: "De territorio rural a metrópolis de más de 17 millones de habitantes en cuatro décadas",
-        has3D: false
-      },
-      {
-        num: 12,
-        title: "Núcleo Corporativo",
-        subtitle: "Bolsa ChiNext y sedes de gigantes tecnológicos: Huawei, Tencent, DJI y BYD",
-        has3D: false
-      },
-      {
-        num: 13,
-        title: "Red Sistémica de Shenzhen",
-        subtitle: "5 Dimensiones: Planificación estatal, 20 clústeres, bolsa ChiNext, aldeas urbanas y patentes",
-        has3D: true,
-        stageId: 1,
-        stageLabel: "Topología 3D: Red Sistémica de Shenzhen",
-        accentColor: "#7c3aed"
-      },
-      {
-        num: 14,
-        title: "Dos Soluciones Distintas a un Mismo Problema",
-        subtitle: "¿Quién concentra la capacidad de decisión sobre datos, infraestructura y riesgo al digitalizar la ciudad?",
-        has3D: false
-      },
-      {
-        num: 15,
-        title: "Modelo Hong Kong vs. Modelo Shenzhen",
-        subtitle: "Hub financiero de 4 pilares (Common Law / PDPO) vs. Zona piloto estatal-corporativa (20 clústeres)",
-        has3D: false
-      },
-      {
-        num: 16,
-        title: "Smart Cities",
-        subtitle: "Dos soluciones territoriales e institucionales opuestas de digitalización",
-        has3D: false
-      },
-      {
-        num: 17,
-        title: "Concepto de Smart City",
-        subtitle: "Uso intensivo de datos y tecnología para movilidad, eficiencia energética y calidad de vida",
-        has3D: false
-      },
-      {
-        num: 18,
-        title: "Blueprint HK 2022",
-        subtitle: "«Strong economy and high quality of living» — Jerarquía: economía fuerte primero, calidad de vida después",
-        has3D: false
-      },
-      {
-        num: 19,
-        title: "Tecnología como Instrumento de Competitividad",
-        subtitle: "La tecnología concebida como palanca comercial-financiera antes que como transformación social",
-        has3D: false
-      },
-      {
-        num: 20,
-        title: "Puntos de Sutura Territorial",
-        subtitle: "Materialización física de la interfase: Qianhai y Lok Ma Chau Loop",
-        has3D: false
-      },
-      {
-        num: 21,
-        title: "«Una Zona, Dos Parques»",
-        subtitle: "Cooperación formal entre territorios sin fusionar sus sistemas jurídicos",
-        has3D: false
-      },
-      {
-        num: 22,
-        title: "Enclave de Qianhai",
-        subtitle: "Zona de operación híbrida en la bahía este de Shenzhen",
-        has3D: false
-      },
-      {
-        num: 23,
-        title: "Qianhai: Reglas Híbridas",
-        subtitle: "Autoridad creada en 2010 • El Plan 2021 cita 67 veces a Hong Kong para atraer capital y talento",
-        has3D: false
-      },
-      {
-        num: 24,
-        title: "Qianhai en la Red",
-        subtitle: "Nodo conector entre la Gran Bahía y la institucionalidad jurídica de Hong Kong",
-        has3D: false
-      },
-      {
-        num: 25,
-        title: "Lok Ma Chau Loop",
-        subtitle: "Enclave transfronterizo neutral ganado al río Shenzhen",
-        has3D: false
-      },
-      {
-        num: 26,
-        title: "Conexión Interfronteriza",
-        subtitle: "Zona de cooperación tecnológica conjunta • Primera fase de I+D programada para finales de 2024",
-        has3D: false
-      },
-      {
-        num: 27,
-        title: "Proyecto Arquitectónico del Loop",
-        subtitle: "Masterplan del complejo conjunto de investigación",
-        has3D: false
-      },
-      {
-        num: 28,
-        title: "Parque Conjunto HSITP",
-        subtitle: "Hong Kong-Shenzhen Innovation and Technology Park",
-        has3D: false
-      },
-      {
-        num: 29,
-        title: "Zonificación HSITP",
-        subtitle: "100% Investigación y Desarrollo • Exclusión deliberada de vivienda y calidad de vida",
-        has3D: false
-      },
-      {
-        num: 30,
-        title: "El HSITP en la Red",
-        subtitle: "Enlace directo entre el hardware de ChiNext y el régimen de patentes Common Law de HKEX",
-        has3D: false
-      },
-      {
-        num: 31,
-        title: "El Sistema Circulatorio Conjunto",
-        subtitle: "Un solo sistema simbiótico con dos centros de decisión (Dongjiang, Daya Bay, Mai Po-Futian, Fondo Gran Bahía)",
-        has3D: true,
-        stageId: 2,
-        stageLabel: "Topología 3D: Sistema Circulatorio Conjunto (HK ⇄ SZ)",
-        accentColor: "#0284c7"
-      },
-      {
-        num: 32,
-        title: "Innovación Top-Down en Shenzhen",
-        subtitle: "6.46% del PIB en I+D (2024) y 20 clústeres estratégicos liderando patentes mundiales por 21 años",
-        has3D: false
-      },
-      {
-        num: 33,
-        title: "Huaqiangbei: Ecosistema Maker",
-        subtitle: "22 mercados especializados en 1.45 km² con más de 500 equipos maker nacidos del comercio informal",
-        has3D: false
-      },
-      {
-        num: 34,
-        title: "Innovación No Planificada",
-        subtitle: "El hardware más ágil del mundo surgió precisamente porque nadie lo optimizaba desde arriba",
-        has3D: false
-      },
-      {
-        num: 35,
-        title: "Política Fragmentada en Hong Kong",
-        subtitle: "0.99% del PIB en I+D frente a la gestión jerárquica de Shenzhen",
-        has3D: false
-      },
-      {
-        num: 36,
-        title: "Predictibilidad vs. Diversidad Humana",
-        subtitle: "Ley de Seguridad Nacional (2020) y éxodo de 140.000 profesionales de la fuerza laboral",
-        has3D: false
-      },
-      {
-        num: 37,
-        title: "Principio de Innovación",
-        subtitle: "La innovación surge de la diversidad y la incertidumbre; la planificación centralizada tiende a reducir ambas",
-        has3D: false
-      },
-      {
-        num: 38,
-        title: "Centralización del Riesgo",
-        subtitle: "Centralizar la infraestructura para ganar eficiencia concentra también el riesgo sistémico",
-        has3D: false
-      },
-      {
-        num: 39,
-        title: "Cuenca del Río Dongjiang",
-        subtitle: "Trasvase de 83 km (1965) • 70% a 90% del agua de ambas megaciudades proviene de una sola cuenca de 35.340 km²",
-        has3D: false
-      },
-      {
-        num: 40,
-        title: "La Sequía de 2021–2022",
-        subtitle: "Embalses al -55% y déficit diario de >1M m³ amenazando a ambos modelos por igual",
-        has3D: false
-      },
-      {
-        num: 41,
-        title: "Çatalhöyük: Espacio Doméstico y Colectivo",
-        subtitle: "Alta densidad neolítica (7500 a.C.) sin calles vehiculares; integración celular de hábitat y ritual",
-        has3D: false
-      },
-      {
-        num: 42,
-        title: "Malla Celular Adosada",
-        subtitle: "Cohesión sin jerarquías espaciales ni fronteras internas impuestas vs. suturas diseñadas de HK y SZ",
-        has3D: true,
-        stageId: 3,
-        stageLabel: "Topología 3D: Malla Peer-to-Peer Sin Jerarquía (Çatalhöyük)",
-        accentColor: "#d97706"
-      },
-      {
-        num: 43,
-        title: "Conclusiones & Transferencia Territorial",
-        subtitle: "Aprendizajes críticos para el modelo territorial de Bogotá",
-        has3D: false
-      },
-      {
-        num: 44,
-        title: "¿Absorción por Jerarquía o Autoorganización?",
-        subtitle: "¿Es la absorción por jerarquía la única alternativa para los procesos comunitarios?",
-        has3D: false
-      },
-      {
-        num: 45,
-        title: "La Tercera Vía de Qianhai y el Loop",
-        subtitle: "Cooperación formal entre sistemas distintos sin absorción mutua",
-        has3D: false
-      },
-      {
-        num: 46,
-        title: "Cooperación Diseñada Deliberadamente",
-        subtitle: "Conservar marcos propios construyendo una zona de sutura formal",
-        has3D: false
-      },
-      {
-        num: 47,
-        title: "Kennedy: Patio Bonito y El Amparo",
-        subtitle: "El tejido barrial popular frente al modelo centralizado",
-        has3D: false
-      },
-      {
-        num: 48,
-        title: "Evolución de Huella Urbana (1985–2006)",
-        subtitle: "Autoorganización popular y autogestión de hábitat en Kennedy",
-        has3D: false
-      },
-      {
-        num: 49,
-        title: "Absorción por el POT",
-        subtitle: "Imposición normativa centralizada sobre el territorio autoorganizado",
-        has3D: false
-      },
-      {
-        num: 50,
-        title: "Instrumentos del POT de Bogotá",
-        subtitle: "Art. 9 (Elementos Locales), Art. 566 (Conectividad), Art. 567 (Movilidad), Art. 568 (Cuidado)",
-        has3D: false
-      },
-      {
-        num: 51,
-        title: "¿Sobrevivencia o Absorción?",
-        subtitle: "¿La autoorganización comunitaria sobrevivió o fue anulada normativamente?",
-        has3D: false
-      },
-      {
-        num: 52,
-        title: "Actuaciones Estratégicas como Interfaz",
-        subtitle: "Zonas de interfaz con las JAC con mecanismos reales de exigibilidad jurídica y presupuestal",
-        has3D: false
-      },
-      {
-        num: 53,
-        title: "Crítica al Modelo Centralizado",
-        subtitle: "Riesgos de la concentración de datos y control en un solo nodo",
-        has3D: false
-      },
-      {
-        num: 54,
-        title: "Escala de la Matriz Central",
-        subtitle: "La concentración tecnocrática de la decisión",
-        has3D: false
-      },
-      {
-        num: 55,
-        title: "Unidades Reducidas a «Usuarias»",
-        subtitle: "Subordinación periférica a un núcleo concentrador de datos",
-        has3D: false
-      },
-      {
-        num: 56,
-        title: "El Centro de Decisión",
-        subtitle: "El nodo que concentra el control territorial",
-        has3D: false
-      },
-      {
-        num: 57,
-        title: "El Patrón en Kennedy",
-        subtitle: "Búsqueda de nodos donde la capacidad de decisión se concentró sin deliberación previa",
-        has3D: false
-      },
-      {
-        num: 58,
-        title: "Corabastos Regional",
-        subtitle: "12.000 ton/día articulando el comercio agroalimentario de Bogotá, Cundinamarca, Boyacá y Llanos",
-        has3D: false
-      },
-      {
-        num: 59,
-        title: "Concentración Silenciosa",
-        subtitle: "Nodos donde la capacidad de decisión se concentró sin una decisión democrática explícita",
-        has3D: false
-      },
-      {
-        num: 60,
-        title: "La Pregunta Incorrecta",
-        subtitle: "La pregunta no debería ser: ¿Qué está mal en Corabastos?",
-        has3D: false
-      },
-      {
-        num: 61,
-        title: "La Pregunta Correcta & El Vacío Institucional",
-        subtitle: "¿En qué otros nodos ya ocurrió esa concentración silenciosa? • Urgencia: crear el nodo de gestión interjurisdiccional",
-        has3D: true,
-        stageId: 4,
-        stageLabel: "Topología 3D: Red Territorial, Autoorganización y Corabastos",
-        accentColor: "#059669"
-      },
-      {
-        num: 62,
-        title: "Gracias por ver",
-        subtitle: "Investigación desarrollada por Alejandra Gómez • Ana Casas • Juan Trujillo",
-        has3D: false
-      }
-    ];
+    function initMaps() {
+      // Mapa 1: Hong Kong
+      const mapHK = L.map('mapHK', { zoomControl: false, attributionControl: false }).setView([22.2855, 114.1577], 13);
+      L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', { maxZoom: 20 }).addTo(mapHK);
+      L.polygon([[22.335, 114.140], [22.335, 114.205], [22.300, 114.215], [22.270, 114.195], [22.265, 114.135], [22.300, 114.130]], {
+        color: '#0284c7', weight: 2, fillOpacity: 0.2, dashArray: '5, 5'
+      }).addTo(mapHK);
 
-    // ==========================================================================
-    // 2. RENDERIZADO DEL STREAM ROLL-UP ARQUITECTÓNICO
-    // ==========================================================================
-    const streamContainer = document.getElementById('archStream');
+      // Mapa 2: Shenzhen
+      const mapSZ = L.map('mapSZ', { zoomControl: false, attributionControl: false }).setView([22.5350, 114.0550], 13);
+      L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', { maxZoom: 20 }).addTo(mapSZ);
+      L.polygon([[22.565, 113.925], [22.565, 114.120], [22.505, 114.120], [22.505, 114.040], [22.515, 113.925]], {
+        color: '#7c3aed', weight: 2, fillOpacity: 0.2, dashArray: '5, 5'
+      }).addTo(mapSZ);
 
-    function renderStream() {
-      let html = '';
+      // Mapa 3: Suturas (Qianhai & Loop)
+      const mapSutura = L.map('mapSutura', { zoomControl: false, attributionControl: false }).setView([22.5150, 113.9900], 12);
+      L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', { maxZoom: 20 }).addTo(mapSutura);
+      L.polygon([[22.545, 113.890], [22.545, 114.090], [22.490, 114.090], [22.490, 113.890]], {
+        color: '#0284c7', weight: 2, fillOpacity: 0.18, dashArray: '5, 5'
+      }).addTo(mapSutura);
 
-      SLIDES.forEach(s => {
-        html += `
-          <section class="arch-slide-block" id="slide-${s.num}">
-            <div class="slide-meta">
-              <span class="slide-num-tag">Slide ${String(s.num).padStart(2, '0')}</span>
-              <span>Entrega de Maestría</span>
-            </div>
-
-            <h2 class="slide-heading">${s.title}</h2>
-            <p class="slide-subtitle">${s.subtitle}</p>
-
-            <div class="arch-plate-frame" onclick="openFullPlate(${s.num}, 'Slide ${s.num}: ${s.title.replace(/'/g, "\\'")}')">
-              <img src="./slides/slide_${s.num}.png" alt="Slide ${s.num} - ${s.title}" loading="lazy" />
-            </div>
-        `;
-
-        if (s.has3D) {
-          html += `
-            <div class="network-stage-frame">
-              <div class="stage-bar">
-                <div class="stage-label" style="color: ${s.accentColor};">✦ ${s.stageLabel}</div>
-                <div class="stage-controls">
-                  <div class="speed-box">
-                    <span>Vel:</span>
-                    <input type="range" class="speed-range" id="speed${s.stageId}" min="0.2" max="3" step="0.1" value="1.0" />
-                    <span id="speedVal${s.stageId}">1.0x</span>
-                  </div>
-                  <button class="stage-btn" onclick="triggerStagePulse(${s.stageId})">⚡ Pulso</button>
-                  <button class="stage-btn" onclick="toggleAutoRotate(${s.stageId}, this)">🌀 Órbita</button>
-                  <button class="stage-btn" onclick="resetStageNodes(${s.stageId})">⟲ Reset</button>
-                </div>
-              </div>
-              <div class="canvas-box" id="viewBox${s.stageId}">
-                <canvas id="stageCanvas${s.stageId}"></canvas>
-                <div class="canvas-note">🖱️ Rotar 360° • Arrastrar Nodos • Clic para fijar datos</div>
-                <div class="canvas-inspector" id="inspect${s.stageId}">
-                  <div class="inspector-title" id="inspectTitle${s.stageId}" style="color: ${s.accentColor};">Nodo</div>
-                  <div id="inspectDesc${s.stageId}" style="color: var(--text-muted);">Detalles.</div>
-                </div>
-              </div>
-            </div>
-          `;
-        }
-
-        html += `</section>`;
-      });
-
-      html += `
-        <footer class="colophon-sec">
-          <blockquote class="colophon-quote">
-            «Pensar la densidad no es contar rascacielos; es comprender la arquitectura y sus redes como la capacidad viva de una sociedad para negociar su propio destino en el espacio.»
-          </blockquote>
-          <div class="colophon-card">
-            <div style="font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--accent-hk); text-transform: uppercase; margin-bottom: 4px; font-weight: 600;">Autoría Colectiva</div>
-            <div style="font-weight: 700; font-size: 1.1rem; color: var(--text-main);">Alejandra Gómez • Ana Casas • Juan Trujillo</div>
-          </div>
-        </footer>
-      `;
-
-      streamContainer.innerHTML = html;
+      // Mapa 4: Bogotá (Kennedy & Corabastos)
+      const mapBogota = L.map('mapBogota', { zoomControl: false, attributionControl: false }).setView([4.6280, -74.1530], 15);
+      L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', { maxZoom: 20 }).addTo(mapBogota);
+      L.polygon([[4.635, -74.159], [4.635, -74.146], [4.620, -74.146], [4.620, -74.159]], {
+        color: '#059669', weight: 2, fillOpacity: 0.2, dashArray: '5, 5'
+      }).addTo(mapBogota);
     }
 
-    renderStream();
+    window.addEventListener('DOMContentLoaded', () => {
+      initMaps();
+    });
 
     // ==========================================================================
-    // 3. STEPPER & SCROLL PROGRESS
+    // 2. STEPPER DE NAVEGACIÓN Y SCROLL SPY
     // ==========================================================================
-    let currentSlide = 1;
+    const CHAPTERS = ['cap-01', 'cap-02', 'cap-03', 'cap-04', 'cap-05', 'cap-06', 'cap-07', 'cap-08'];
+    let currentChapterIdx = 0;
 
-    function updateProgress() {
+    function updateProgressBar() {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const progress = (scrollTop / scrollHeight) * 100;
       document.getElementById('progressBar').style.width = `${progress}%`;
 
-      for (let i = 1; i <= 62; i++) {
-        const el = document.getElementById(`slide-${i}`);
+      CHAPTERS.forEach((id, idx) => {
+        const el = document.getElementById(id);
         if (el) {
           const rect = el.getBoundingClientRect();
           if (rect.top <= window.innerHeight * 0.45 && rect.bottom >= window.innerHeight * 0.2) {
-            currentSlide = i;
-            document.getElementById('slideBadge').textContent = `${String(i).padStart(2, '0')} / 62`;
-            break;
+            currentChapterIdx = idx;
+            document.getElementById('stepBadge').textContent = `${String(idx + 1).padStart(2, '0')} / ${String(CHAPTERS.length).padStart(2, '0')}`;
           }
         }
+      });
+    }
+
+    window.addEventListener('scroll', updateProgressBar, { passive: true });
+
+    function prevChapter() {
+      if (currentChapterIdx > 0) {
+        currentChapterIdx--;
+        document.getElementById(CHAPTERS[currentChapterIdx]).scrollIntoView({ behavior: 'smooth' });
       }
     }
 
-    window.addEventListener('scroll', updateProgress, { passive: true });
-
-    function goToSlide(num) {
-      const target = document.getElementById(`slide-${num}`);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    function nextChapter() {
+      if (currentChapterIdx < CHAPTERS.length - 1) {
+        currentChapterIdx++;
+        document.getElementById(CHAPTERS[currentChapterIdx]).scrollIntoView({ behavior: 'smooth' });
       }
-    }
-
-    function prevSlide() {
-      if (currentSlide > 1) goToSlide(currentSlide - 1);
-    }
-
-    function nextSlide() {
-      if (currentSlide < 62) goToSlide(currentSlide + 1);
     }
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === 'PageDown') nextSlide();
-      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
-      else if (e.key === 'Escape') closeFullPlate();
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') nextChapter();
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevChapter();
     });
 
     // ==========================================================================
-    // 4. MODELOS 3D EN SUS SLIDES EXACTAS (7, 13, 31, 42, 61)
+    // 3. TOPOLOGÍAS 3D NATIVAS (5 LABORATORIOS EN TIEMPO REAL)
     // ==========================================================================
     const TOPOLOGIES = [
-      // 0: Slide 7 (Red Hong Kong)
+      // 0: Red Hong Kong
       {
         accentRgb: [2, 132, 199],
         nodes: [
@@ -1046,11 +1077,9 @@
           { id: 3, x: -110, y: 80, z: -20, r: 10, label: 'Vivienda & Desigualdad', desc: 'Mercado hiperespeculativo y viviendas subdivididas (cage homes).' },
           { id: 4, x: 100, y: 90, z: 10, r: 10, label: 'Dependencia Dongjiang', desc: 'Suministro del 70-90% de agua potable dependiente de una sola cuenca continental.' }
         ],
-        links: [
-          [0,1],[0,2],[0,3],[1,2],[1,4],[2,3],[3,4],[0,4]
-        ]
+        links: [[0,1],[0,2],[0,3],[1,2],[1,4],[2,3],[3,4],[0,4]]
       },
-      // 1: Slide 13 (Red Shenzhen)
+      // 1: Red Shenzhen
       {
         accentRgb: [124, 58, 237],
         nodes: [
@@ -1060,11 +1089,9 @@
           { id: 3, x: 100, y: 110, z: 40, r: 10, label: 'Aldeas Urbanas (Chengzhongcun)', desc: 'Vivienda asequible para población trabajadora flotante sin hukou.' },
           { id: 4, x: -110, y: -90, z: -20, r: 10, label: 'I+D Intensivo (6.46% PIB)', desc: 'Mayor tasa de patentes internacionales en China durante 21 años.' }
         ],
-        links: [
-          [0,1],[0,2],[0,3],[0,4],[1,4],[2,4],[3,0],[1,3]
-        ]
+        links: [[0,1],[0,2],[0,3],[0,4],[1,4],[2,4],[3,0],[1,3]]
       },
-      // 2: Slide 31 (Red Conjunta HK-SZ)
+      // 2: Red Conjunta HK-SZ
       {
         accentRgb: [2, 132, 199],
         nodes: [
@@ -1076,11 +1103,9 @@
           { id: 5, x: 120, y: -110, z: 40, r: 9, label: 'Central Nuclear Daya Bay', desc: 'Energía nuclear continental que abastece la red de Hong Kong.' },
           { id: 6, x: -120, y: 110, z: -40, r: 8, label: 'Corredor Ecológico Mai Po-Futian', desc: 'Humedales y manglares binacionales protegidos.' }
         ],
-        links: [
-          [0,2],[1,2],[0,3],[1,3],[2,3],[0,4],[1,4],[0,5],[1,5],[0,6],[1,6]
-        ]
+        links: [[0,2],[1,2],[0,3],[1,3],[2,3],[0,4],[1,4],[0,5],[1,5],[0,6],[1,6]]
       },
-      // 3: Slide 42 (Çatalhöyük Malla Celular)
+      // 3: Çatalhöyük
       {
         accentRgb: [217, 119, 6],
         nodes: Array.from({ length: 12 }, (_, i) => ({
@@ -1098,7 +1123,7 @@
           [0,5],[1,6],[4,9],[5,10]
         ]
       },
-      // 4: Slide 61 (Bogotá Kennedy & Corabastos)
+      // 4: Bogotá Kennedy & Corabastos
       {
         accentRgb: [5, 150, 105],
         nodes: [
@@ -1109,9 +1134,7 @@
           { id: 4, x: 80, y: 110, z: 30, r: 10, label: 'Interfaz JAC (Propuesta)', desc: 'Actuaciones Estratégicas como interfaz de cooperación con exigibilidad real.' },
           { id: 5, x: 0, y: -130, z: 20, r: 8, label: 'Red Regional (Cundinamarca/Boyacá)', desc: 'Flujos agropecuarios interdepartamentales.' }
         ],
-        links: [
-          [0,1],[0,2],[0,5],[1,2],[1,3],[2,3],[1,4],[2,4],[3,4],[0,4]
-        ]
+        links: [[0,1],[0,2],[0,5],[1,2],[1,3],[2,3],[1,4],[2,4],[3,4],[0,4]]
       }
     ];
 
@@ -1144,7 +1167,7 @@
       resize() {
         const box = this.canvas.parentElement;
         this.width = box.clientWidth || 800;
-        this.height = box.clientHeight || 420;
+        this.height = box.clientHeight || 450;
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         this.canvas.width = Math.floor(this.width * dpr);
         this.canvas.height = Math.floor(this.height * dpr);
@@ -1393,25 +1416,6 @@
 
     function resetStageNodes(idx) {
       if (STAGES[idx]) STAGES[idx].resetNodes();
-    }
-
-    // ==========================================================================
-    // 5. LIGHTBOX MODAL EN ALTA RESOLUCIÓN
-    // ==========================================================================
-    function openFullPlate(slideNum, captionText) {
-      const modal = document.getElementById('lightboxModal');
-      const img = document.getElementById('lightboxImg');
-      const cap = document.getElementById('lightboxCaption');
-      if (modal && img) {
-        img.src = `./slides/slide_${slideNum}.png`;
-        if (cap) cap.textContent = captionText || `Slide ${slideNum}`;
-        modal.classList.add('active');
-      }
-    }
-
-    function closeFullPlate(e) {
-      const modal = document.getElementById('lightboxModal');
-      if (modal) modal.classList.remove('active');
     }
   </script>
 </body>
