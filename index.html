@@ -82,15 +82,6 @@
         linear-gradient(to right, rgba(226, 232, 240, 0.6) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(226, 232, 240, 0.6) 1px, transparent 1px);
     }
-
-    .pulse-glow {
-      animation: pulseGlow 2.5s infinite ease-in-out;
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.4; transform: scale(1); }
-      50% { opacity: 0.9; transform: scale(1.08); }
-    }
   </style>
 </head>
 <body class="bg-white text-slate-900 min-h-screen flex flex-col selection:bg-blue-100 selection:text-blue-900">
@@ -111,7 +102,7 @@
       <!-- NAV PILLS -->
       <nav class="hidden lg:flex items-center space-x-1 bg-slate-100/90 p-1 rounded-full border border-slate-200 text-xs font-medium text-slate-600">
         <a href="#hero-section" class="px-3 py-1.5 rounded-full hover:text-slate-900 hover:bg-white transition">Portada</a>
-        <a href="#lab-redes" class="px-3 py-1.5 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition shadow-xs">⚡ Redes Animadas</a>
+        <a href="#lab-redes-3d" class="px-3 py-1.5 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition shadow-xs">🌐 Redes en 3D</a>
         <a href="#hk-section" class="px-3 py-1.5 rounded-full hover:text-slate-900 hover:bg-white transition">1. Hong Kong</a>
         <a href="#sz-section" class="px-3 py-1.5 rounded-full hover:text-slate-900 hover:bg-white transition">2. Shenzhen</a>
         <a href="#interfaz-section" class="px-3 py-1.5 rounded-full hover:text-slate-900 hover:bg-white transition">3. Interfaz & Cooperación</a>
@@ -193,105 +184,119 @@
       </div>
     </section>
 
-    <!-- INTERACTIVE ANIMATED NETWORKS LAB (NEW REQUEST) -->
-    <section id="lab-redes" class="py-16 bg-slate-950 text-white relative overflow-hidden border-b border-slate-800">
+    <!-- NEW SECTION: 3D HOLOGRAPHIC URBAN NETWORKS LAB (PERSPECTIVE 3D) -->
+    <section id="lab-redes-3d" class="py-16 bg-slate-950 text-white relative overflow-hidden border-b border-slate-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-800 gap-4">
           <div>
-            <div class="inline-flex items-center space-x-2 text-xs font-mono font-bold uppercase tracking-wider text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800/80 mb-2">
-              <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-              <span>Laboratorio Interactivo de Redes Urbanas Animadas</span>
+            <div class="inline-flex items-center space-x-2 text-xs font-mono font-bold uppercase tracking-wider text-cyan-400 bg-cyan-950/60 px-2.5 py-1 rounded-md border border-cyan-800/80 mb-2">
+              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+              <span>Laboratorio 3D • Redes Espaciales Orbitables</span>
             </div>
-            <h2 class="text-2xl sm:text-4xl font-extrabold font-display text-white">Simulación Física de Flujos y Nodos de Decisión</h2>
+            <h2 class="text-2xl sm:text-4xl font-extrabold font-display text-white">Visualizador Holográfico de Redes Urbanas en 3D</h2>
             <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl leading-relaxed">
-              Redes dinámicas con partículas activas que representan flujos de datos, capital, agua y gobernanza. <strong>Arrastra los nodos</strong> y cambia de topología para comparar su resiliencia.
+              Topologías tridimensionales con <strong>rotación 360° en todos los ejes</strong>, partículas volumétricas en flujo y control en tiempo real de velocidad y profundidad.
             </p>
           </div>
 
-          <!-- Network Topologies Switcher -->
+          <!-- 3D Topology Switcher -->
           <div class="flex flex-wrap gap-1.5 p-1.5 bg-slate-900 rounded-xl border border-slate-800 text-xs font-mono">
-            <button id="btn-net-1" onclick="switchNetwork('simbiosis')" class="px-3 py-2 rounded-lg font-bold bg-blue-600 text-white transition shadow-sm">1. HK ⇄ SZ (Simbiosis)</button>
-            <button id="btn-net-2" onclick="switchNetwork('central')" class="px-3 py-2 rounded-lg font-medium text-slate-400 hover:text-white transition">2. Hub Centralizado (SZ)</button>
-            <button id="btn-net-3" onclick="switchNetwork('horizontal')" class="px-3 py-2 rounded-lg font-medium text-slate-400 hover:text-white transition">3. Red P2P (Çatalhöyük)</button>
-            <button id="btn-net-4" onclick="switchNetwork('kennedy')" class="px-3 py-2 rounded-lg font-medium text-slate-400 hover:text-white transition">4. Kennedy & Corabastos</button>
+            <button id="btn-3d-1" onclick="switch3DNetwork('simbiosis')" class="px-3 py-2 rounded-lg font-bold bg-cyan-600 text-white transition shadow-sm">1. 3D HK ⇄ SZ (Simbiosis)</button>
+            <button id="btn-3d-2" onclick="switch3DNetwork('central')" class="px-3 py-2 rounded-lg font-medium text-slate-400 hover:text-white transition">2. 3D Hub Centralizado (SZ)</button>
+            <button id="btn-3d-3" onclick="switch3DNetwork('horizontal')" class="px-3 py-2 rounded-lg font-medium text-slate-400 hover:text-white transition">3. 3D Malla P2P (Çatalhöyük)</button>
+            <button id="btn-3d-4" onclick="switch3DNetwork('kennedy')" class="px-3 py-2 rounded-lg font-medium text-slate-400 hover:text-white transition">4. 3D Kennedy & Corabastos</button>
           </div>
         </div>
 
-        <!-- CANVAS + CONTROL BAR CONTAINER -->
+        <!-- 3D CANVAS STAGE & HUD -->
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
           
-          <!-- Live Interactive Canvas (3 cols) -->
-          <div class="lg:col-span-3 bg-slate-900/90 rounded-2xl border border-slate-800 relative overflow-hidden shadow-2xl flex flex-col justify-between" style="min-height: 520px;">
+          <!-- 3D WebGL / Perspective Canvas Viewport -->
+          <div class="lg:col-span-3 bg-slate-900/90 rounded-2xl border border-slate-800 relative overflow-hidden shadow-2xl flex flex-col justify-between" style="min-height: 550px;">
             
-            <!-- Canvas HUD Overlay -->
+            <!-- Top HUD Overlay -->
             <div class="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
               <div class="bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-800 text-[11px] font-mono text-slate-300">
-                <span class="text-blue-400 font-bold" id="canvas-net-title">Red 1: Simbiosis Transfronteriza HK ⇄ SZ</span>
+                <span class="text-cyan-400 font-bold" id="hud-3d-title">Topología 3D: Simbiosis Transfronteriza HK ⇄ SZ</span>
               </div>
               <div class="bg-slate-950/80 backdrop-blur-md px-2.5 py-1.5 rounded-lg border border-slate-800 text-[10px] font-mono text-emerald-400 flex items-center space-x-1.5">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span id="canvas-particle-counter">Partículas activas: 36</span>
+                <span id="hud-3d-status">Orbit 3D: 360° Activo • 48 Partículas 3D</span>
               </div>
             </div>
 
-            <!-- HTML5 Physics Canvas -->
-            <canvas id="animatedNetworkCanvas" width="800" height="520" class="w-full h-full cursor-grab active:cursor-grabbing block"></canvas>
+            <!-- 3D Perspective Canvas (True XYZ coordinate math) -->
+            <canvas id="network3DCanvas" width="800" height="550" class="w-full h-full cursor-grab active:cursor-grabbing block"></canvas>
 
-            <!-- Bottom Floating Controls -->
-            <div class="p-3 bg-slate-950/80 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
-              <div class="flex items-center space-x-3 text-slate-400">
-                <span>Velocidad de Flujo:</span>
-                <input type="range" min="1" max="5" value="2" id="speed-slider" class="w-24 h-1.5 bg-slate-700 rounded-lg accent-blue-500 cursor-pointer" oninput="updateSimulationSpeed(this.value)">
+            <!-- Bottom Floating 3D Controls -->
+            <div class="p-3 bg-slate-950/90 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs font-mono z-10">
+              <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-2 text-slate-400">
+                  <span>Velocidad Flujo:</span>
+                  <input type="range" min="0.5" max="4" step="0.5" value="1.5" id="slider-3d-speed" class="w-24 h-1.5 bg-slate-700 rounded-lg accent-cyan-400 cursor-pointer" oninput="set3DFlowSpeed(this.value)">
+                </div>
+                <div class="flex items-center space-x-2 text-slate-400">
+                  <span>Zoom 3D:</span>
+                  <input type="range" min="0.6" max="1.8" step="0.1" value="1.1" id="slider-3d-zoom" class="w-20 h-1.5 bg-slate-700 rounded-lg accent-cyan-400 cursor-pointer" oninput="set3DZoom(this.value)">
+                </div>
               </div>
+
               <div class="flex items-center space-x-2">
-                <button onclick="triggerShockPulse()" class="px-3 py-1 rounded-md bg-rose-600/80 hover:bg-rose-600 text-white font-semibold transition flex items-center space-x-1">
-                  <span>⚡ Enviar Pulso de Choque</span>
+                <button id="btn-autorotate" onclick="toggle3DAutoRotate()" class="px-3 py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-cyan-300 font-semibold transition border border-slate-700 flex items-center space-x-1">
+                  <span>Auto-Rotación: ON</span>
                 </button>
-                <button onclick="resetNodePositions()" class="px-3 py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
-                  Reorganizar Nodos
+                <button onclick="trigger3DShockPulse()" class="px-3 py-1 rounded-md bg-rose-600 hover:bg-rose-500 text-white font-semibold transition shadow-xs">
+                  ⚡ Pulso Esférico
+                </button>
+                <button onclick="reset3DCamera()" class="px-2.5 py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-400 transition" title="Centrar Cámara 3D">
+                  ⟲ Reset Vista
                 </button>
               </div>
             </div>
 
           </div>
 
-          <!-- Network Info & Diagnostics Panel (1 col) -->
+          <!-- 3D Diagnostic & Node Info Sidebar -->
           <div class="space-y-4 flex flex-col justify-between">
             
             <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800">
-              <span class="text-[10px] font-mono uppercase text-amber-400 font-bold">Diagnóstico de Gobernanza</span>
-              <h4 id="net-diag-title" class="text-base font-bold text-white mt-1 font-display">Simbiosis Asimétrica</h4>
-              <p id="net-diag-desc" class="text-xs text-slate-400 mt-2 leading-relaxed">
-                Flujos cruzados entre dos jurisdicciones. Los nodos de interfaz (Lok Ma Chau Loop y Qianhai) operan como transformadores y traductores de reglas sin requerir unificación jerárquica total.
+              <span class="text-[10px] font-mono uppercase text-cyan-400 font-bold">Diagnóstico Espacial 3D</span>
+              <h4 id="diag-3d-heading" class="text-base font-bold text-white mt-1 font-display">Doble Clúster Transfronterizo</h4>
+              <p id="diag-3d-text" class="text-xs text-slate-400 mt-2 leading-relaxed">
+                El modelo orbital muestra los dos clústeres metropolitanos vinculados por el canal de interface (Lok Ma Chau Loop y Qianhai), con partículas tridimensionales que ilustran el flujo de capital, agua y hardware.
               </p>
 
               <div class="mt-4 pt-3 border-t border-slate-800 space-y-2 text-xs">
                 <div class="flex justify-between font-mono text-[11px]">
-                  <span class="text-slate-500">Resiliencia Sistémica:</span>
-                  <span id="net-stat-resilience" class="text-emerald-400 font-bold">85% (Alta)</span>
+                  <span class="text-slate-500">Resiliencia de Red 3D:</span>
+                  <span id="stat-3d-resilience" class="text-emerald-400 font-bold">88% (Alta)</span>
                 </div>
                 <div class="flex justify-between font-mono text-[11px]">
-                  <span class="text-slate-500">Concentración de Decisión:</span>
-                  <span id="net-stat-power" class="text-amber-400 font-bold">45% (Distribuida)</span>
+                  <span class="text-slate-500">Centralización Espacial:</span>
+                  <span id="stat-3d-power" class="text-cyan-400 font-bold">42% (Bipolar)</span>
                 </div>
                 <div class="flex justify-between font-mono text-[11px]">
-                  <span class="text-slate-500">Velocidad de Innovación:</span>
-                  <span id="net-stat-speed" class="text-blue-400 font-bold">92% (Óptima)</span>
+                  <span class="text-slate-500">Velocidad de Flujo:</span>
+                  <span id="stat-3d-speed" class="text-amber-400 font-bold">1.5x (Activo)</span>
                 </div>
               </div>
             </div>
 
-            <div id="hovered-node-card" class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-xs">
-              <span class="text-[10px] font-mono text-slate-500 uppercase">Nodo Seleccionado</span>
-              <div id="hovered-node-name" class="font-bold text-white text-sm mt-0.5">Pasa el cursor sobre un nodo</div>
-              <p id="hovered-node-details" class="text-slate-400 text-[11px] mt-1 leading-snug">
-                Haz clic y arrastra cualquier nodo en el lienzo para ver la elasticidad de las relaciones urbanas.
+            <!-- Hover Node Inspector -->
+            <div id="inspector-3d-node" class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-xs">
+              <span class="text-[10px] font-mono text-cyan-400 uppercase font-bold">Nodo 3D Bajo el Cursor</span>
+              <div id="inspector-3d-name" class="font-bold text-white text-sm mt-0.5">Arrastra en 3D o pasa el mouse</div>
+              <p id="inspector-3d-desc" class="text-slate-400 text-[11px] mt-1 leading-snug">
+                Haz clic y arrastra en el espacio 3D para rotar en 360 grados. Usa la rueda del ratón para hacer zoom in/out.
               </p>
             </div>
 
-            <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800/80 text-[11px] text-slate-400 leading-relaxed font-mono">
-              💡 <strong>Instrucción interactiva:</strong> Usa los botones superiores para conmutar entre las 4 topologías analizadas en el documento de 65 slides.
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 text-[11px] text-slate-400 leading-relaxed font-mono">
+              🖱️ <strong>Instrucciones 3D:</strong><br>
+              • <strong>Arrastrar:</strong> Rotar órbita 3D.<br>
+              • <strong>Rueda:</strong> Zoom in / out.<br>
+              • <strong>Botones:</strong> Cambiar entre las 4 topologías del documento.
             </div>
 
           </div>
@@ -889,7 +894,7 @@
       <div class="flex flex-wrap gap-4 text-[11px]">
         <span>65 Diapositivas Renderizadas</span>
         <span>•</span>
-        <span>Redes Urbanas Animadas</span>
+        <span>Redes 3D Orbitables</span>
         <span>•</span>
         <span>POT Decreto 555</span>
         <span>•</span>
@@ -911,379 +916,492 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT ANIMATED NETWORKS ENGINE & LOGIC -->
+  <!-- JAVASCRIPT: TRUE 3D HOLOGRAPHIC NETWORK ENGINE (360° ORBIT + FLOWS) -->
   <script>
-    // --- ANIMATED PARTICLES & FORCE GRAPH ENGINE ---
-    const netConfigs = {
+    // --- 3D NETWORK TOPOLOGIES DEFINITION ---
+    const net3DData = {
       simbiosis: {
-        title: "Red 1: Simbiosis Transfronteriza HK ⇄ SZ",
-        diagTitle: "Simbiosis Asimétrica Transfronteriza",
-        diagDesc: "Flujos de capital, hardware y normatividad cruzada. Los nodos de interfaz (Lok Ma Chau Loop y Qianhai) traducen reglas institucionales sin absorción obligatoria.",
+        title: "Topología 3D: Simbiosis Transfronteriza HK ⇄ SZ",
+        heading: "Doble Clúster Bipolar en 3D",
+        desc: "Visualización tridimensional que posiciona el clúster financiero de Hong Kong (azul) y el clúster industrial de Shenzhen (verde) orbitando en torno a la zona de interfaz fronteriza (Lok Ma Chau y Qianhai).",
         resilience: "88% (Alta)",
-        power: "42% (Descentralizada)",
-        speed: "94% (Óptima)",
+        power: "42% (Bipolar)",
         nodes: [
-          { id: 'hk_core', label: 'HK Finanzas', x: 180, y: 160, color: '#3b82f6', radius: 16, type: 'hk', desc: 'Bolsa HKEX, mercados de capital abiertos y 4 pilares de servicios.' },
-          { id: 'hk_law', label: 'Common Law', x: 130, y: 260, color: '#2563eb', radius: 13, type: 'hk', desc: 'Marco legal británico, PDPO privacidad e independencia judicial.' },
-          { id: 'hk_park', label: 'Science Park', x: 230, y: 320, color: '#60a5fa', radius: 12, type: 'hk', desc: 'Ecosistema I+D y Cyberport en Hong Kong.' },
-          { id: 'dongjiang', label: 'Río Dongjiang', x: 400, y: 80, color: '#06b6d4', radius: 14, type: 'eco', desc: 'Trasvase de 83 km que abastece 70-80% del agua de HK y cuenca de Shenzhen.' },
-          { id: 'lokmachau', label: 'Lok Ma Chau (HSITP)', x: 360, y: 240, color: '#f59e0b', radius: 18, type: 'hub', desc: 'Zona de interfaz: 87 ha con marco HK Law e ingeniería continental.' },
-          { id: 'qianhai', label: 'Qianhai Authority', x: 440, y: 300, color: '#f59e0b', radius: 17, type: 'hub', desc: 'Zona de cooperación financiera en Shenzhen con arbitraje hongkonés.' },
-          { id: 'sz_core', label: 'SZ Hard Tech', x: 620, y: 180, color: '#10b981', radius: 16, type: 'sz', desc: 'Ecosistema de manufactura electrónica (90% global) e I+D (6.46% PIB).' },
-          { id: 'sz_corp', label: 'Huawei / DJI / BYD', x: 670, y: 280, color: '#059669', radius: 14, type: 'sz', desc: 'Empresas ancla privadas que financian >90% de la innovación.' },
-          { id: 'sz_maker', label: 'Huaqiangbei Maker', x: 570, y: 360, color: '#34d399', radius: 13, type: 'sz', desc: 'Distrito de prototipado rápido y transición de shanzhai a IP propia.' },
-          { id: 'sz_sponge', label: 'Sponge City', x: 580, y: 90, color: '#14b8a6', radius: 12, type: 'sz', desc: 'Programa de resiliencia hídrica urbana y Reserva de Futian.' }
+          // HK Cluster (Left 3D space)
+          { id: 'hk_core', label: 'HK Finanzas', x: -160, y: -40, z: -50, color: '#3b82f6', radius: 14, desc: 'Bolsa HKEX, mercados de capital abiertos y 4 pilares de servicios.' },
+          { id: 'hk_law', label: 'Common Law', x: -210, y: 50, z: 40, color: '#2563eb', radius: 11, desc: 'Marco legal británico, ordenanza PDPO de privacidad e independencia judicial.' },
+          { id: 'hk_park', label: 'Science Park', x: -140, y: 110, z: -70, color: '#60a5fa', radius: 10, desc: 'Ecosistema de I+D y Cyberport en Hong Kong.' },
+          { id: 'hk_lease', label: 'Leasehold Suelo', x: -220, y: -100, z: 30, color: '#38bdf8', radius: 10, desc: 'Sistema de arrendamiento estatal de suelo e ingresos fiscales.' },
+
+          // Interface Hubs (Center corridor 3D)
+          { id: 'lokmachau', label: 'Lok Ma Chau Loop', x: 0, y: -10, z: 20, color: '#f59e0b', radius: 16, desc: 'Zona de interfaz: 87 ha de parque tecnológico con marco Common Law.' },
+          { id: 'qianhai', label: 'Zona Qianhai', x: 20, y: 80, z: -30, color: '#f59e0b', radius: 15, desc: 'Zona piloto en Shenzhen con resolución de disputas y arbitraje de HK.' },
+          { id: 'dongjiang', label: 'Río Dongjiang', x: -10, y: -140, z: -60, color: '#06b6d4', radius: 13, desc: 'Acueducto de 83 km: soporte vital de agua compartida para ambas metrópolis.' },
+
+          // Shenzhen Cluster (Right 3D space)
+          { id: 'sz_core', label: 'SZ Hard Tech', x: 180, y: -30, z: 50, color: '#10b981', radius: 14, desc: 'Ecosistema de manufactura electrónica mundial (90%) e I+D al 6.46% del PIB.' },
+          { id: 'sz_corp', label: 'Huawei / BYD / DJI', x: 230, y: 60, z: -40, color: '#059669', radius: 12, desc: 'Conglomerados ancla que financian más del 90% de la innovación tecnológica.' },
+          { id: 'sz_maker', label: 'Huaqiangbei Maker', x: 150, y: 120, z: 60, color: '#34d399', radius: 11, desc: 'Distrito de prototipado ultrarrápido y cultura maker.' },
+          { id: 'sz_sponge', label: 'Sponge City / Manglar', x: 210, y: -110, z: -30, color: '#14b8a6', radius: 11, desc: 'Ciudad Esponja contra tifones y Reserva Natural de Futian.' }
         ],
         edges: [
-          { from: 'hk_core', to: 'hk_law', color: '#3b82f6', pColor: '#93c5fd' },
-          { from: 'hk_core', to: 'hk_park', color: '#3b82f6', pColor: '#93c5fd' },
-          { from: 'hk_core', to: 'lokmachau', color: '#f59e0b', pColor: '#fde68a' },
-          { from: 'hk_law', to: 'lokmachau', color: '#f59e0b', pColor: '#fde68a' },
-          { from: 'hk_core', to: 'qianhai', color: '#f59e0b', pColor: '#fde68a' },
-          { from: 'dongjiang', to: 'hk_core', color: '#06b6d4', pColor: '#a5f3fc' },
-          { from: 'dongjiang', to: 'sz_sponge', color: '#06b6d4', pColor: '#a5f3fc' },
-          { from: 'sz_core', to: 'lokmachau', color: '#10b981', pColor: '#6ee7b7' },
-          { from: 'sz_core', to: 'qianhai', color: '#10b981', pColor: '#6ee7b7' },
-          { from: 'sz_core', to: 'sz_corp', color: '#10b981', pColor: '#6ee7b7' },
-          { from: 'sz_core', to: 'sz_maker', color: '#10b981', pColor: '#6ee7b7' },
-          { from: 'sz_sponge', to: 'sz_core', color: '#14b8a6', pColor: '#99f6e4' },
-          { from: 'lokmachau', to: 'qianhai', color: '#f59e0b', pColor: '#ffffff' }
+          { from: 'hk_core', to: 'hk_law', color: '#3b82f6' },
+          { from: 'hk_core', to: 'hk_park', color: '#3b82f6' },
+          { from: 'hk_core', to: 'hk_lease', color: '#38bdf8' },
+          { from: 'hk_core', to: 'lokmachau', color: '#f59e0b' },
+          { from: 'hk_law', to: 'lokmachau', color: '#f59e0b' },
+          { from: 'hk_core', to: 'qianhai', color: '#f59e0b' },
+          { from: 'dongjiang', to: 'hk_core', color: '#06b6d4' },
+          { from: 'dongjiang', to: 'sz_sponge', color: '#06b6d4' },
+          { from: 'lokmachau', to: 'qianhai', color: '#f59e0b' },
+          { from: 'sz_core', to: 'lokmachau', color: '#10b981' },
+          { from: 'sz_core', to: 'qianhai', color: '#10b981' },
+          { from: 'sz_core', to: 'sz_corp', color: '#10b981' },
+          { from: 'sz_core', to: 'sz_maker', color: '#10b981' },
+          { from: 'sz_sponge', to: 'sz_core', color: '#14b8a6' }
         ]
       },
       central: {
-        title: "Red 2: Hub Centralizado de Smart City (Shenzhen / Modelo Estatal)",
-        diagTitle: "Concentración Central de Datos",
-        diagDesc: "Topología en estrella donde todos los flujos convergen en un único servidor/agencia estatal. Alta eficiencia pero máxima fragilidad ante fallos o abusos.",
-        resilience: "32% (Crítica)",
-        power: "95% (Monopolio)",
-        speed: "78% (Rápida pero rígida)",
+        title: "Topología 3D: Hub Centralizado de Smart City (Shenzhen)",
+        heading: "Acaparamiento de Datos e Hiperfragilidad 3D",
+        desc: "Estructura octaédrica concéntrica donde el Centro de Datos Estatal se suspende en el origen (0,0,0) y los nodos de usuarias orbitan en planos polares subordinados.",
+        resilience: "30% (Crítica)",
+        power: "96% (Monopolio)",
         nodes: [
-          { id: 'hub', label: 'CENTRO DE DATOS', x: 400, y: 250, color: '#ef4444', radius: 24, type: 'hub', desc: 'Servidor central que concentra todos los registros, cámaras y algoritmos urbanos.' },
-          { id: 'u1', label: 'Usuaria 1 (Vivienda)', x: 220, y: 130, color: '#94a3b8', radius: 10, type: 'leaf', desc: 'Receptora de asignaciones y proveedora pasiva de datos biométricos.' },
-          { id: 'u2', label: 'Usuaria 2 (Movilidad)', x: 400, y: 90, color: '#94a3b8', radius: 10, type: 'leaf', desc: 'Monitoreo de trayectos por tarjeta y cámaras faciales.' },
-          { id: 'u3', label: 'Usuaria 3 (Comercio)', x: 580, y: 130, color: '#94a3b8', radius: 10, type: 'leaf', desc: 'Pagos electrónicos rastreados y perfil crediticio social.' },
-          { id: 'u4', label: 'Usuaria 4 (Salud)', x: 620, y: 260, color: '#94a3b8', radius: 10, type: 'leaf', desc: 'Registros hospitalarios centralizados.' },
-          { id: 'u5', label: 'Usuaria 5 (Trabajo)', x: 560, y: 390, color: '#94a3b8', radius: 10, type: 'leaf', desc: 'Control de jornada y verificación de Hukou.' },
-          { id: 'u6', label: 'Usuaria 6 (Energía)', x: 400, y: 430, color: '#94a3b8', radius: 10, type: 'leaf', desc: 'Medición inteligente sin margen de negociación comunitaria.' },
-          { id: 'u7', label: 'Usuaria 7 (Educación)', x: 240, y: 390, color: '#94a3b8', radius: 10, type: 'leaf', desc: 'Asignación top-down de cupos escolares.' },
-          { id: 'u8', label: 'Usuaria 8 (Seguridad)', x: 180, y: 260, color: '#94a3b8', radius: 10, type: 'leaf', desc: 'Vigilancia algorítmica sin comités vecinales autónomos.' }
+          { id: 'hub', label: 'CEREBRO DE DATOS', x: 0, y: 0, z: 0, color: '#ef4444', radius: 22, desc: 'Servidor central que concentra todos los registros biométricos, sensores y decisiones.' },
+          { id: 'u1', label: 'Vivienda Inteligente', x: -140, y: -110, z: -80, color: '#94a3b8', radius: 9, desc: 'Monitoreo domótico centralizado.' },
+          { id: 'u2', label: 'Cámaras Faciales', x: 140, y: -120, z: 90, color: '#94a3b8', radius: 9, desc: 'Flujo de vigilancia en tiempo real sin privacidad individual.' },
+          { id: 'u3', label: 'Pagos Digitales', x: 170, y: 10, z: -110, color: '#94a3b8', radius: 9, desc: 'Control financiero y crédito social.' },
+          { id: 'u4', label: 'Movilidad & Metro', x: -160, y: 20, z: 120, color: '#94a3b8', radius: 9, desc: 'Rastreo permanente de desplazamientos urbanos.' },
+          { id: 'u5', label: 'Salud & Biometría', x: -90, y: 140, z: -90, color: '#94a3b8', radius: 9, desc: 'Expedientes hospitalarios dependientes de la nube estatal.' },
+          { id: 'u6', label: 'Trabajo & Hukou', x: 100, y: 130, z: 100, color: '#94a3b8', radius: 9, desc: 'Verificación administrativa del registro de residencia.' },
+          { id: 'u7', label: 'Energía & Red', x: 0, y: -170, z: 30, color: '#94a3b8', radius: 9, desc: 'Medidores sin margen de negociación ciudadana.' },
+          { id: 'u8', label: 'Comités Vecinales', x: 0, y: 170, z: -30, color: '#94a3b8', radius: 9, desc: 'Células territoriales subordinadas al plan unificado.' }
         ],
         edges: [
-          { from: 'u1', to: 'hub', color: '#ef4444', pColor: '#fca5a5' },
-          { from: 'u2', to: 'hub', color: '#ef4444', pColor: '#fca5a5' },
-          { from: 'u3', to: 'hub', color: '#ef4444', pColor: '#fca5a5' },
-          { from: 'u4', to: 'hub', color: '#ef4444', pColor: '#fca5a5' },
-          { from: 'u5', to: 'hub', color: '#ef4444', pColor: '#fca5a5' },
-          { from: 'u6', to: 'hub', color: '#ef4444', pColor: '#fca5a5' },
-          { from: 'u7', to: 'hub', color: '#ef4444', pColor: '#fca5a5' },
-          { from: 'u8', to: 'hub', color: '#ef4444', pColor: '#fca5a5' }
+          { from: 'u1', to: 'hub', color: '#ef4444' },
+          { from: 'u2', to: 'hub', color: '#ef4444' },
+          { from: 'u3', to: 'hub', color: '#ef4444' },
+          { from: 'u4', to: 'hub', color: '#ef4444' },
+          { from: 'u5', to: 'hub', color: '#ef4444' },
+          { from: 'u6', to: 'hub', color: '#ef4444' },
+          { from: 'u7', to: 'hub', color: '#ef4444' },
+          { from: 'u8', to: 'hub', color: '#ef4444' }
         ]
       },
       horizontal: {
-        title: "Red 3: Red P2P Autoorganizada (Çatalhöyük & JAC Barriales)",
-        diagTitle: "Autoorganización sin Jerarquía Central",
-        diagDesc: "Inspirada en Çatalhöyük: 10.000 habitantes comunicados por techos y acuerdos horizontales. Si un nodo cae, los demás asumen la coordinación.",
-        resilience: "96% (Máxima)",
-        power: "12% (Nula concentración)",
-        speed: "82% (Adaptativa)",
+        title: "Topología 3D: Malla P2P Autoorganizada (Çatalhöyük)",
+        heading: "Malla Icosaédrica sin Nivel Jerárquico",
+        desc: "Red geodésica tridimensional donde las viviendas se vinculan a través de sus azoteas. La ausencia de un nodo central supremo garantiza inmunidad ante colapsos autoritarios.",
+        resilience: "98% (Máxima)",
+        power: "8% (Horizontal)",
         nodes: [
-          { id: 'h1', label: 'Vivienda Techo A', x: 200, y: 160, color: '#8b5cf6', radius: 13, type: 'p2p', desc: 'Espacio doméstico con acceso horizontal por azotea.' },
-          { id: 'h2', label: 'Patio Comunitario B', x: 330, y: 120, color: '#8b5cf6', radius: 14, type: 'p2p', desc: 'Área de molienda y acopio compartido de obsidiana.' },
-          { id: 'h3', label: 'Vivienda Techo C', x: 480, y: 140, color: '#8b5cf6', radius: 13, type: 'p2p', desc: 'Nodo doméstico con acuerdos consuetudinarios.' },
-          { id: 'h4', label: 'Asamblea Vecinal D', x: 600, y: 220, color: '#a78bfa', radius: 15, type: 'p2p', desc: 'Pacto de resolución comunitaria sin magistrados permanentes.' },
-          { id: 'h5', label: 'Vivienda Techo E', x: 550, y: 350, color: '#8b5cf6', radius: 13, type: 'p2p', desc: 'Red de ayuda mutua inter-hogares.' },
-          { id: 'h6', label: 'Taller Artesanal F', x: 390, y: 400, color: '#8b5cf6', radius: 14, type: 'p2p', desc: 'Intercambio de bienes sin moneda estatal.' },
-          { id: 'h7', label: 'Vivienda Techo G', x: 250, y: 340, color: '#8b5cf6', radius: 13, type: 'p2p', desc: 'Almacén descentralizado de grano.' },
-          { id: 'h8', label: 'Nodo Interfaz H', x: 370, y: 250, color: '#f59e0b', radius: 16, type: 'hub', desc: 'Punto de articulación horizontal para grandes celebraciones.' }
+          { id: 'p1', label: 'Azotea Doméstica A', x: -140, y: -90, z: 90, color: '#8b5cf6', radius: 11, desc: 'Acceso por escaleras de techo y grano comunitario.' },
+          { id: 'p2', label: 'Patio de Molienda B', x: 140, y: -90, z: 90, color: '#8b5cf6', radius: 12, desc: 'Espacio de procesamiento alimentario colectivo.' },
+          { id: 'p3', label: 'Taller Obsidiana C', x: 0, y: -160, z: -100, color: '#8b5cf6', radius: 12, desc: 'Intercambio de herramientas volcánicas sin moneda formal.' },
+          { id: 'p4', label: 'Azotea Doméstica D', x: -160, y: 90, z: -70, color: '#8b5cf6', radius: 11, desc: 'Unidad residencial de autogestión.' },
+          { id: 'p5', label: 'Espacio Ritual E', x: 160, y: 90, z: -70, color: '#a78bfa', radius: 13, desc: 'Santuario doméstico sin casta sacerdotal permanente.' },
+          { id: 'p6', label: 'Azotea Doméstica F', x: 0, y: 160, z: 100, color: '#8b5cf6', radius: 11, desc: 'Red de ayuda mutua inter-familiar.' },
+          { id: 'p7', label: 'Nodo de Interfaz Vecinal', x: 0, y: 0, z: 0, color: '#f59e0b', radius: 14, desc: 'Punto de deliberación horizontal entre clanes.' }
         ],
         edges: [
-          { from: 'h1', to: 'h2', color: '#8b5cf6', pColor: '#ddd6fe' },
-          { from: 'h2', to: 'h3', color: '#8b5cf6', pColor: '#ddd6fe' },
-          { from: 'h3', to: 'h4', color: '#8b5cf6', pColor: '#ddd6fe' },
-          { from: 'h4', to: 'h5', color: '#8b5cf6', pColor: '#ddd6fe' },
-          { from: 'h5', to: 'h6', color: '#8b5cf6', pColor: '#ddd6fe' },
-          { from: 'h6', to: 'h7', color: '#8b5cf6', pColor: '#ddd6fe' },
-          { from: 'h7', to: 'h1', color: '#8b5cf6', pColor: '#ddd6fe' },
-          { from: 'h8', to: 'h1', color: '#f59e0b', pColor: '#fef08a' },
-          { from: 'h8', to: 'h2', color: '#f59e0b', pColor: '#fef08a' },
-          { from: 'h8', to: 'h5', color: '#f59e0b', pColor: '#fef08a' },
-          { from: 'h8', to: 'h6', color: '#f59e0b', pColor: '#fef08a' }
+          { from: 'p1', to: 'p2', color: '#8b5cf6' },
+          { from: 'p2', to: 'p5', color: '#8b5cf6' },
+          { from: 'p5', to: 'p6', color: '#8b5cf6' },
+          { from: 'p6', to: 'p1', color: '#8b5cf6' },
+          { from: 'p3', to: 'p4', color: '#8b5cf6' },
+          { from: 'p4', to: 'p1', color: '#8b5cf6' },
+          { from: 'p3', to: 'p2', color: '#8b5cf6' },
+          { from: 'p4', to: 'p6', color: '#8b5cf6' },
+          { from: 'p7', to: 'p1', color: '#f59e0b' },
+          { from: 'p7', to: 'p2', color: '#f59e0b' },
+          { from: 'p7', to: 'p3', color: '#f59e0b' },
+          { from: 'p7', to: 'p4', color: '#f59e0b' },
+          { from: 'p7', to: 'p5', color: '#f59e0b' },
+          { from: 'p7', to: 'p6', color: '#f59e0b' }
         ]
       },
       kennedy: {
-        title: "Red 4: Red Territorial de Kennedy & Corabastos (Bogotá)",
-        diagTitle: "La Concentración Silenciosa en Nodos Urbanos",
-        diagDesc: "Corabastos concentra la logística y precios agroalimentarios. La propuesta de Actuaciones Estratégicas (POT) crea una interfaz de cogestión con las JAC.",
-        resilience: "72% (Moderada)",
-        power: "68% (Riesgo en Corabastos)",
-        speed: "80% (Buena)",
+        title: "Topología 3D: Red Territorial de Kennedy & Corabastos (Bogotá)",
+        heading: "La Concentración Silenciosa en el Espacio Local",
+        desc: "Modelo espacial 3D donde Corabastos (nodo rojo) ejerce una fuerza gravitacional masiva sobre los barrios populares y las JAC, mientras el POT propone una zona de interfaz de cuidado.",
+        resilience: "74% (Media)",
+        power: "70% (Concentración en Abastecimiento)",
         nodes: [
-          { id: 'corabastos', label: 'CORABASTOS (Mega-Nodo)', x: 420, y: 220, color: '#e11d48', radius: 22, type: 'alert', desc: 'Nodo donde la decisión sobre precios y abastecimiento se concentró sin deliberación previa.' },
-          { id: 'patio_bonito', label: 'Patio Bonito (1985-2006)', x: 220, y: 150, color: '#3b82f6', radius: 15, type: 'bog', desc: 'Barrio popular consolidado con fuerte tejido de autoconstrucción comunitaria.' },
-          { id: 'amparo', label: 'El Amparo', x: 200, y: 290, color: '#3b82f6', radius: 14, type: 'bog', desc: 'Sector residencial y comercial popular de Kennedy.' },
-          { id: 'jac_pb', label: 'JAC Patio Bonito', x: 130, y: 210, color: '#10b981', radius: 13, type: 'jac', desc: 'Junta de Acción Comunal: núcleo de autoorganización barrial y cuidado local.' },
-          { id: 'jac_amparo', label: 'JAC El Amparo', x: 120, y: 360, color: '#10b981', radius: 12, type: 'jac', desc: 'Junta comunal vecinal defensora del territorio.' },
-          { id: 'pot_interfaz', label: 'Actuación Estratégica POT', x: 340, y: 340, color: '#f59e0b', radius: 18, type: 'hub', desc: 'Zona de interfaz (Arts. 9, 566, 567, 568) que debe cogestionarse con las JAC.' },
-          { id: 'tintal', label: 'Eje Ambiental Tintal / Humedal', x: 320, y: 90, color: '#06b6d4', radius: 13, type: 'eco', desc: 'Estructura ecológica principal y programa de reverdecimiento.' },
-          { id: 'portal_americas', label: 'Portal Américas / Movilidad', x: 620, y: 220, color: '#8b5cf6', radius: 15, type: 'bog', desc: 'Nodo masivo de transporte público y descarbonización.' },
-          { id: 'comercio_local', label: 'Comercio Popular Kennedy', x: 570, y: 340, color: '#ec4899', radius: 13, type: 'bog', desc: 'Redes de tiendas de barrio dependientes del flujo de Corabastos.' }
+          { id: 'corabastos', label: 'CORABASTOS (Mega-Nodo)', x: 0, y: -20, z: 0, color: '#e11d48', radius: 20, desc: 'Nodo donde la decisión de precios y logística se concentró sin deliberación previa.' },
+          { id: 'patio_bonito', label: 'Patio Bonito (1985-2006)', x: -170, y: -80, z: 80, color: '#3b82f6', radius: 13, desc: 'Barrio popular autoconstruido sobre la planicie inundable del río Bogotá.' },
+          { id: 'amparo', label: 'El Amparo', x: -150, y: 80, z: -90, color: '#3b82f6', radius: 12, desc: 'Sector residencial y comercial popular de Kennedy.' },
+          { id: 'jac_pb', label: 'JAC Patio Bonito', x: -230, y: -30, z: 30, color: '#10b981', radius: 11, desc: 'Junta de Acción Comunal: núcleo de gobernanza comunitaria y cuidado local.' },
+          { id: 'jac_amparo', label: 'JAC El Amparo', x: -210, y: 120, z: -40, color: '#10b981', radius: 11, desc: 'Junta comunal vecinal para el mejoramiento integral.' },
+          { id: 'pot_interfaz', label: 'Actuación Estratégica POT', x: 80, y: 110, z: 70, color: '#f59e0b', radius: 16, desc: 'Zona de interfaz (Arts. 9, 566, 567, 568) cogestionada con las JAC.' },
+          { id: 'tintal', label: 'Eje Ambiental / Humedal', x: -50, y: -160, z: -110, color: '#06b6d4', radius: 12, desc: 'Estructura ecológica principal, conectividad y reverdecimiento.' },
+          { id: 'portal_americas', label: 'Portal Américas (Movilidad)', x: 190, y: -70, z: -80, color: '#8b5cf6', radius: 14, desc: 'Nodo masivo de transporte público y descarbonización.' },
+          { id: 'comercio_local', label: 'Comercio Popular Kennedy', x: 180, y: 50, z: 90, color: '#ec4899', radius: 12, desc: 'Redes de micromercados y tenderos dependientes de Corabastos.' }
         ],
         edges: [
-          { from: 'patio_bonito', to: 'jac_pb', color: '#10b981', pColor: '#a7f3d0' },
-          { from: 'amparo', to: 'jac_amparo', color: '#10b981', pColor: '#a7f3d0' },
-          { from: 'patio_bonito', to: 'amparo', color: '#3b82f6', pColor: '#bfdbfe' },
-          { from: 'patio_bonito', to: 'tintal', color: '#06b6d4', pColor: '#a5f3fc' },
-          { from: 'corabastos', to: 'patio_bonito', color: '#e11d48', pColor: '#fecdd3' },
-          { from: 'corabastos', to: 'amparo', color: '#e11d48', pColor: '#fecdd3' },
-          { from: 'corabastos', to: 'portal_americas', color: '#e11d48', pColor: '#fecdd3' },
-          { from: 'corabastos', to: 'comercio_local', color: '#e11d48', pColor: '#fecdd3' },
-          { from: 'pot_interfaz', to: 'jac_pb', color: '#f59e0b', pColor: '#fef08a' },
-          { from: 'pot_interfaz', to: 'jac_amparo', color: '#f59e0b', pColor: '#fef08a' },
-          { from: 'pot_interfaz', to: 'corabastos', color: '#f59e0b', pColor: '#fef08a' },
-          { from: 'pot_interfaz', to: 'tintal', color: '#06b6d4', pColor: '#a5f3fc' }
+          { from: 'corabastos', to: 'patio_bonito', color: '#e11d48' },
+          { from: 'corabastos', to: 'amparo', color: '#e11d48' },
+          { from: 'corabastos', to: 'portal_americas', color: '#e11d48' },
+          { from: 'corabastos', to: 'comercio_local', color: '#e11d48' },
+          { from: 'patio_bonito', to: 'jac_pb', color: '#10b981' },
+          { from: 'amparo', to: 'jac_amparo', color: '#10b981' },
+          { from: 'patio_bonito', to: 'tintal', color: '#06b6d4' },
+          { from: 'pot_interfaz', to: 'jac_pb', color: '#f59e0b' },
+          { from: 'pot_interfaz', to: 'jac_amparo', color: '#f59e0b' },
+          { from: 'pot_interfaz', to: 'corabastos', color: '#f59e0b' },
+          { from: 'pot_interfaz', to: 'tintal', color: '#06b6d4' }
         ]
       }
     };
 
-    let activeNetworkKey = 'simbiosis';
-    let particles = [];
-    let draggedNode = null;
-    let hoveredNode = null;
-    let simSpeed = 2;
-    let shockPulseRadius = 0;
-    let shockPulseActive = false;
+    // --- 3D ENGINE STATE ---
+    let active3DKey = 'simbiosis';
+    let rotX = 0.35;
+    let rotY = 0.55;
+    let rotZ = 0;
+    let autoRotate = true;
+    let zoom3D = 1.1;
+    let flowSpeed3D = 1.5;
+    let isDragging3D = false;
+    let lastMouseX = 0;
+    let lastMouseY = 0;
+    let particles3D = [];
+    let hoveredNode3D = null;
+    let shockPulse3DRadius = 0;
+    let shockPulse3DActive = false;
 
-    function initNetworkPhysics() {
-      const config = netConfigs[activeNetworkKey];
-      particles = [];
+    function init3DParticles() {
+      const config = net3DData[active3DKey];
+      particles3D = [];
 
-      // Generate animated particles along edges
       config.edges.forEach((edge, eIdx) => {
-        const numP = 3;
+        const numP = 4;
         for (let i = 0; i < numP; i++) {
-          particles.push({
+          particles3D.push({
             edgeIndex: eIdx,
             progress: (i / numP) + Math.random() * 0.1,
-            speed: 0.006 * (0.8 + Math.random() * 0.4),
-            color: edge.pColor || '#ffffff',
+            speed: 0.005 * (0.8 + Math.random() * 0.4),
+            color: edge.color,
             size: 3.5
           });
         }
       });
-      document.getElementById('canvas-particle-counter').innerText = `Partículas activas: ${particles.length}`;
+      document.getElementById('hud-3d-status').innerText = `Orbit 3D: 360° Activo • ${particles3D.length} Partículas 3D`;
     }
 
-    function switchNetwork(key) {
-      activeNetworkKey = key;
-      const config = netConfigs[key];
+    function switch3DNetwork(key) {
+      active3DKey = key;
+      const config = net3DData[key];
 
-      // Update button active state
-      ['btn-net-1', 'btn-net-2', 'btn-net-3', 'btn-net-4'].forEach((id, idx) => {
+      ['btn-3d-1', 'btn-3d-2', 'btn-3d-3', 'btn-3d-4'].forEach((id, idx) => {
         const btn = document.getElementById(id);
         const keys = ['simbiosis', 'central', 'horizontal', 'kennedy'];
         if (keys[idx] === key) {
-          btn.className = 'px-3 py-2 rounded-lg font-bold bg-blue-600 text-white transition shadow-sm';
+          btn.className = 'px-3 py-2 rounded-lg font-bold bg-cyan-600 text-white transition shadow-sm';
         } else {
           btn.className = 'px-3 py-2 rounded-lg font-medium text-slate-400 hover:text-white transition';
         }
       });
 
-      // Update HUD info
-      document.getElementById('canvas-net-title').innerText = config.title;
-      document.getElementById('net-diag-title').innerText = config.diagTitle;
-      document.getElementById('net-diag-desc').innerText = config.diagDesc;
-      document.getElementById('net-stat-resilience').innerText = config.resilience;
-      document.getElementById('net-stat-power').innerText = config.power;
-      document.getElementById('net-stat-speed').innerText = config.speed;
+      document.getElementById('hud-3d-title').innerText = config.title;
+      document.getElementById('diag-3d-heading').innerText = config.heading;
+      document.getElementById('diag-3d-text').innerText = config.desc;
+      document.getElementById('stat-3d-resilience').innerText = config.resilience;
+      document.getElementById('stat-3d-power').innerText = config.power;
 
-      initNetworkPhysics();
+      init3DParticles();
     }
 
-    function updateSimulationSpeed(val) {
-      simSpeed = parseFloat(val);
+    function set3DFlowSpeed(val) {
+      flowSpeed3D = parseFloat(val);
+      document.getElementById('stat-3d-speed').innerText = `${flowSpeed3D}x (Activo)`;
     }
 
-    function triggerShockPulse() {
-      shockPulseRadius = 1;
-      shockPulseActive = true;
+    function set3DZoom(val) {
+      zoom3D = parseFloat(val);
     }
 
-    function resetNodePositions() {
-      // re-trigger network config reload
-      switchNetwork(activeNetworkKey);
+    function toggle3DAutoRotate() {
+      autoRotate = !autoRotate;
+      const btn = document.getElementById('btn-autorotate');
+      btn.innerText = `Auto-Rotación: ${autoRotate ? 'ON' : 'OFF'}`;
+      btn.className = autoRotate ? 'px-3 py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-cyan-300 font-semibold transition border border-slate-700' : 'px-3 py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-400 font-semibold transition border border-slate-700';
     }
 
-    // Canvas Render Loop
-    function renderAnimatedNetwork() {
-      const canvas = document.getElementById('animatedNetworkCanvas');
-      if (!canvas) return requestAnimationFrame(renderAnimatedNetwork);
+    function trigger3DShockPulse() {
+      shockPulse3DRadius = 10;
+      shockPulse3DActive = true;
+    }
+
+    function reset3DCamera() {
+      rotX = 0.35;
+      rotY = 0.55;
+      zoom3D = 1.1;
+      document.getElementById('slider-3d-zoom').value = 1.1;
+    }
+
+    // 3D Perspective Projection Function
+    function project3DPoint(x, y, z, cx, cy, fov) {
+      // 1. Rotate Y (Azimuth)
+      const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+      const x1 = x * cosY + z * sinY;
+      const z1 = -x * sinY + z * cosY;
+
+      // 2. Rotate X (Elevation)
+      const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+      const y1 = y * cosX - z1 * sinX;
+      const z2 = y * sinX + z1 * cosX;
+
+      // 3. Perspective projection
+      const distance = fov + (z2 * zoom3D);
+      const scale = distance > 10 ? fov / distance : 0.001;
+
+      return {
+        screenX: cx + (x1 * zoom3D * scale),
+        screenY: cy + (y1 * zoom3D * scale),
+        scale: scale * zoom3D,
+        depth: z2,
+        visible: distance > 10
+      };
+    }
+
+    // Main 3D Rendering Loop
+    function render3DNetworkLoop() {
+      const canvas = document.getElementById('network3DCanvas');
+      if (!canvas) return requestAnimationFrame(render3DNetworkLoop);
+
       const ctx = canvas.getContext('2d');
       const w = canvas.width;
       const h = canvas.height;
-      const config = netConfigs[activeNetworkKey];
+      const cx = w / 2;
+      const cy = h / 2;
+      const fov = 450;
+      const config = net3DData[active3DKey];
 
       ctx.clearRect(0, 0, w, h);
 
-      // Draw faint background grid
-      ctx.strokeStyle = 'rgba(51, 65, 85, 0.25)';
+      // Auto-rotation physics
+      if (autoRotate && !isDragging3D) {
+        rotY += 0.004;
+      }
+
+      // Draw faint 3D background cosmic grid / rings
+      ctx.strokeStyle = 'rgba(30, 41, 59, 0.4)';
       ctx.lineWidth = 1;
-      for (let x = 0; x < w; x += 40) {
-        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
-      }
-      for (let y = 0; y < h; y += 40) {
-        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
-      }
+      ctx.beginPath();
+      ctx.arc(cx, cy, 180 * zoom3D, 0, 2 * Math.PI);
+      ctx.stroke();
 
-      // Map nodes for lookup
-      const nodeMap = {};
-      config.nodes.forEach(n => nodeMap[n.id] = n);
-
-      // Draw shockwave if active
-      if (shockPulseActive) {
-        shockPulseRadius += 5 * simSpeed;
-        ctx.strokeStyle = `rgba(244, 63, 94, ${Math.max(0, 1 - shockPulseRadius / (w * 0.7))})`;
-        ctx.lineWidth = 3;
+      // Shockwave sphere in 3D
+      if (shockPulse3DActive) {
+        shockPulse3DRadius += 4 * flowSpeed3D;
+        ctx.strokeStyle = `rgba(244, 63, 94, ${Math.max(0, 1 - shockPulse3DRadius / 300)})`;
+        ctx.lineWidth = 2.5;
         ctx.beginPath();
-        ctx.arc(w / 2, h / 2, shockPulseRadius, 0, 2 * Math.PI);
+        ctx.arc(cx, cy, shockPulse3DRadius * zoom3D, 0, 2 * Math.PI);
         ctx.stroke();
-
-        if (shockPulseRadius > w * 0.7) {
-          shockPulseActive = false;
-        }
+        if (shockPulse3DRadius > 300) shockPulse3DActive = false;
       }
 
-      // 1. Draw Edges with subtle glowing glow
+      // 1. Project all nodes to screen coordinates
+      const projectedNodes = {};
+      config.nodes.forEach(n => {
+        const proj = project3DPoint(n.x, n.y, n.z, cx, cy, fov);
+        projectedNodes[n.id] = { node: n, ...proj };
+      });
+
+      // 2. Draw 3D Connecting Lines
       config.edges.forEach(edge => {
-        const n1 = nodeMap[edge.from];
-        const n2 = nodeMap[edge.to];
-        if (!n1 || !n2) return;
+        const p1 = projectedNodes[edge.from];
+        const p2 = projectedNodes[edge.to];
+        if (!p1 || !p2 || !p1.visible || !p2.visible) return;
+
+        // Depth-based transparency
+        const avgDepth = (p1.depth + p2.depth) / 2;
+        const alpha = Math.max(0.2, Math.min(0.85, 0.5 + (avgDepth / 300)));
 
         ctx.strokeStyle = edge.color;
-        ctx.lineWidth = (hoveredNode && (hoveredNode.id === n1.id || hoveredNode.id === n2.id)) ? 3 : 1.8;
-        ctx.globalAlpha = (hoveredNode && (hoveredNode.id === n1.id || hoveredNode.id === n2.id)) ? 0.9 : 0.45;
+        ctx.globalAlpha = alpha;
+        ctx.lineWidth = Math.max(1, 1.8 * ((p1.scale + p2.scale) / 2));
 
         ctx.beginPath();
-        ctx.moveTo(n1.x, n1.y);
-        ctx.lineTo(n2.x, n2.y);
+        ctx.moveTo(p1.screenX, p1.screenY);
+        ctx.lineTo(p2.screenX, p2.screenY);
         ctx.stroke();
         ctx.globalAlpha = 1.0;
       });
 
-      // 2. Draw Moving Flow Particles
-      particles.forEach(p => {
+      // 3. Draw 3D Moving Flow Particles
+      particles3D.forEach(p => {
         const edge = config.edges[p.edgeIndex];
         if (!edge) return;
-        const n1 = nodeMap[edge.from];
-        const n2 = nodeMap[edge.to];
+        const n1 = config.nodes.find(n => n.id === edge.from);
+        const n2 = config.nodes.find(n => n.id === edge.to);
         if (!n1 || !n2) return;
 
-        p.progress += p.speed * simSpeed;
+        p.progress += p.speed * flowSpeed3D;
         if (p.progress >= 1) p.progress = 0;
 
-        const px = n1.x + (n2.x - n1.x) * p.progress;
-        const py = n1.y + (n2.y - n1.y) * p.progress;
+        // Interpolate in 3D XYZ space
+        const curX = n1.x + (n2.x - n1.x) * p.progress;
+        const curY = n1.y + (n2.y - n1.y) * p.progress;
+        const curZ = n1.z + (n2.z - n1.z) * p.progress;
 
-        ctx.fillStyle = p.color;
-        ctx.shadowColor = p.color;
-        ctx.shadowBlur = 8;
-        ctx.beginPath();
-        ctx.arc(px, py, p.size, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.shadowBlur = 0; // reset
+        const projP = project3DPoint(curX, curY, curZ, cx, cy, fov);
+        if (projP.visible) {
+          ctx.fillStyle = p.color;
+          ctx.shadowColor = p.color;
+          ctx.shadowBlur = 8;
+          ctx.beginPath();
+          ctx.arc(projP.screenX, projP.screenY, Math.max(1.5, p.size * projP.scale), 0, 2 * Math.PI);
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
       });
 
-      // 3. Draw Nodes
-      config.nodes.forEach(node => {
-        const isHovered = hoveredNode && hoveredNode.id === node.id;
-        const isAlert = node.type === 'alert';
+      // 4. Sort Nodes by Depth for correct 3D occlusion
+      const sortedNodes = Object.values(projectedNodes).sort((a, b) => b.depth - a.depth);
 
-        // Outer pulsing aura for hubs or alerts
-        if (node.type === 'hub' || isAlert || isHovered) {
-          const auraRadius = node.radius + (Math.sin(Date.now() * 0.005) * 4) + 6;
-          ctx.fillStyle = isAlert ? 'rgba(225, 29, 72, 0.25)' : (node.type === 'hub' ? 'rgba(245, 158, 11, 0.25)' : 'rgba(59, 130, 246, 0.25)');
-          ctx.beginPath();
-          ctx.arc(node.x, node.y, auraRadius, 0, 2 * Math.PI);
-          ctx.fill();
-        }
+      // 5. Draw 3D Spherical Nodes with Depth Shading
+      sortedNodes.forEach(item => {
+        if (!item.visible) return;
+        const n = item.node;
+        const isHovered = hoveredNode3D && hoveredNode3D.id === n.id;
+        const r = Math.max(4, n.radius * item.scale);
 
-        // Node Body
-        ctx.fillStyle = node.color;
+        // 3D Outer Halo
+        const haloR = r + (Math.sin(Date.now() * 0.005 + n.x) * 3) + 4;
+        ctx.fillStyle = isHovered ? 'rgba(6, 182, 212, 0.4)' : `${n.color}33`;
         ctx.beginPath();
-        ctx.arc(node.x, node.y, node.radius, 0, 2 * Math.PI);
+        ctx.arc(item.screenX, item.screenY, haloR, 0, 2 * Math.PI);
         ctx.fill();
 
-        // Node Border
-        ctx.strokeStyle = isHovered ? '#ffffff' : 'rgba(255, 255, 255, 0.7)';
-        ctx.lineWidth = isHovered ? 2.5 : 1.5;
+        // 3D Sphere Radial Gradient
+        const grad = ctx.createRadialGradient(
+          item.screenX - r * 0.3, item.screenY - r * 0.3, r * 0.1,
+          item.screenX, item.screenY, r
+        );
+        grad.addColorStop(0, '#ffffff');
+        grad.addColorStop(0.3, n.color);
+        grad.addColorStop(1, '#020617');
+
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(item.screenX, item.screenY, r, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // 3D Rim stroke
+        ctx.strokeStyle = isHovered ? '#ffffff' : `${n.color}cc`;
+        ctx.lineWidth = isHovered ? 2.5 : 1.2;
         ctx.stroke();
 
-        // Node Label
+        // 3D Text Label
         ctx.fillStyle = isHovered ? '#ffffff' : '#cbd5e1';
-        ctx.font = isHovered ? 'bold 11px JetBrains Mono' : '9px JetBrains Mono';
-        ctx.fillText(node.label, node.x - (ctx.measureText(node.label).width / 2), node.y + node.radius + 13);
+        ctx.font = isHovered ? 'bold 11px JetBrains Mono' : `${Math.max(8, Math.round(9 * item.scale))}px JetBrains Mono`;
+        const textWidth = ctx.measureText(n.label).width;
+        ctx.fillText(n.label, item.screenX - (textWidth / 2), item.screenY + r + 12);
       });
 
-      requestAnimationFrame(renderAnimatedNetwork);
+      requestAnimationFrame(render3DNetworkLoop);
     }
 
-    // Canvas Mouse Interactivity (Dragging & Hover)
-    function setupCanvasInteractivity() {
-      const canvas = document.getElementById('animatedNetworkCanvas');
+    // 3D Mouse & Touch Orbit Controls
+    function setup3DCanvasControls() {
+      const canvas = document.getElementById('network3DCanvas');
       if (!canvas) return;
 
-      function getNodeUnderMouse(e) {
-        const rect = canvas.getBoundingClientRect();
-        const scaleX = canvas.width / rect.width;
-        const scaleY = canvas.height / rect.height;
-        const mouseX = (e.clientX - rect.left) * scaleX;
-        const mouseY = (e.clientY - rect.top) * scaleY;
-
-        const config = netConfigs[activeNetworkKey];
-        for (let i = config.nodes.length - 1; i >= 0; i--) {
-          const n = config.nodes[i];
-          const dist = Math.hypot(n.x - mouseX, n.y - mouseY);
-          if (dist <= n.radius + 6) {
-            return n;
-          }
-        }
-        return null;
-      }
-
-      canvas.addEventListener('mousemove', (e) => {
-        const n = getNodeUnderMouse(e);
-        hoveredNode = n;
-
-        if (draggedNode) {
-          const rect = canvas.getBoundingClientRect();
-          const scaleX = canvas.width / rect.width;
-          const scaleY = canvas.height / rect.height;
-          draggedNode.x = Math.max(30, Math.min(canvas.width - 30, (e.clientX - rect.left) * scaleX));
-          draggedNode.y = Math.max(30, Math.min(canvas.height - 30, (e.clientY - rect.top) * scaleY));
-        }
-
-        if (n) {
-          document.getElementById('hovered-node-name').innerText = n.label;
-          document.getElementById('hovered-node-details').innerText = n.desc;
-          canvas.style.cursor = 'grab';
-        } else if (!draggedNode) {
-          canvas.style.cursor = 'default';
-        }
+      canvas.addEventListener('mousedown', (e) => {
+        isDragging3D = true;
+        lastMouseX = e.clientX;
+        lastMouseY = e.clientY;
+        canvas.style.cursor = 'grabbing';
       });
 
-      canvas.addEventListener('mousedown', (e) => {
-        const n = getNodeUnderMouse(e);
-        if (n) {
-          draggedNode = n;
-          canvas.style.cursor = 'grabbing';
+      window.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+        const my = (e.clientY - rect.top) * (canvas.height / rect.height);
+
+        if (isDragging3D) {
+          const deltaX = e.clientX - lastMouseX;
+          const deltaY = e.clientY - lastMouseY;
+          rotY += deltaX * 0.008;
+          rotX -= deltaY * 0.008;
+          // Clamp elevation
+          rotX = Math.max(-1.4, Math.min(1.4, rotX));
+          lastMouseX = e.clientX;
+          lastMouseY = e.clientY;
+        } else {
+          // Check Hover in 3D
+          const cx = canvas.width / 2;
+          const cy = canvas.height / 2;
+          const fov = 450;
+          const config = net3DData[active3DKey];
+          let found = null;
+
+          for (let i = config.nodes.length - 1; i >= 0; i--) {
+            const n = config.nodes[i];
+            const proj = project3DPoint(n.x, n.y, n.z, cx, cy, fov);
+            if (proj.visible) {
+              const dist = Math.hypot(proj.screenX - mx, proj.screenY - my);
+              if (dist <= n.radius * proj.scale + 8) {
+                found = n;
+                break;
+              }
+            }
+          }
+
+          hoveredNode3D = found;
+          if (found) {
+            document.getElementById('inspector-3d-name').innerText = found.label;
+            document.getElementById('inspector-3d-desc').innerText = found.desc;
+            canvas.style.cursor = 'pointer';
+          } else {
+            canvas.style.cursor = isDragging3D ? 'grabbing' : 'grab';
+          }
         }
       });
 
       window.addEventListener('mouseup', () => {
-        draggedNode = null;
+        isDragging3D = false;
+        canvas.style.cursor = 'grab';
       });
+
+      // 3D Wheel Zoom
+      canvas.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        zoom3D += e.deltaY * -0.001;
+        zoom3D = Math.max(0.6, Math.min(1.8, zoom3D));
+        document.getElementById('slider-3d-zoom').value = zoom3D;
+      }, { passive: false });
+
+      // Touch orbit for mobile/tablets
+      canvas.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches[0]) {
+          isDragging3D = true;
+          lastMouseX = e.touches[0].clientX;
+          lastMouseY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+
+      canvas.addEventListener('touchmove', (e) => {
+        if (isDragging3D && e.touches && e.touches[0]) {
+          const deltaX = e.touches[0].clientX - lastMouseX;
+          const deltaY = e.touches[0].clientY - lastMouseY;
+          rotY += deltaX * 0.008;
+          rotX -= deltaY * 0.008;
+          rotX = Math.max(-1.4, Math.min(1.4, rotX));
+          lastMouseX = e.touches[0].clientX;
+          lastMouseY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+
+      canvas.addEventListener('touchend', () => {
+        isDragging3D = false;
+      }, { passive: true });
     }
 
-    // Slide Metadata Database for Deck Viewer
+    // Slide Metadata Database for Deck Viewer (65 Slides)
     const slideInfo = {
       1: { cat: "Portada", title: "Slide 01 • Portada General", desc: "Hong Kong & Shenzhen: Carátula principal del estudio comparativo de modelos urbanos." },
       2: { cat: "Hong Kong", title: "Slide 02 • Separador Hong Kong", desc: "Inicio del capítulo de análisis del Modelo Regulatorio-Financiero de Hong Kong." },
@@ -1418,9 +1536,9 @@
 
     // Init
     window.addEventListener('DOMContentLoaded', () => {
-      initNetworkPhysics();
-      setupCanvasInteractivity();
-      renderAnimatedNetwork();
+      init3DParticles();
+      setup3DCanvasControls();
+      render3DNetworkLoop();
       updateDeckViewer();
     });
   </script>
