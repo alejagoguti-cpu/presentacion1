@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hong Kong & Shenzhen | Investigación Urbana - Alejandra Gómez, Ana Casas, Juan Trujillo</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap');
+    
+    :root {
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: #ffffff;
+      color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .font-display { font-family: var(--font-display); }
+    .font-mono { font-family: var(--font-mono); }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f8fafc;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    .glass-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+      transition: all 0.2s ease-in-out;
+    }
+
+    .glass-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.03);
+    }
+
+    .slide-img-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: zoom-in;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .slide-img-box:hover {
+      transform: translateY(-2px);
+      border-color: #94a3b8;
+      box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.08);
+    }
+
+    .hero-slide-frame {
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(15, 23, 42, 0.03);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .grid-bg {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(226, 232, 240, 0.6) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(226, 232, 240, 0.6) 1px, transparent 1px);
+    }
+
+    .pulse-glow {
+      animation: pulseGlow 2.5s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.08); }
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-900 min-h-screen flex flex-col selection:bg-blue-100 selection:text-blue-900">
+
+  <!-- TOP HEADER / NAV -->
+  <header class="border-b border-slate-200 bg-white/95 sticky top-0 z-50 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="h-9 w-9 rounded-lg bg-slate-900 flex items-center justify-center text-white font-bold text-sm shadow-xs font-mono">
+          HK|SZ
+        </div>
+        <div>
+          <span class="text-[10px] uppercase tracking-widest font-mono font-bold text-blue-600 block leading-none">Investigación Urbana • Alejandra Gómez • Ana Casas • Juan Trujillo</span>
+          <h1 class="text-sm sm:text-base font-bold text-slate-900 tracking-tight leading-tight">Hong Kong & Shenzhen</h1>
+        </div>
+      </div>
+
+      <!-- NAV PILLS -->
+      <nav class="hidden lg:flex items-center space-x-1 bg-slate-100/90 p-1 rounded-full border border-slate-200 text-xs font-medium text-slate-600">
+        <a href="#hero-section" class="px-3 py-1.5 rounded-full hover:text-slate-900 hover:bg-white transition">Portada</a>
+        <a href="#lab-redes" class="px-3 py-1.5 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition shadow-xs">⚡ Redes Animadas</a>
+        <a href="#hk-section" class="px-3 py-1.5 rounded-full hover:text-slate-900 hover:bg-white transition">1. Hong Kong</a>
+        <a href="#sz-section" class="px-3 py-1.5 rounded-full hover:text-slate-900 hover:bg-white transition">2. Shenzhen</a>
+        <a href="#interfaz-section" class="px-3 py-1.5 rounded-full hover:text-slate-900 hover:bg-white transition">3. Interfaz & Cooperación</a>
+        <a href="#redes-section" class="px-3 py-1.5 rounded-full hover:text-slate-900 hover:bg-white transition">4. Redes & Smart Cities</a>
+        <a href="#catalhoyuk-section" class="px-3 py-1.5 rounded-full hover:text-slate-900 hover:bg-white transition">5. Çatalhöyük</a>
+        <a href="#bogota-section" class="px-3 py-1.5 rounded-full hover:text-slate-900 hover:bg-white transition">6. Bogotá & Kennedy</a>
+        <a href="#visor-deck" class="px-3 py-1.5 rounded-full bg-slate-900 text-white font-semibold hover:bg-slate-800 transition">Visor 65 Slides</a>
+      </nav>
+
+      <div class="flex items-center space-x-2">
+        <button onclick="openDeckModal(1)" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 flex items-center space-x-1.5 transition">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+          <span>Galería Slides</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-grow">
+
+    <!-- HERO SECTION: EXACT SLIDE 1 SHOWCASE -->
+    <section id="hero-section" class="relative pt-8 pb-16 border-b border-slate-200 grid-bg">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Top Status Meta -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-xs font-mono font-medium shadow-xs">
+            <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+            <span>DIAPOSITIVA 01 • PORTADA OFICIAL DE LA PRESENTACIÓN</span>
+          </div>
+          <div class="text-xs font-mono text-slate-500">
+            Integrantes: <strong class="text-slate-900 font-bold">Alejandra Gómez • Ana Casas • Juan Trujillo</strong> • 65 Diapositivas
+          </div>
+        </div>
+
+        <!-- HERO COVER: EXACT SLIDE 1 IMAGE AS HERO CENTERPIECE -->
+        <div class="hero-slide-frame mb-8 cursor-zoom-in group" onclick="openImageModal('slides/slide_1.png', 'Diapositiva 1: Portada Principal Hong Kong & Shenzhen')">
+          <div class="relative overflow-hidden bg-slate-950">
+            <img src="slides/slide_1.png" alt="Slide 1 - Hong Kong & Shenzhen" class="w-full h-auto object-contain max-h-[700px] mx-auto transition duration-300 group-hover:scale-[1.01]">
+            <div class="absolute bottom-4 right-4 bg-slate-900/80 hover:bg-slate-900 text-white text-xs px-3 py-1.5 rounded-full font-mono backdrop-blur-md border border-slate-700 transition">
+              🔍 Click para zoom completo [Slide 01]
+            </div>
+          </div>
+        </div>
+
+        <!-- HERO SUB-BAR: QUICK ACTION CARDS & CORE THESIS -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          
+          <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs">
+            <div class="text-xs font-mono font-bold text-blue-600 uppercase mb-1">Capítulo I & II</div>
+            <h3 class="text-sm font-bold text-slate-900 font-display">Hong Kong & Shenzhen</h3>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+              Contraste entre el Modelo Regulatorio-Financiero (Common Law) y el Modelo Estatal-Corporativo (ZEE, I+D 6.46%).
+            </p>
+            <a href="#hk-section" class="inline-block mt-3 text-xs font-semibold text-blue-600 hover:text-blue-800">Ver análisis y redes →</a>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs">
+            <div class="text-xs font-mono font-bold text-amber-600 uppercase mb-1">Capítulo III & IV</div>
+            <h3 class="text-sm font-bold text-slate-900 font-display">Zonas de Interfaz & Çatalhöyük</h3>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+              Lok Ma Chau Loop, Qianhai y la lección arqueológica: ¿La absorción por jerarquía es la única salida?
+            </p>
+            <a href="#interfaz-section" class="inline-block mt-3 text-xs font-semibold text-amber-600 hover:text-amber-800">Ver interfaces →</a>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs">
+            <div class="text-xs font-mono font-bold text-emerald-600 uppercase mb-1">Capítulo V & VI</div>
+            <h3 class="text-sm font-bold text-slate-900 font-display">Bogotá: Patio Bonito & Corabastos</h3>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+              POT (Arts. 9, 566, 567, 568), cogestión con JACs y la pregunta crítica sobre los nodos de poder en Kennedy.
+            </p>
+            <a href="#bogota-section" class="inline-block mt-3 text-xs font-semibold text-emerald-600 hover:text-emerald-800">Ver caso local →</a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTERACTIVE ANIMATED NETWORKS LAB (NEW REQUEST) -->
+    <section id="lab-redes" class="py-16 bg-slate-950 text-white relative overflow-hidden border-b border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-800 gap-4">
+          <div>
+            <div class="inline-flex items-center space-x-2 text-xs font-mono font-bold uppercase tracking-wider text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-800/80 mb-2">
+              <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+              <span>Laboratorio Interactivo de Redes Urbanas Animadas</span>
+            </div>
+            <h2 class="text-2xl sm:text-4xl font-extrabold font-display text-white">Simulación Física de Flujos y Nodos de Decisión</h2>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl leading-relaxed">
+              Redes dinámicas con partículas activas que representan flujos de datos, capital, agua y gobernanza. <strong>Arrastra los nodos</strong> y cambia de topología para comparar su resiliencia.
+            </p>
+          </div>
+
+          <!-- Network Topologies Switcher -->
+          <div class="flex flex-wrap gap-1.5 p-1.5 bg-slate-900 rounded-xl border border-slate-800 text-xs font-mono">
+            <button id="btn-net-1" onclick="switchNetwork('simbiosis')" class="px-3 py-2 rounded-lg font-bold bg-blue-600 text-white transition shadow-sm">1. HK ⇄ SZ (Simbiosis)</button>
+            <button id="btn-net-2" onclick="switchNetwork('central')" class="px-3 py-2 rounded-lg font-medium text-slate-400 hover:text-white transition">2. Hub Centralizado (SZ)</button>
+            <button id="btn-net-3" onclick="switchNetwork('horizontal')" class="px-3 py-2 rounded-lg font-medium text-slate-400 hover:text-white transition">3. Red P2P (Çatalhöyük)</button>
+            <button id="btn-net-4" onclick="switchNetwork('kennedy')" class="px-3 py-2 rounded-lg font-medium text-slate-400 hover:text-white transition">4. Kennedy & Corabastos</button>
+          </div>
+        </div>
+
+        <!-- CANVAS + CONTROL BAR CONTAINER -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          
+          <!-- Live Interactive Canvas (3 cols) -->
+          <div class="lg:col-span-3 bg-slate-900/90 rounded-2xl border border-slate-800 relative overflow-hidden shadow-2xl flex flex-col justify-between" style="min-height: 520px;">
+            
+            <!-- Canvas HUD Overlay -->
+            <div class="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
+              <div class="bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-800 text-[11px] font-mono text-slate-300">
+                <span class="text-blue-400 font-bold" id="canvas-net-title">Red 1: Simbiosis Transfronteriza HK ⇄ SZ</span>
+              </div>
+              <div class="bg-slate-950/80 backdrop-blur-md px-2.5 py-1.5 rounded-lg border border-slate-800 text-[10px] font-mono text-emerald-400 flex items-center space-x-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span id="canvas-particle-counter">Partículas activas: 36</span>
+              </div>
+            </div>
+
+            <!-- HTML5 Physics Canvas -->
+            <canvas id="animatedNetworkCanvas" width="800" height="520" class="w-full h-full cursor-grab active:cursor-grabbing block"></canvas>
+
+            <!-- Bottom Floating Controls -->
+            <div class="p-3 bg-slate-950/80 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+              <div class="flex items-center space-x-3 text-slate-400">
+                <span>Velocidad de Flujo:</span>
+                <input type="range" min="1" max="5" value="2" id="speed-slider" class="w-24 h-1.5 bg-slate-700 rounded-lg accent-blue-500 cursor-pointer" oninput="updateSimulationSpeed(this.value)">
+              </div>
+              <div class="flex items-center space-x-2">
+                <button onclick="triggerShockPulse()" class="px-3 py-1 rounded-md bg-rose-600/80 hover:bg-rose-600 text-white font-semibold transition flex items-center space-x-1">
+                  <span>⚡ Enviar Pulso de Choque</span>
+                </button>
+                <button onclick="resetNodePositions()" class="px-3 py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
+                  Reorganizar Nodos
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Network Info & Diagnostics Panel (1 col) -->
+          <div class="space-y-4 flex flex-col justify-between">
+            
+            <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800">
+              <span class="text-[10px] font-mono uppercase text-amber-400 font-bold">Diagnóstico de Gobernanza</span>
+              <h4 id="net-diag-title" class="text-base font-bold text-white mt-1 font-display">Simbiosis Asimétrica</h4>
+              <p id="net-diag-desc" class="text-xs text-slate-400 mt-2 leading-relaxed">
+                Flujos cruzados entre dos jurisdicciones. Los nodos de interfaz (Lok Ma Chau Loop y Qianhai) operan como transformadores y traductores de reglas sin requerir unificación jerárquica total.
+              </p>
+
+              <div class="mt-4 pt-3 border-t border-slate-800 space-y-2 text-xs">
+                <div class="flex justify-between font-mono text-[11px]">
+                  <span class="text-slate-500">Resiliencia Sistémica:</span>
+                  <span id="net-stat-resilience" class="text-emerald-400 font-bold">85% (Alta)</span>
+                </div>
+                <div class="flex justify-between font-mono text-[11px]">
+                  <span class="text-slate-500">Concentración de Decisión:</span>
+                  <span id="net-stat-power" class="text-amber-400 font-bold">45% (Distribuida)</span>
+                </div>
+                <div class="flex justify-between font-mono text-[11px]">
+                  <span class="text-slate-500">Velocidad de Innovación:</span>
+                  <span id="net-stat-speed" class="text-blue-400 font-bold">92% (Óptima)</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="hovered-node-card" class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-xs">
+              <span class="text-[10px] font-mono text-slate-500 uppercase">Nodo Seleccionado</span>
+              <div id="hovered-node-name" class="font-bold text-white text-sm mt-0.5">Pasa el cursor sobre un nodo</div>
+              <p id="hovered-node-details" class="text-slate-400 text-[11px] mt-1 leading-snug">
+                Haz clic y arrastra cualquier nodo en el lienzo para ver la elasticidad de las relaciones urbanas.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800/80 text-[11px] text-slate-400 leading-relaxed font-mono">
+              💡 <strong>Instrucción interactiva:</strong> Usa los botones superiores para conmutar entre las 4 topologías analizadas en el documento de 65 slides.
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 1: HONG KONG (SLIDES 2 TO 7) -->
+    <section id="hk-section" class="py-16 bg-white border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-200">
+          <div>
+            <div class="inline-flex items-center space-x-1.5 text-xs font-mono font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200 mb-2">
+              <span>Sección 01 • Diapositivas 2 a 7</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 font-display">Hong Kong: Modelo Regulatorio-Financiero</h2>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Evolución territorial colonial (1842), densidad vertical, mercados de capital, PDPO y red sistémica.</p>
+          </div>
+          <div class="text-xs font-mono text-slate-400 mt-2 md:mt-0">
+            6 diapositivas analizadas
+          </div>
+        </div>
+
+        <!-- Hong Kong Slides Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- Slide 3 -->
+          <div class="glass-card rounded-xl overflow-hidden p-4">
+            <div class="slide-img-box mb-3" onclick="openImageModal('slides/slide_3.png', 'Diapositiva 3: Ubicación Hong Kong en la Provincia de Cantón')">
+              <img src="slides/slide_3.png" alt="Slide 3 Hong Kong Cantón" class="w-full h-auto object-cover">
+            </div>
+            <div class="flex items-center justify-between text-xs font-mono mb-1">
+              <span class="font-bold text-slate-900">Slide 03 • Localización</span>
+              <span class="text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">Cantón / HK</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Posición geoestratégica en el delta del río de las Perlas. Transición de territorio colonial británico (Tratado de Nankín, 1842) a Región Administrativa Especial de China.
+            </p>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="glass-card rounded-xl overflow-hidden p-4">
+            <div class="slide-img-box mb-3" onclick="openImageModal('slides/slide_4.png', 'Diapositiva 4: Transformación Histórica de Pequeños Pueblos a Ciudad Compacta y Vertical')">
+              <img src="slides/slide_4.png" alt="Slide 4 Historia HK" class="w-full h-auto object-cover">
+            </div>
+            <div class="flex items-center justify-between text-xs font-mono mb-1">
+              <span class="font-bold text-slate-900">Slide 04 • Trayectoria Histórica</span>
+              <span class="text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">1842–Siglo XX</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              De pueblos pesqueros y agrícolas a enclave industrial y financiero global. La severa escasez de suelo obligó a un modelo de ocupación hipercompacto y vertical.
+            </p>
+          </div>
+
+          <!-- Slide 5 & 6 (Aerial and density) -->
+          <div class="glass-card rounded-xl overflow-hidden p-4">
+            <div class="slide-img-box mb-3" onclick="openImageModal('slides/slide_5.png', 'Diapositiva 5: Mapa Territorial y Morfología de Hong Kong')">
+              <img src="slides/slide_5.png" alt="Slide 5 Mapa HK" class="w-full h-auto object-cover">
+            </div>
+            <div class="flex items-center justify-between text-xs font-mono mb-1">
+              <span class="font-bold text-slate-900">Slide 05 & 06 • Morfología Urbana</span>
+              <span class="text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">Territorio & Densidad</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Planificación espacial estatutaria, coexistencia de hiperdensidad en torres residenciales con un 40% de suelo protegido en parques rurales y reservas.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- FULL SLIDE 7: HONG KONG CONCEPT NETWORK -->
+        <div class="mt-8 p-6 rounded-2xl bg-slate-50 border border-slate-200">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+            <div>
+              <span class="text-xs font-mono uppercase font-bold text-blue-700">Red Completa de Variables (Slide 07)</span>
+              <h3 class="text-lg font-bold text-slate-900">Matriz Sistémica de Hong Kong: Los 5 Ejes Analíticos</h3>
+            </div>
+            <button onclick="openImageModal('slides/slide_7.png', 'Diapositiva 7: Red y Matriz Conceptual Completa de Hong Kong')" class="text-xs font-mono font-semibold px-3 py-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition">
+              Ver Red en Alta Resolución 🔍
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+            <div class="lg:col-span-2 slide-img-box" onclick="openImageModal('slides/slide_7.png', 'Diapositiva 7: Red y Matriz Conceptual Completa de Hong Kong')">
+              <img src="slides/slide_7.png" alt="Slide 7 Red Conceptual Hong Kong" class="w-full h-auto object-cover">
+            </div>
+            <div class="space-y-2.5 text-xs text-slate-700">
+              <div class="p-3 rounded-lg bg-white border border-slate-200">
+                <strong class="text-blue-700 font-mono">1. Economía & Innovación:</strong> Cyberport, Science Park, 4 pilares financieros, régimen de bajo impuesto, leasehold y Top Talent Pass Scheme (2022).
+              </div>
+              <div class="p-3 rounded-lg bg-white border border-slate-200">
+                <strong class="text-rose-700 font-mono">2. Indicadores ODS & Pobreza:</strong> Gini 0.539, mercado menos asequible del mundo, viviendas subdivididas (<em>cage homes</em>), tasa de pobreza 17.1%.
+              </div>
+              <div class="p-3 rounded-lg bg-white border border-slate-200">
+                <strong class="text-amber-700 font-mono">3. Dependencia Socioecológica:</strong> 70-80% agua del trasvase Dongjiang (83 km), Central Daya Bay, 40% parques rurales protegidos y disputa por reclamación de suelo (<em>Lantau Tomorrow</em>).
+              </div>
+              <div class="p-3 rounded-lg bg-white border border-slate-200">
+                <strong class="text-indigo-700 font-mono">4. Poder & Legitimidad:</strong> Common Law, PDPO, ICAC (1974), Ley de Seguridad Nacional (2020) y principio de "patriotas gobernando HK".
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: SHENZHEN (SLIDES 8 TO 13) -->
+    <section id="sz-section" class="py-16 bg-slate-50 border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-200">
+          <div>
+            <div class="inline-flex items-center space-x-1.5 text-xs font-mono font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 mb-2">
+              <span>Sección 02 • Diapositivas 8 a 13</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 font-display">Shenzhen: Modelo Estatal-Corporativo</h2>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Zona Económica Especial (1980), clústeres tecnológicos, cultura maker/shanzhai, Hukou y red conceptual.</p>
+          </div>
+          <div class="text-xs font-mono text-slate-400 mt-2 md:mt-0">
+            6 diapositivas analizadas
+          </div>
+        </div>
+
+        <!-- Shenzhen Slides Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- Slide 9 -->
+          <div class="glass-card rounded-xl overflow-hidden p-4">
+            <div class="slide-img-box mb-3" onclick="openImageModal('slides/slide_9.png', 'Diapositiva 9: Ubicación Shenzhen en la Provincia de Cantón')">
+              <img src="slides/slide_9.png" alt="Slide 9 Shenzhen Cantón" class="w-full h-auto object-cover">
+            </div>
+            <div class="flex items-center justify-between text-xs font-mono mb-1">
+              <span class="font-bold text-slate-900">Slide 09 • Localización</span>
+              <span class="text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">Frontera con HK</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Ubicación limítrofe inmediata con Hong Kong, seleccionada deliberadamente por Deng Xiaoping para captar inversión foránea y ensayar políticas de mercado.
+            </p>
+          </div>
+
+          <!-- Slide 10 -->
+          <div class="glass-card rounded-xl overflow-hidden p-4">
+            <div class="slide-img-box mb-3" onclick="openImageModal('slides/slide_10.png', 'Diapositiva 10: De Territorio Rural a Zona Económica Especial (1980)')">
+              <img src="slides/slide_10.png" alt="Slide 10 ZEE Shenzhen" class="w-full h-auto object-cover">
+            </div>
+            <div class="flex items-center justify-between text-xs font-mono mb-1">
+              <span class="font-bold text-slate-900">Slide 10 • Salto a la ZEE</span>
+              <span class="text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">1980–Presente</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Transformación sin precedentes de pueblos agrícolas a metrópoli de más de 17 millones de habitantes, ciudad subprovincial (1981) con poder legislativo delegado (1992).
+            </p>
+          </div>
+
+          <!-- Slide 11 & 12 -->
+          <div class="glass-card rounded-xl overflow-hidden p-4">
+            <div class="slide-img-box mb-3" onclick="openImageModal('slides/slide_11.png', 'Diapositiva 11: Expansión Territorial de Shenzhen')">
+              <img src="slides/slide_11.png" alt="Slide 11 Expansión Shenzhen" class="w-full h-auto object-cover">
+            </div>
+            <div class="flex items-center justify-between text-xs font-mono mb-1">
+              <span class="font-bold text-slate-900">Slide 11 & 12 • Plan Urbano</span>
+              <span class="text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">Megaestructuras</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Despliegue de cuadrículas de transporte masivo (Shenzhen Metro), integración de aldeas urbanas (<em>Chengzhongcun</em>) y reservas ecológicas de manglares en Futian.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- FULL SLIDE 13: SHENZHEN CONCEPT NETWORK -->
+        <div class="mt-8 p-6 rounded-2xl bg-white border border-slate-200">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+            <div>
+              <span class="text-xs font-mono uppercase font-bold text-emerald-700">Red Completa de Variables (Slide 13)</span>
+              <h3 class="text-lg font-bold text-slate-900">Matriz Sistémica de Shenzhen: Los 5 Ejes Analíticos</h3>
+            </div>
+            <button onclick="openImageModal('slides/slide_13.png', 'Diapositiva 13: Red y Matriz Conceptual Completa de Shenzhen')" class="text-xs font-mono font-semibold px-3 py-1.5 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition">
+              Ver Red en Alta Resolución 🔍
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+            <div class="lg:col-span-2 slide-img-box" onclick="openImageModal('slides/slide_13.png', 'Diapositiva 13: Red y Matriz Conceptual Completa de Shenzhen')">
+              <img src="slides/slide_13.png" alt="Slide 13 Red Conceptual Shenzhen" class="w-full h-auto object-cover">
+            </div>
+            <div class="space-y-2.5 text-xs text-slate-700">
+              <div class="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                <strong class="text-emerald-700 font-mono">1. Economía & Innovación:</strong> 6.46% PIB en I+D (2024), 90% financiado por empresas privadas (Huawei, DJI, BYD, Tencent), bolsa ChiNext, Huaqiangbei y 20 clústeres estratégicos.
+              </div>
+              <div class="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                <strong class="text-rose-700 font-mono">2. Indicadores ODS & Pobreza:</strong> Exclusión de población flotante no-hukou de la seguridad social formal, aldeas urbanas como refugio de vivienda barata gestionadas por colectivos rurales.
+              </div>
+              <div class="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                <strong class="text-teal-700 font-mono">3. Dependencia Socioecológica:</strong> Programa Ciudad Esponja (<em>Sponge City</em>), pérdida histórica de manglares (35-50%), Reserva de Futian y estrés hídrico regional.
+              </div>
+              <div class="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                <strong class="text-indigo-700 font-mono">4. Poder & Legitimidad:</strong> Modelo estatal-corporativo, empresas públicas SASAC, comités de residentes subordinados y autoridad especial de Qianhai.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: INTERFACE ZONES & COOPERATION (SLIDES 14 TO 31) -->
+    <section id="interfaz-section" class="py-16 bg-white border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-200">
+          <div>
+            <div class="inline-flex items-center space-x-1.5 text-xs font-mono font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200 mb-2">
+              <span>Sección 03 • Diapositivas 14 a 31</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 font-display">Zonas de Interfaz: Cooperación entre Reglas Distintas</h2>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">¿Quién concentra la decisión? Lok Ma Chau Loop, Qianhai y el principio de complementariedad legal.</p>
+          </div>
+          <div class="text-xs font-mono text-slate-400 mt-2 md:mt-0">
+            18 diapositivas analizadas
+          </div>
+        </div>
+
+        <!-- The Central Core Principle Banner -->
+        <div class="mb-8 p-6 rounded-2xl bg-gradient-to-r from-blue-50 via-slate-50 to-emerald-50 border border-slate-200">
+          <div class="max-w-3xl">
+            <span class="text-xs font-mono uppercase font-bold text-slate-500">Tesis Central (Diapositivas 14–16)</span>
+            <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 font-display mt-1">
+              "Cada uno construye la mitad del sistema que la otra ciudad no puede construir por su propio marco legal."
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+              Hong Kong no puede generar la velocidad de iteración de hardware ni la escala de manufactura de Shenzhen. Shenzhen no puede ofrecer los tribunales independientes de Common Law ni la libre convertibilidad financiera de Hong Kong.
+            </p>
+          </div>
+        </div>
+
+        <!-- Slide Images Grid: Diagrams of Cooperation & Maps -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Slide 14 & 15 -->
+          <div class="glass-card rounded-xl p-4">
+            <div class="slide-img-box mb-3" onclick="openImageModal('slides/slide_15.png', 'Diapositiva 15: Comparativa de Modelos Common Law vs Socialismo Chino')">
+              <img src="slides/slide_15.png" alt="Slide 15 Modelos Legales" class="w-full h-auto object-cover">
+            </div>
+            <div class="text-xs font-bold text-slate-900 font-mono mb-1">Slide 15 • Los 2 Modelos</div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Common Law / Mercados de capital abiertos frente a Planificación Top-Down / Demostración socialista.
+            </p>
+          </div>
+
+          <!-- Slide 21 & 22 -->
+          <div class="glass-card rounded-xl p-4">
+            <div class="slide-img-box mb-3" onclick="openImageModal('slides/slide_22.png', 'Diapositiva 22: Definición de Zonas de Cooperación')">
+              <img src="slides/slide_22.png" alt="Slide 22 Zonas Cooperación" class="w-full h-auto object-cover">
+            </div>
+            <div class="text-xs font-bold text-slate-900 font-mono mb-1">Slide 22 • Zonas de Interfaz</div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Espacios diseñados deliberadamente para operar bajo reglas que faciliten la conexión fluida entre territorios.
+            </p>
+          </div>
+
+          <!-- Slide 23 & 29 (Lok Ma Chau Loop) -->
+          <div class="glass-card rounded-xl p-4">
+            <div class="slide-img-box mb-3" onclick="openImageModal('slides/slide_29.png', 'Diapositiva 29: Hong Kong-Shenzhen Innovation and Technology Park (Lok Ma Chau Loop)')">
+              <img src="slides/slide_29.png" alt="Slide 29 Lok Ma Chau Loop HSITP" class="w-full h-auto object-cover">
+            </div>
+            <div class="text-xs font-bold text-slate-900 font-mono mb-1">Slide 29 • Lok Ma Chau (HSITP)</div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Parque de innovación en el meandro del río fronterizo con régimen jurídico especial para startups e I+D compartido.
+            </p>
+          </div>
+
+          <!-- Slide 24 & 30 (Qianhai & Red) -->
+          <div class="glass-card rounded-xl p-4">
+            <div class="slide-img-box mb-3" onclick="openImageModal('slides/slide_30.png', 'Diapositiva 30: Red de Conexión Transfronteriza HK-SZ')">
+              <img src="slides/slide_30.png" alt="Slide 30 Qianhai Red" class="w-full h-auto object-cover">
+            </div>
+            <div class="text-xs font-bold text-slate-900 font-mono mb-1">Slide 30 • Red Qianhai & Metro</div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Zona de servicios modernos en Shenzhen adaptada con arbitraje hongkonés y líneas de metro transfronterizas.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: NETWORK SYNTHESIS & SMART CITY CRITIQUE (SLIDES 32 TO 41) -->
+    <section id="redes-section" class="py-16 bg-slate-50 border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-200">
+          <div>
+            <div class="inline-flex items-center space-x-1.5 text-xs font-mono font-bold uppercase tracking-wider text-rose-700 bg-rose-50 px-2.5 py-1 rounded-md border border-rose-200 mb-2">
+              <span>Sección 04 • Diapositivas 32 a 41</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 font-display">Redes Comparadas y Crítica de Smart Cities</h2>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">La supermatriz comparativa HK & SH, los axiomas de riesgo y la reducción de diversidad.</p>
+          </div>
+          <div class="text-xs font-mono text-slate-400 mt-2 md:mt-0">
+            10 diapositivas analizadas
+          </div>
+        </div>
+
+        <!-- FULL SLIDE 32: SYNTHESIS NETWORK -->
+        <div class="mb-10 p-6 rounded-2xl bg-white border border-slate-200 shadow-xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+            <div>
+              <span class="text-xs font-mono uppercase font-bold text-slate-500">Supermatriz de Síntesis (Slide 32)</span>
+              <h3 class="text-lg font-bold text-slate-900">La Red Comparativa Completa: Hong Kong & Shenzhen Cruzados</h3>
+            </div>
+            <button onclick="openImageModal('slides/slide_32.png', 'Diapositiva 32: Red Comparativa Completa HK & SH')" class="text-xs font-mono font-semibold px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition">
+              Examinar Red Cruzada 🔍
+            </button>
+          </div>
+
+          <div class="slide-img-box" onclick="openImageModal('slides/slide_32.png', 'Diapositiva 32: Red Comparativa Completa HK & SH')">
+            <img src="slides/slide_32.png" alt="Slide 32 Red Completa HK SH" class="w-full h-auto object-cover">
+          </div>
+        </div>
+
+        <!-- THE TWO CORE CRITIQUE SLIDES (38 & 39) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <div class="glass-card rounded-2xl p-6 sm:p-8 border-t-4 border-t-amber-500">
+            <div class="slide-img-box mb-4" onclick="openImageModal('slides/slide_38.png', 'Diapositiva 38: Crítica sobre Diversidad e Incertidumbre')">
+              <img src="slides/slide_38.png" alt="Slide 38 Diversidad Incertidumbre" class="w-full h-auto object-cover">
+            </div>
+            <span class="text-xs font-mono font-bold text-amber-700 uppercase">Slide 38 • Axioma de la Innovación</span>
+            <h4 class="text-base font-bold text-slate-900 mt-1 font-display">
+              "La innovación surge de la diversidad y la incertidumbre, la planificación centralizada tiende a reducir ambas."
+            </h4>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              La planificación excesivamente rígida elimina los márgenes de error fértiles y las redes informales donde nacen los descubrimientos radicales.
+            </p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6 sm:p-8 border-t-4 border-t-rose-500">
+            <div class="slide-img-box mb-4" onclick="openImageModal('slides/slide_39.png', 'Diapositiva 39: Crítica sobre Eficiencia y Concentración del Riesgo')">
+              <img src="slides/slide_39.png" alt="Slide 39 Concentración Riesgo" class="w-full h-auto object-cover">
+            </div>
+            <span class="text-xs font-mono font-bold text-rose-700 uppercase">Slide 39 • Axioma del Riesgo</span>
+            <h4 class="text-base font-bold text-slate-900 mt-1 font-display">
+              "Centralizar la infraestructura para ganar eficiencia concentra también el riesgo."
+            </h4>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              Al hiperconectar todos los sistemas urbanos a un solo cerebro de datos, la ciudad gana velocidad pero se vuelve hiperfrágil ante ciberataques, fallas eléctricas o abusos de poder.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5: ÇATALHÖYÜK & AUTO-ORGANIZATION (SLIDES 42 TO 46) -->
+    <section id="catalhoyuk-section" class="py-16 bg-white border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-200">
+          <div>
+            <div class="inline-flex items-center space-x-1.5 text-xs font-mono font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-md border border-indigo-200 mb-2">
+              <span>Sección 05 • Diapositivas 42 a 46</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 font-display">Çatalhöyük: Autoorganización sin Jerarquía Central</h2>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Cruce arqueológico: 10.000 habitantes autoorganizados durante un milenio sin palacios ni templos de poder.</p>
+          </div>
+          <div class="text-xs font-mono text-slate-400 mt-2 md:mt-0">
+            5 diapositivas analizadas
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+          
+          <div class="slide-img-box" onclick="openImageModal('slides/slide_42.png', 'Diapositiva 42: Cruce con Çatalhöyük - Cooperación y Autoorganización')">
+            <img src="slides/slide_42.png" alt="Slide 42 Çatalhöyük Pregunta" class="w-full h-auto object-cover">
+            <div class="p-2.5 bg-white border-t border-slate-100 text-[11px] font-mono font-bold text-slate-800">
+              Slide 42 • El Cruce Contemporáneo
+            </div>
+          </div>
+
+          <div class="slide-img-box" onclick="openImageModal('slides/slide_43.png', 'Diapositiva 43: Reconstrucción y Registro Arqueológico de Çatalhöyük')">
+            <img src="slides/slide_43.png" alt="Slide 43 Çatalhöyük Plano" class="w-full h-auto object-cover">
+            <div class="p-2.5 bg-white border-t border-slate-100 text-[11px] font-mono font-bold text-slate-800">
+              Slide 43 • Estructura Urbana de Techos
+            </div>
+          </div>
+
+          <div class="slide-img-box" onclick="openImageModal('slides/slide_46.png', 'Diapositiva 46: ¿Absorción por Jerarquía es la Única Alternativa para la Autoorganización?')">
+            <img src="slides/slide_46.png" alt="Slide 46 Absorción Jerarquía" class="w-full h-auto object-cover">
+            <div class="p-2.5 bg-white border-t border-slate-100 text-[11px] font-mono font-bold text-rose-700">
+              Slide 46 • ¿Absorción por Jerarquía?
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mt-8 p-6 rounded-2xl bg-indigo-50/60 border border-indigo-200">
+          <h4 class="text-sm font-bold text-indigo-950 font-display">La lección profunda de Çatalhöyük para la teoría urbana:</h4>
+          <p class="text-xs text-slate-700 mt-2 leading-relaxed">
+            La densidad demográfica no conduce de manera fatal e inevitable a la creación de una burocracia centralizada autoritaria. Las sociedades pueden sostenerse mediante <strong>pactos consuetudinarios, arquitecturas de interfase doméstica y acuerdos horizontales</strong>. El desafío actual es cómo diseñar zonas de contacto entre el Estado formal y estas dinámicas comunitarias.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 6: TRANSFER TO BOGOTÁ (PATIO BONITO, EL AMPARO, POT & KENNEDY) (SLIDES 47 TO 63) -->
+    <section id="bogota-section" class="py-16 bg-slate-50 border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-200">
+          <div>
+            <div class="inline-flex items-center space-x-1.5 text-xs font-mono font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 mb-2">
+              <span>Sección 06 • Diapositivas 47 a 63</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 font-display">Transferencia a Bogotá: Kennedy, Patio Bonito y Corabastos</h2>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Evolución 1985-2006, Actuaciones Estratégicas del POT (Arts. 9, 566, 567, 568), las JAC y las redes de poder.</p>
+          </div>
+          <div class="text-xs font-mono text-slate-400 mt-2 md:mt-0">
+            17 diapositivas analizadas
+          </div>
+        </div>
+
+        <!-- BOGOTA TIMELINE SLIDES (50 to 52) -->
+        <div class="mb-10 p-6 rounded-2xl bg-white border border-slate-200 shadow-xs">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <span class="text-xs font-mono font-bold uppercase text-blue-700">Línea de Tiempo y Planificación (Slides 50–52)</span>
+              <h3 class="text-lg font-bold text-slate-900">Patio Bonito y El Amparo: 1985 $\to$ 1991 $\to$ 2006 $\to$ POT Actual</h3>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="slide-img-box" onclick="openImageModal('slides/slide_50.png', 'Diapositiva 50: Línea de Tiempo Patio Bonito y El Amparo 1985-1991-2006')">
+              <img src="slides/slide_50.png" alt="Slide 50 Cronología Patio Bonito" class="w-full h-auto object-cover">
+              <div class="p-2.5 bg-white border-t border-slate-100 text-xs font-mono text-slate-800 font-semibold">
+                Slide 50 • Cronología Comunitaria
+              </div>
+            </div>
+
+            <div class="slide-img-box" onclick="openImageModal('slides/slide_51.png', 'Diapositiva 51: Planos Territoriales Históricos de Patio Bonito y El Amparo')">
+              <img src="slides/slide_51.png" alt="Slide 51 Planos Patio Bonito" class="w-full h-auto object-cover">
+              <div class="p-2.5 bg-white border-t border-slate-100 text-xs font-mono text-slate-800 font-semibold">
+                Slide 51 • Cartografía Histórica
+              </div>
+            </div>
+
+            <div class="slide-img-box" onclick="openImageModal('slides/slide_52.png', 'Diapositiva 52: Artículos del POT Decreto 555 de 2021 (Arts. 9, 566, 567, 568)')">
+              <img src="slides/slide_52.png" alt="Slide 52 Artículos POT" class="w-full h-auto object-cover">
+              <div class="p-2.5 bg-white border-t border-slate-100 text-xs font-mono text-slate-800 font-semibold">
+                Slide 52 • Marco Normativo POT
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- PROPOSAL SLIDE 54: ACTUACIONES ESTRATÉGICAS COMO INTERFAZ CON JAC -->
+        <div class="mb-10 p-6 sm:p-8 rounded-2xl bg-blue-50/80 border border-blue-200">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+            <div class="lg:col-span-2 slide-img-box" onclick="openImageModal('slides/slide_54.png', 'Diapositiva 54: Las Actuaciones Estratégicas como Zona de Interfaz con las JAC')">
+              <img src="slides/slide_54.png" alt="Slide 54 Actuaciones Estratégicas e Interfaz JAC" class="w-full h-auto object-cover">
+            </div>
+            <div class="space-y-3 text-xs text-slate-700">
+              <span class="text-xs font-mono font-bold text-blue-800 uppercase">Slide 54 • La Propuesta Propositiva</span>
+              <h4 class="text-base font-bold text-slate-900 font-display">
+                Actuaciones Estratégicas como Zonas de Interfaz con las JAC
+              </h4>
+              <p class="leading-relaxed">
+                "Las Actuaciones Estratégicas podrían diseñarse con el concepto de <strong>cooperación</strong> en mente: una <strong>zona de interfaz con las Juntas de Acción Comunal (JAC)</strong>, no una imposición normativa que sustituye su capacidad de decisión."
+              </p>
+              <div class="p-3 bg-white rounded-lg border border-blue-200 text-blue-950 font-medium">
+                Rescatar la gobernanza vecinal: que los programas de reverdecimiento (Art. 566) y cuidado (Art. 568) sean cogestionados con las juntas barriales.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- THE KENNEDY NETWORKS & CORABASTOS (SLIDES 57 TO 63) -->
+        <div class="p-6 sm:p-8 rounded-2xl bg-white border border-slate-200 shadow-xs">
+          <div class="max-w-3xl mb-6">
+            <span class="text-xs font-mono font-bold uppercase text-rose-700">Las Redes Urbanas de Kennedy y el Dilema de Corabastos (Slides 57–63)</span>
+            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 font-display mt-1">
+              "¿Qué está mal en Corabastos? vs ¿En qué otros nodos ya ocurrió la concentración silenciosa de poder?"
+            </h3>
+          </div>
+
+          <!-- Network Slide Images Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Slide 57 -->
+            <div class="glass-card rounded-xl p-4">
+              <div class="slide-img-box mb-3" onclick="openImageModal('slides/slide_57.png', 'Diapositiva 57: Diagrama Usuarias vs Centro que Concentra Datos')">
+                <img src="slides/slide_57.png" alt="Slide 57 Concentración Datos" class="w-full h-auto object-cover">
+              </div>
+              <div class="text-xs font-bold text-slate-900 font-mono mb-1">Slide 57 • La Trampa del Hub</div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Diagrama de usuarias subordinadas a un centro que acapara los datos e impone decisiones unilaterales.
+              </p>
+            </div>
+
+            <!-- Slide 58 / 59 / 60 (Red de Kennedy) -->
+            <div class="glass-card rounded-xl p-4">
+              <div class="slide-img-box mb-3" onclick="openImageModal('slides/slide_58.png', 'Diapositiva 58: Red Territorial de Relaciones en la Localidad de Kennedy')">
+                <img src="slides/slide_58.png" alt="Slide 58 Red Kennedy" class="w-full h-auto object-cover">
+              </div>
+              <div class="text-xs font-bold text-slate-900 font-mono mb-1">Slide 58 & 60 • La Red de Kennedy</div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Mapeo de interconexiones urbanas, flujos peatonales, equipamientos y nodos barriales en Kennedy.
+              </p>
+            </div>
+
+            <!-- Slide 61, 62 & 63 -->
+            <div class="glass-card rounded-xl p-4">
+              <div class="slide-img-box mb-3" onclick="openImageModal('slides/slide_63.png', 'Diapositiva 63: Pregunta Crítica sobre la Red de Kennedy y la Concentración Silenciosa')">
+                <img src="slides/slide_63.png" alt="Slide 63 Pregunta Corabastos" class="w-full h-auto object-cover">
+              </div>
+              <div class="text-xs font-bold text-slate-900 font-mono mb-1">Slide 63 • Pregunta Final</div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                "¿En qué otros nodos de la red de Kennedy ya ocurrió esa misma concentración silenciosa de poder de decisión?"
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 7: SLIDE DECK VISOR (SLIDE A SLIDE INTERACTIVO) -->
+    <section id="visor-deck" class="py-16 bg-white border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-4 border-b border-slate-200">
+          <div>
+            <div class="inline-flex items-center space-x-1.5 text-xs font-mono font-bold uppercase tracking-wider text-slate-700 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200 mb-2">
+              <span>Navegador Secuencial • 65 Diapositivas</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 font-display">Visor Completo de Diapositivas</h2>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Explora cada diapositiva en orden con su imagen exacta, textos y controles de presentación.</p>
+          </div>
+
+          <!-- Controls -->
+          <div class="flex items-center space-x-2 mt-4 md:mt-0">
+            <button onclick="prevSlide()" class="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-50 text-xs font-mono font-semibold text-slate-700 transition flex items-center space-x-1">
+              <span>← Anterior</span>
+            </button>
+            <span id="current-slide-badge" class="px-3 py-1.5 bg-slate-900 text-white rounded-lg text-xs font-mono font-bold">
+              Diapositiva 1 / 65
+            </span>
+            <button onclick="nextSlide()" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-mono font-semibold transition flex items-center space-x-1 shadow-xs">
+              <span>Siguiente →</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Interactive Slide Canvas Container -->
+        <div class="glass-card rounded-2xl p-6 sm:p-8 flex flex-col items-center">
+          <div class="w-full max-w-4xl slide-img-box relative" onclick="openImageModal(getSlideSrc(currentSlideIdx), `Diapositiva ${currentSlideIdx}`)" style="cursor: zoom-in;">
+            <img id="deck-slide-img" src="slides/slide_1.png" alt="Slide viewer" class="w-full h-auto object-contain max-h-[550px] mx-auto rounded-lg">
+            <div class="absolute bottom-3 right-3 bg-slate-900/80 text-white text-xs px-2.5 py-1 rounded-full font-mono backdrop-blur-sm">
+              🔍 Click para zoom completo
+            </div>
+          </div>
+
+          <!-- Slide Caption & Text Box -->
+          <div class="w-full max-w-4xl mt-6 p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="flex items-center justify-between text-xs font-mono mb-2">
+              <span id="deck-slide-title" class="font-bold text-slate-900 uppercase">Slide 01 • Hong Kong & Shenzhen</span>
+              <span id="deck-slide-category" class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-semibold">Portada</span>
+            </div>
+            <p id="deck-slide-desc" class="text-xs text-slate-600 leading-relaxed">
+              Carátula principal del estudio comparativo de modelos urbanos, gobernanza de datos y autoorganización comunitaria.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-200 bg-slate-50 py-10 text-xs text-slate-500 font-mono">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>
+        <strong class="text-slate-900">Hong Kong & Shenzhen</strong> • Integrantes: <strong class="text-slate-800">Alejandra Gómez • Ana Casas • Juan Trujillo</strong>
+      </div>
+      <div class="flex flex-wrap gap-4 text-[11px]">
+        <span>65 Diapositivas Renderizadas</span>
+        <span>•</span>
+        <span>Redes Urbanas Animadas</span>
+        <span>•</span>
+        <span>POT Decreto 555</span>
+        <span>•</span>
+        <span>Lok Ma Chau & Qianhai</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FULLSCREEN IMAGE ZOOM MODAL -->
+  <div id="imageModal" class="hidden fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex flex-col items-center justify-center p-4" onclick="closeImageModal()">
+    <div class="max-w-6xl w-full flex items-center justify-between text-white pb-3" onclick="event.stopPropagation()">
+      <span id="modalCaption" class="text-sm font-bold font-mono tracking-wide">Vista Detallada de Diapositiva</span>
+      <button onclick="closeImageModal()" class="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-lg text-xs font-mono transition">
+        Cerrar [ESC] ✕
+      </button>
+    </div>
+    <div class="max-w-6xl max-h-[85vh] w-full flex items-center justify-center overflow-hidden rounded-xl border border-slate-700 bg-slate-900 p-2 shadow-2xl" onclick="event.stopPropagation()">
+      <img id="modalImg" src="" alt="Enlarged slide" class="max-h-[80vh] w-auto object-contain rounded-lg">
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT ANIMATED NETWORKS ENGINE & LOGIC -->
+  <script>
+    // --- ANIMATED PARTICLES & FORCE GRAPH ENGINE ---
+    const netConfigs = {
+      simbiosis: {
+        title: "Red 1: Simbiosis Transfronteriza HK ⇄ SZ",
+        diagTitle: "Simbiosis Asimétrica Transfronteriza",
+        diagDesc: "Flujos de capital, hardware y normatividad cruzada. Los nodos de interfaz (Lok Ma Chau Loop y Qianhai) traducen reglas institucionales sin absorción obligatoria.",
+        resilience: "88% (Alta)",
+        power: "42% (Descentralizada)",
+        speed: "94% (Óptima)",
+        nodes: [
+          { id: 'hk_core', label: 'HK Finanzas', x: 180, y: 160, color: '#3b82f6', radius: 16, type: 'hk', desc: 'Bolsa HKEX, mercados de capital abiertos y 4 pilares de servicios.' },
+          { id: 'hk_law', label: 'Common Law', x: 130, y: 260, color: '#2563eb', radius: 13, type: 'hk', desc: 'Marco legal británico, PDPO privacidad e independencia judicial.' },
+          { id: 'hk_park', label: 'Science Park', x: 230, y: 320, color: '#60a5fa', radius: 12, type: 'hk', desc: 'Ecosistema I+D y Cyberport en Hong Kong.' },
+          { id: 'dongjiang', label: 'Río Dongjiang', x: 400, y: 80, color: '#06b6d4', radius: 14, type: 'eco', desc: 'Trasvase de 83 km que abastece 70-80% del agua de HK y cuenca de Shenzhen.' },
+          { id: 'lokmachau', label: 'Lok Ma Chau (HSITP)', x: 360, y: 240, color: '#f59e0b', radius: 18, type: 'hub', desc: 'Zona de interfaz: 87 ha con marco HK Law e ingeniería continental.' },
+          { id: 'qianhai', label: 'Qianhai Authority', x: 440, y: 300, color: '#f59e0b', radius: 17, type: 'hub', desc: 'Zona de cooperación financiera en Shenzhen con arbitraje hongkonés.' },
+          { id: 'sz_core', label: 'SZ Hard Tech', x: 620, y: 180, color: '#10b981', radius: 16, type: 'sz', desc: 'Ecosistema de manufactura electrónica (90% global) e I+D (6.46% PIB).' },
+          { id: 'sz_corp', label: 'Huawei / DJI / BYD', x: 670, y: 280, color: '#059669', radius: 14, type: 'sz', desc: 'Empresas ancla privadas que financian >90% de la innovación.' },
+          { id: 'sz_maker', label: 'Huaqiangbei Maker', x: 570, y: 360, color: '#34d399', radius: 13, type: 'sz', desc: 'Distrito de prototipado rápido y transición de shanzhai a IP propia.' },
+          { id: 'sz_sponge', label: 'Sponge City', x: 580, y: 90, color: '#14b8a6', radius: 12, type: 'sz', desc: 'Programa de resiliencia hídrica urbana y Reserva de Futian.' }
+        ],
+        edges: [
+          { from: 'hk_core', to: 'hk_law', color: '#3b82f6', pColor: '#93c5fd' },
+          { from: 'hk_core', to: 'hk_park', color: '#3b82f6', pColor: '#93c5fd' },
+          { from: 'hk_core', to: 'lokmachau', color: '#f59e0b', pColor: '#fde68a' },
+          { from: 'hk_law', to: 'lokmachau', color: '#f59e0b', pColor: '#fde68a' },
+          { from: 'hk_core', to: 'qianhai', color: '#f59e0b', pColor: '#fde68a' },
+          { from: 'dongjiang', to: 'hk_core', color: '#06b6d4', pColor: '#a5f3fc' },
+          { from: 'dongjiang', to: 'sz_sponge', color: '#06b6d4', pColor: '#a5f3fc' },
+          { from: 'sz_core', to: 'lokmachau', color: '#10b981', pColor: '#6ee7b7' },
+          { from: 'sz_core', to: 'qianhai', color: '#10b981', pColor: '#6ee7b7' },
+          { from: 'sz_core', to: 'sz_corp', color: '#10b981', pColor: '#6ee7b7' },
+          { from: 'sz_core', to: 'sz_maker', color: '#10b981', pColor: '#6ee7b7' },
+          { from: 'sz_sponge', to: 'sz_core', color: '#14b8a6', pColor: '#99f6e4' },
+          { from: 'lokmachau', to: 'qianhai', color: '#f59e0b', pColor: '#ffffff' }
+        ]
+      },
+      central: {
+        title: "Red 2: Hub Centralizado de Smart City (Shenzhen / Modelo Estatal)",
+        diagTitle: "Concentración Central de Datos",
+        diagDesc: "Topología en estrella donde todos los flujos convergen en un único servidor/agencia estatal. Alta eficiencia pero máxima fragilidad ante fallos o abusos.",
+        resilience: "32% (Crítica)",
+        power: "95% (Monopolio)",
+        speed: "78% (Rápida pero rígida)",
+        nodes: [
+          { id: 'hub', label: 'CENTRO DE DATOS', x: 400, y: 250, color: '#ef4444', radius: 24, type: 'hub', desc: 'Servidor central que concentra todos los registros, cámaras y algoritmos urbanos.' },
+          { id: 'u1', label: 'Usuaria 1 (Vivienda)', x: 220, y: 130, color: '#94a3b8', radius: 10, type: 'leaf', desc: 'Receptora de asignaciones y proveedora pasiva de datos biométricos.' },
+          { id: 'u2', label: 'Usuaria 2 (Movilidad)', x: 400, y: 90, color: '#94a3b8', radius: 10, type: 'leaf', desc: 'Monitoreo de trayectos por tarjeta y cámaras faciales.' },
+          { id: 'u3', label: 'Usuaria 3 (Comercio)', x: 580, y: 130, color: '#94a3b8', radius: 10, type: 'leaf', desc: 'Pagos electrónicos rastreados y perfil crediticio social.' },
+          { id: 'u4', label: 'Usuaria 4 (Salud)', x: 620, y: 260, color: '#94a3b8', radius: 10, type: 'leaf', desc: 'Registros hospitalarios centralizados.' },
+          { id: 'u5', label: 'Usuaria 5 (Trabajo)', x: 560, y: 390, color: '#94a3b8', radius: 10, type: 'leaf', desc: 'Control de jornada y verificación de Hukou.' },
+          { id: 'u6', label: 'Usuaria 6 (Energía)', x: 400, y: 430, color: '#94a3b8', radius: 10, type: 'leaf', desc: 'Medición inteligente sin margen de negociación comunitaria.' },
+          { id: 'u7', label: 'Usuaria 7 (Educación)', x: 240, y: 390, color: '#94a3b8', radius: 10, type: 'leaf', desc: 'Asignación top-down de cupos escolares.' },
+          { id: 'u8', label: 'Usuaria 8 (Seguridad)', x: 180, y: 260, color: '#94a3b8', radius: 10, type: 'leaf', desc: 'Vigilancia algorítmica sin comités vecinales autónomos.' }
+        ],
+        edges: [
+          { from: 'u1', to: 'hub', color: '#ef4444', pColor: '#fca5a5' },
+          { from: 'u2', to: 'hub', color: '#ef4444', pColor: '#fca5a5' },
+          { from: 'u3', to: 'hub', color: '#ef4444', pColor: '#fca5a5' },
+          { from: 'u4', to: 'hub', color: '#ef4444', pColor: '#fca5a5' },
+          { from: 'u5', to: 'hub', color: '#ef4444', pColor: '#fca5a5' },
+          { from: 'u6', to: 'hub', color: '#ef4444', pColor: '#fca5a5' },
+          { from: 'u7', to: 'hub', color: '#ef4444', pColor: '#fca5a5' },
+          { from: 'u8', to: 'hub', color: '#ef4444', pColor: '#fca5a5' }
+        ]
+      },
+      horizontal: {
+        title: "Red 3: Red P2P Autoorganizada (Çatalhöyük & JAC Barriales)",
+        diagTitle: "Autoorganización sin Jerarquía Central",
+        diagDesc: "Inspirada en Çatalhöyük: 10.000 habitantes comunicados por techos y acuerdos horizontales. Si un nodo cae, los demás asumen la coordinación.",
+        resilience: "96% (Máxima)",
+        power: "12% (Nula concentración)",
+        speed: "82% (Adaptativa)",
+        nodes: [
+          { id: 'h1', label: 'Vivienda Techo A', x: 200, y: 160, color: '#8b5cf6', radius: 13, type: 'p2p', desc: 'Espacio doméstico con acceso horizontal por azotea.' },
+          { id: 'h2', label: 'Patio Comunitario B', x: 330, y: 120, color: '#8b5cf6', radius: 14, type: 'p2p', desc: 'Área de molienda y acopio compartido de obsidiana.' },
+          { id: 'h3', label: 'Vivienda Techo C', x: 480, y: 140, color: '#8b5cf6', radius: 13, type: 'p2p', desc: 'Nodo doméstico con acuerdos consuetudinarios.' },
+          { id: 'h4', label: 'Asamblea Vecinal D', x: 600, y: 220, color: '#a78bfa', radius: 15, type: 'p2p', desc: 'Pacto de resolución comunitaria sin magistrados permanentes.' },
+          { id: 'h5', label: 'Vivienda Techo E', x: 550, y: 350, color: '#8b5cf6', radius: 13, type: 'p2p', desc: 'Red de ayuda mutua inter-hogares.' },
+          { id: 'h6', label: 'Taller Artesanal F', x: 390, y: 400, color: '#8b5cf6', radius: 14, type: 'p2p', desc: 'Intercambio de bienes sin moneda estatal.' },
+          { id: 'h7', label: 'Vivienda Techo G', x: 250, y: 340, color: '#8b5cf6', radius: 13, type: 'p2p', desc: 'Almacén descentralizado de grano.' },
+          { id: 'h8', label: 'Nodo Interfaz H', x: 370, y: 250, color: '#f59e0b', radius: 16, type: 'hub', desc: 'Punto de articulación horizontal para grandes celebraciones.' }
+        ],
+        edges: [
+          { from: 'h1', to: 'h2', color: '#8b5cf6', pColor: '#ddd6fe' },
+          { from: 'h2', to: 'h3', color: '#8b5cf6', pColor: '#ddd6fe' },
+          { from: 'h3', to: 'h4', color: '#8b5cf6', pColor: '#ddd6fe' },
+          { from: 'h4', to: 'h5', color: '#8b5cf6', pColor: '#ddd6fe' },
+          { from: 'h5', to: 'h6', color: '#8b5cf6', pColor: '#ddd6fe' },
+          { from: 'h6', to: 'h7', color: '#8b5cf6', pColor: '#ddd6fe' },
+          { from: 'h7', to: 'h1', color: '#8b5cf6', pColor: '#ddd6fe' },
+          { from: 'h8', to: 'h1', color: '#f59e0b', pColor: '#fef08a' },
+          { from: 'h8', to: 'h2', color: '#f59e0b', pColor: '#fef08a' },
+          { from: 'h8', to: 'h5', color: '#f59e0b', pColor: '#fef08a' },
+          { from: 'h8', to: 'h6', color: '#f59e0b', pColor: '#fef08a' }
+        ]
+      },
+      kennedy: {
+        title: "Red 4: Red Territorial de Kennedy & Corabastos (Bogotá)",
+        diagTitle: "La Concentración Silenciosa en Nodos Urbanos",
+        diagDesc: "Corabastos concentra la logística y precios agroalimentarios. La propuesta de Actuaciones Estratégicas (POT) crea una interfaz de cogestión con las JAC.",
+        resilience: "72% (Moderada)",
+        power: "68% (Riesgo en Corabastos)",
+        speed: "80% (Buena)",
+        nodes: [
+          { id: 'corabastos', label: 'CORABASTOS (Mega-Nodo)', x: 420, y: 220, color: '#e11d48', radius: 22, type: 'alert', desc: 'Nodo donde la decisión sobre precios y abastecimiento se concentró sin deliberación previa.' },
+          { id: 'patio_bonito', label: 'Patio Bonito (1985-2006)', x: 220, y: 150, color: '#3b82f6', radius: 15, type: 'bog', desc: 'Barrio popular consolidado con fuerte tejido de autoconstrucción comunitaria.' },
+          { id: 'amparo', label: 'El Amparo', x: 200, y: 290, color: '#3b82f6', radius: 14, type: 'bog', desc: 'Sector residencial y comercial popular de Kennedy.' },
+          { id: 'jac_pb', label: 'JAC Patio Bonito', x: 130, y: 210, color: '#10b981', radius: 13, type: 'jac', desc: 'Junta de Acción Comunal: núcleo de autoorganización barrial y cuidado local.' },
+          { id: 'jac_amparo', label: 'JAC El Amparo', x: 120, y: 360, color: '#10b981', radius: 12, type: 'jac', desc: 'Junta comunal vecinal defensora del territorio.' },
+          { id: 'pot_interfaz', label: 'Actuación Estratégica POT', x: 340, y: 340, color: '#f59e0b', radius: 18, type: 'hub', desc: 'Zona de interfaz (Arts. 9, 566, 567, 568) que debe cogestionarse con las JAC.' },
+          { id: 'tintal', label: 'Eje Ambiental Tintal / Humedal', x: 320, y: 90, color: '#06b6d4', radius: 13, type: 'eco', desc: 'Estructura ecológica principal y programa de reverdecimiento.' },
+          { id: 'portal_americas', label: 'Portal Américas / Movilidad', x: 620, y: 220, color: '#8b5cf6', radius: 15, type: 'bog', desc: 'Nodo masivo de transporte público y descarbonización.' },
+          { id: 'comercio_local', label: 'Comercio Popular Kennedy', x: 570, y: 340, color: '#ec4899', radius: 13, type: 'bog', desc: 'Redes de tiendas de barrio dependientes del flujo de Corabastos.' }
+        ],
+        edges: [
+          { from: 'patio_bonito', to: 'jac_pb', color: '#10b981', pColor: '#a7f3d0' },
+          { from: 'amparo', to: 'jac_amparo', color: '#10b981', pColor: '#a7f3d0' },
+          { from: 'patio_bonito', to: 'amparo', color: '#3b82f6', pColor: '#bfdbfe' },
+          { from: 'patio_bonito', to: 'tintal', color: '#06b6d4', pColor: '#a5f3fc' },
+          { from: 'corabastos', to: 'patio_bonito', color: '#e11d48', pColor: '#fecdd3' },
+          { from: 'corabastos', to: 'amparo', color: '#e11d48', pColor: '#fecdd3' },
+          { from: 'corabastos', to: 'portal_americas', color: '#e11d48', pColor: '#fecdd3' },
+          { from: 'corabastos', to: 'comercio_local', color: '#e11d48', pColor: '#fecdd3' },
+          { from: 'pot_interfaz', to: 'jac_pb', color: '#f59e0b', pColor: '#fef08a' },
+          { from: 'pot_interfaz', to: 'jac_amparo', color: '#f59e0b', pColor: '#fef08a' },
+          { from: 'pot_interfaz', to: 'corabastos', color: '#f59e0b', pColor: '#fef08a' },
+          { from: 'pot_interfaz', to: 'tintal', color: '#06b6d4', pColor: '#a5f3fc' }
+        ]
+      }
+    };
+
+    let activeNetworkKey = 'simbiosis';
+    let particles = [];
+    let draggedNode = null;
+    let hoveredNode = null;
+    let simSpeed = 2;
+    let shockPulseRadius = 0;
+    let shockPulseActive = false;
+
+    function initNetworkPhysics() {
+      const config = netConfigs[activeNetworkKey];
+      particles = [];
+
+      // Generate animated particles along edges
+      config.edges.forEach((edge, eIdx) => {
+        const numP = 3;
+        for (let i = 0; i < numP; i++) {
+          particles.push({
+            edgeIndex: eIdx,
+            progress: (i / numP) + Math.random() * 0.1,
+            speed: 0.006 * (0.8 + Math.random() * 0.4),
+            color: edge.pColor || '#ffffff',
+            size: 3.5
+          });
+        }
+      });
+      document.getElementById('canvas-particle-counter').innerText = `Partículas activas: ${particles.length}`;
+    }
+
+    function switchNetwork(key) {
+      activeNetworkKey = key;
+      const config = netConfigs[key];
+
+      // Update button active state
+      ['btn-net-1', 'btn-net-2', 'btn-net-3', 'btn-net-4'].forEach((id, idx) => {
+        const btn = document.getElementById(id);
+        const keys = ['simbiosis', 'central', 'horizontal', 'kennedy'];
+        if (keys[idx] === key) {
+          btn.className = 'px-3 py-2 rounded-lg font-bold bg-blue-600 text-white transition shadow-sm';
+        } else {
+          btn.className = 'px-3 py-2 rounded-lg font-medium text-slate-400 hover:text-white transition';
+        }
+      });
+
+      // Update HUD info
+      document.getElementById('canvas-net-title').innerText = config.title;
+      document.getElementById('net-diag-title').innerText = config.diagTitle;
+      document.getElementById('net-diag-desc').innerText = config.diagDesc;
+      document.getElementById('net-stat-resilience').innerText = config.resilience;
+      document.getElementById('net-stat-power').innerText = config.power;
+      document.getElementById('net-stat-speed').innerText = config.speed;
+
+      initNetworkPhysics();
+    }
+
+    function updateSimulationSpeed(val) {
+      simSpeed = parseFloat(val);
+    }
+
+    function triggerShockPulse() {
+      shockPulseRadius = 1;
+      shockPulseActive = true;
+    }
+
+    function resetNodePositions() {
+      // re-trigger network config reload
+      switchNetwork(activeNetworkKey);
+    }
+
+    // Canvas Render Loop
+    function renderAnimatedNetwork() {
+      const canvas = document.getElementById('animatedNetworkCanvas');
+      if (!canvas) return requestAnimationFrame(renderAnimatedNetwork);
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+      const config = netConfigs[activeNetworkKey];
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Draw faint background grid
+      ctx.strokeStyle = 'rgba(51, 65, 85, 0.25)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < w; x += 40) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+      }
+      for (let y = 0; y < h; y += 40) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+      }
+
+      // Map nodes for lookup
+      const nodeMap = {};
+      config.nodes.forEach(n => nodeMap[n.id] = n);
+
+      // Draw shockwave if active
+      if (shockPulseActive) {
+        shockPulseRadius += 5 * simSpeed;
+        ctx.strokeStyle = `rgba(244, 63, 94, ${Math.max(0, 1 - shockPulseRadius / (w * 0.7))})`;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(w / 2, h / 2, shockPulseRadius, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        if (shockPulseRadius > w * 0.7) {
+          shockPulseActive = false;
+        }
+      }
+
+      // 1. Draw Edges with subtle glowing glow
+      config.edges.forEach(edge => {
+        const n1 = nodeMap[edge.from];
+        const n2 = nodeMap[edge.to];
+        if (!n1 || !n2) return;
+
+        ctx.strokeStyle = edge.color;
+        ctx.lineWidth = (hoveredNode && (hoveredNode.id === n1.id || hoveredNode.id === n2.id)) ? 3 : 1.8;
+        ctx.globalAlpha = (hoveredNode && (hoveredNode.id === n1.id || hoveredNode.id === n2.id)) ? 0.9 : 0.45;
+
+        ctx.beginPath();
+        ctx.moveTo(n1.x, n1.y);
+        ctx.lineTo(n2.x, n2.y);
+        ctx.stroke();
+        ctx.globalAlpha = 1.0;
+      });
+
+      // 2. Draw Moving Flow Particles
+      particles.forEach(p => {
+        const edge = config.edges[p.edgeIndex];
+        if (!edge) return;
+        const n1 = nodeMap[edge.from];
+        const n2 = nodeMap[edge.to];
+        if (!n1 || !n2) return;
+
+        p.progress += p.speed * simSpeed;
+        if (p.progress >= 1) p.progress = 0;
+
+        const px = n1.x + (n2.x - n1.x) * p.progress;
+        const py = n1.y + (n2.y - n1.y) * p.progress;
+
+        ctx.fillStyle = p.color;
+        ctx.shadowColor = p.color;
+        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        ctx.arc(px, py, p.size, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.shadowBlur = 0; // reset
+      });
+
+      // 3. Draw Nodes
+      config.nodes.forEach(node => {
+        const isHovered = hoveredNode && hoveredNode.id === node.id;
+        const isAlert = node.type === 'alert';
+
+        // Outer pulsing aura for hubs or alerts
+        if (node.type === 'hub' || isAlert || isHovered) {
+          const auraRadius = node.radius + (Math.sin(Date.now() * 0.005) * 4) + 6;
+          ctx.fillStyle = isAlert ? 'rgba(225, 29, 72, 0.25)' : (node.type === 'hub' ? 'rgba(245, 158, 11, 0.25)' : 'rgba(59, 130, 246, 0.25)');
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, auraRadius, 0, 2 * Math.PI);
+          ctx.fill();
+        }
+
+        // Node Body
+        ctx.fillStyle = node.color;
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Node Border
+        ctx.strokeStyle = isHovered ? '#ffffff' : 'rgba(255, 255, 255, 0.7)';
+        ctx.lineWidth = isHovered ? 2.5 : 1.5;
+        ctx.stroke();
+
+        // Node Label
+        ctx.fillStyle = isHovered ? '#ffffff' : '#cbd5e1';
+        ctx.font = isHovered ? 'bold 11px JetBrains Mono' : '9px JetBrains Mono';
+        ctx.fillText(node.label, node.x - (ctx.measureText(node.label).width / 2), node.y + node.radius + 13);
+      });
+
+      requestAnimationFrame(renderAnimatedNetwork);
+    }
+
+    // Canvas Mouse Interactivity (Dragging & Hover)
+    function setupCanvasInteractivity() {
+      const canvas = document.getElementById('animatedNetworkCanvas');
+      if (!canvas) return;
+
+      function getNodeUnderMouse(e) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const mouseX = (e.clientX - rect.left) * scaleX;
+        const mouseY = (e.clientY - rect.top) * scaleY;
+
+        const config = netConfigs[activeNetworkKey];
+        for (let i = config.nodes.length - 1; i >= 0; i--) {
+          const n = config.nodes[i];
+          const dist = Math.hypot(n.x - mouseX, n.y - mouseY);
+          if (dist <= n.radius + 6) {
+            return n;
+          }
+        }
+        return null;
+      }
+
+      canvas.addEventListener('mousemove', (e) => {
+        const n = getNodeUnderMouse(e);
+        hoveredNode = n;
+
+        if (draggedNode) {
+          const rect = canvas.getBoundingClientRect();
+          const scaleX = canvas.width / rect.width;
+          const scaleY = canvas.height / rect.height;
+          draggedNode.x = Math.max(30, Math.min(canvas.width - 30, (e.clientX - rect.left) * scaleX));
+          draggedNode.y = Math.max(30, Math.min(canvas.height - 30, (e.clientY - rect.top) * scaleY));
+        }
+
+        if (n) {
+          document.getElementById('hovered-node-name').innerText = n.label;
+          document.getElementById('hovered-node-details').innerText = n.desc;
+          canvas.style.cursor = 'grab';
+        } else if (!draggedNode) {
+          canvas.style.cursor = 'default';
+        }
+      });
+
+      canvas.addEventListener('mousedown', (e) => {
+        const n = getNodeUnderMouse(e);
+        if (n) {
+          draggedNode = n;
+          canvas.style.cursor = 'grabbing';
+        }
+      });
+
+      window.addEventListener('mouseup', () => {
+        draggedNode = null;
+      });
+    }
+
+    // Slide Metadata Database for Deck Viewer
+    const slideInfo = {
+      1: { cat: "Portada", title: "Slide 01 • Portada General", desc: "Hong Kong & Shenzhen: Carátula principal del estudio comparativo de modelos urbanos." },
+      2: { cat: "Hong Kong", title: "Slide 02 • Separador Hong Kong", desc: "Inicio del capítulo de análisis del Modelo Regulatorio-Financiero de Hong Kong." },
+      3: { cat: "Hong Kong", title: "Slide 03 • Ubicación en Cantón", desc: "Ubicación geográfica de Hong Kong en la provincia de Cantón frente al mar de China Meridional." },
+      4: { cat: "Hong Kong", title: "Slide 04 • Trayectoria Colonial", desc: "Evolución histórica: de pequeños pueblos pesqueros a colonia británica (1842) y crecimiento vertical compacto." },
+      5: { cat: "Hong Kong", title: "Slide 05 • Cartografía y Morfología", desc: "Mapeo territorial del suelo urbano consolidado vs reservas naturales protegidas." },
+      6: { cat: "Hong Kong", title: "Slide 06 • Imagen Urbana de HK", desc: "Densidad extrema, península de Kowloon y la bahía de Victoria." },
+      7: { cat: "Hong Kong", title: "Slide 07 • Matriz Completa de Variables HK", desc: "Red sistémica de 5 ejes: Economía (Science Park, Leasehold), ODS (Gini 0.539, Cage homes), Socioecología (70-80% agua Dongjiang) y Poder (Common Law, PDPO, Seguridad Nacional)." },
+      8: { cat: "Shenzhen", title: "Slide 08 • Separador Shenzhen", desc: "Inicio del capítulo de análisis del Modelo Estatal-Corporativo de Shenzhen." },
+      9: { cat: "Shenzhen", title: "Slide 09 • Ubicación en Cantón", desc: "Localización de Shenzhen colindante con la frontera norte de Hong Kong." },
+      10: { cat: "Shenzhen", title: "Slide 10 • Zona Económica Especial (1980)", desc: "De territorio agrícola a laboratorio del socialismo con características chinas." },
+      11: { cat: "Shenzhen", title: "Slide 11 • Plan Urbano y Expansión", desc: "Cuadrícula urbana, zonificación industrial y distritos tecnológicos." },
+      12: { cat: "Shenzhen", title: "Slide 12 • Vista Aérea Shenzhen", desc: "Metrópoli policéntrica moderna, distritos de Futian, Nanshan y Luohu." },
+      13: { cat: "Shenzhen", title: "Slide 13 • Matriz Completa de Variables SZ", desc: "Red sistémica de 5 ejes: Economía (6.46% I+D, Huawei, DJI, ChiNext), ODS (Población flotante no-hukou, Aldeas urbanas), Socioecología (Sponge City, Manglares) y Poder (SASAC, Comités vecinales)." },
+      14: { cat: "Teoría Urbana", title: "Slide 14 • La Gran Pregunta Conductora", desc: "¿Quién concentra la capacidad de decisión sobre datos, infraestructura y riesgo cuando la ciudad se digitaliza? Dos soluciones distintas al mismo problema." },
+      15: { cat: "Teoría Urbana", title: "Slide 15 • Comparativa de Modelos", desc: "Common Law / Mercados de capital abiertos frente al Modelo Estatal-Corporativo." },
+      16: { cat: "Teoría Urbana", title: "Slide 16 • Principio de Simbiosis", desc: 'Cada uno construye la mitad del sistema que la otra ciudad no puede construir por su propio marco legal.' },
+      17: { cat: "Smart Cities", title: "Slide 17 • Enfoques de Smart City", desc: "Modelo Regulatorio-Financiero vs Modelo Estatal-Corporativo en la digitalización." },
+      18: { cat: "Smart Cities", title: "Slide 18 • Definición de Smart Cities", desc: "Ciudades que utilizan tecnología y datos para movilidad, energía, sostenibilidad y calidad de vida." },
+      19: { cat: "Smart Cities", title: "Slide 19 • Smart City Blueprint 2.0 (HK)", desc: "La visión de Hong Kong (2020) orientada a la competitividad económica internacional." },
+      20: { cat: "Smart Cities", title: "Slide 20 • Crítica de la Tecnología", desc: "La tecnología concebida como instrumento de competitividad comercial-financiera y no de transformación social." },
+      21: { cat: "Zonas Interfaz", title: "Slide 21 • Lok Ma Chau Loop & Qianhai", desc: "Los dos grandes laboratorios territoriales de interfaz entre Hong Kong y Shenzhen." },
+      22: { cat: "Zonas Interfaz", title: "Slide 22 • Definición Zonas Cooperación", desc: "Territorios diseñados para operar bajo reglas híbridas que facilitan la conexión institucional." },
+      23: { cat: "Zonas Interfaz", title: "Slide 23 • Plano Lok Ma Chau Loop", desc: "El meandro fronterizo rectificado de 87 hectáreas asignado a la cooperación tecnológica." },
+      24: { cat: "Zonas Interfaz", title: "Slide 24 • Plano Qianhai", desc: "La zona piloto de cooperación de servicios modernos en Shenzhen." },
+      25: { cat: "Redes", title: "Slide 25 • Ejes Metodológicos", desc: "Presentación de los 5 vectores de análisis cruzado." },
+      26: { cat: "Redes", title: "Slide 26 • Red de Interconexión 1", desc: "Diagrama de relaciones y flujos de capital e información." },
+      27: { cat: "Redes", title: "Slide 27 • Red de Interconexión 2", desc: "Mapeo de actores institucionales y corporativos." },
+      28: { cat: "Redes", title: "Slide 28 • Red de Interconexión 3", desc: "Visualización de dependencias técnicas y regulatorias." },
+      29: { cat: "Zonas Interfaz", title: "Slide 29 • HSITP Park", desc: "Hong Kong-Shenzhen Innovation and Technology Park en Lok Ma Chau Loop." },
+      30: { cat: "Redes", title: "Slide 30 • Red de Movilidad Transfronteriza", desc: "Integración de metro y aduanas inteligentes entre ambas ciudades." },
+      31: { cat: "Redes", title: "Slide 31 • Categorías Comparativas", desc: "Economía, ODS, Socioecología, Macromodelos y Legitimidad." },
+      32: { cat: "Redes Cruzadas", title: "Slide 32 • Matriz Completa Cruzada HK & SH", desc: "Superred comparativa que cruza todas las variables de ambas metrópolis." },
+      33: { cat: "Redes Cruzadas", title: "Slide 33 • Zoom Shenzhen Red", desc: "Foco en los nodos productivos y regulatorios de Shenzhen." },
+      34: { cat: "Redes Cruzadas", title: "Slide 34 • Zoom Shenzhen Red Detalle", desc: "Detalle de los clústeres de hardware e I+D." },
+      35: { cat: "Redes Cruzadas", title: "Slide 35 • Shenzhen Síntesis", desc: "Consolidación de las variables del ecosistema Shenzhen." },
+      36: { cat: "Redes Cruzadas", title: "Slide 36 • Zoom Hong Kong Red", desc: "Foco en los nodos financieros y de Common Law de Hong Kong." },
+      37: { cat: "Redes Cruzadas", title: "Slide 37 • Zoom Hong Kong Red Detalle", desc: "Detalle de las dinámicas de suelo y vivienda en Hong Kong." },
+      38: { cat: "Axiomas", title: "Slide 38 • Axioma de Innovación", desc: '"La innovación surge de la diversidad y la incertidumbre, la planificación centralizada tiende a reducir ambas."' },
+      39: { cat: "Axiomas", title: "Slide 39 • Axioma del Riesgo", desc: '"Centralizar la infraestructura para ganar eficiencia concentra también el riesgo."' },
+      40: { cat: "Redes", title: "Slide 40 • Diagrama HK & SH 1", desc: "Síntesis gráfica de contrastes y sinergias." },
+      41: { cat: "Redes", title: "Slide 41 • Diagrama HK & SH 2", desc: "Comparación de gobernanza y control de flujos." },
+      42: { cat: "Çatalhöyük", title: "Slide 42 • Cruce Arqueológico", desc: "5. ¿Qué diferencias y continuidades aparecen al cruzar los casos contemporáneos con Çatalhöyük? Cooperación / Autoorganización." },
+      43: { cat: "Çatalhöyük", title: "Slide 43 • Plano y Reconstrucción Çatalhöyük", desc: "Ciudad de Anatolia sin calles ni palacios: acceso por techos y vida comunitaria horizontal." },
+      44: { cat: "Çatalhöyük", title: "Slide 44 • Diagrama Autoorganización", desc: "Mecanismos de cohesión social sin aparato estatal burocrático." },
+      45: { cat: "Conclusiones", title: "Slide 45 • Conclusiones y Aprendizajes", desc: "Apertura del bloque propositivo de la investigación." },
+      46: { cat: "Conclusiones", title: "Slide 46 • ¿Absorción por Jerarquía?", desc: '"¿Absorción por jerarquía es la única alternativa para la autoorganización?"' },
+      47: { cat: "Zonas Interfaz", title: "Slide 47 • Lok Ma Chau & Qianhai Síntesis", desc: "Recordatorio de los modelos de frontera como alternativa a la asimilación total." },
+      48: { cat: "Zonas Interfaz", title: "Slide 48 • Dinámica de Cooperación Diseñada", desc: "Una dinámica deliberada entre dos sistemas de reglas distintos." },
+      49: { cat: "Bogotá", title: "Slide 49 • Patio Bonito / El Amparo", desc: "Inicio de la transferencia al contexto urbano de Bogotá y la localidad de Kennedy." },
+      50: { cat: "Bogotá", title: "Slide 50 • Cronología 1985-1991-2006", desc: "De la autoconstrucción comunal y las JAC a la legalización y consolidación." },
+      51: { cat: "Bogotá", title: "Slide 51 • Cartografía Histórica Kennedy", desc: "Mapeo de la evolución espacial de los barrios populares en Kennedy." },
+      52: { cat: "Bogotá", title: "Slide 52 • Artículos del POT Decreto 555", desc: "Art. 9 (Modelo ocupación), Art. 566 (Reverdecimiento), Art. 567 (Descarbonización) y Art. 568 (Cuidado)." },
+      53: { cat: "Bogotá", title: "Slide 53 • ¿La Autoorganización Sobrevivió?", desc: "¿La autoorganización comunitaria de las JAC sobrevivió o fue absorbida por la norma técnica distrital?" },
+      54: { cat: "Bogotá", title: "Slide 54 • Actuaciones Estratégicas e Interfaz JAC", desc: "Las Actuaciones Estratégicas diseñadas como zona de interfaz con las JAC, no como sustitución de su capacidad de decisión." },
+      55: { cat: "Bogotá", title: "Slide 55 • Crítica al Modelo Centralizado", desc: "Advertencia sobre la replicación del modelo centralista de Shenzhen en Bogotá." },
+      56: { cat: "Bogotá", title: "Slide 56 • Diagrama Redes Urbanas", desc: "Comparación topológica de centralización vs distribución barrial." },
+      57: { cat: "Bogotá", title: "Slide 57 • Usuarias vs Centro de Datos", desc: "Diagrama del centro que acapara datos frente a ciudadanas pasivas." },
+      58: { cat: "Bogotá", title: "Slide 58 • Red de Relaciones de Kennedy", desc: "Mapeo de redes de movilidad, abastecimiento y equipamientos en Kennedy." },
+      59: { cat: "Bogotá", title: "Slide 59 • Mapeo de Flujos en Kennedy", desc: "Interconexión entre el eje Tintal, Patio Bonito, Corabastos y Las Américas." },
+      60: { cat: "Bogotá", title: "Slide 60 • Nodos de Decisión en Kennedy", desc: "Identificación de puntos críticos de articulación urbana." },
+      61: { cat: "Bogotá", title: "Slide 61 • Concentración Silenciosa de Poder", desc: '"Nodos donde la capacidad de decisión se concentró en un solo punto sin que existiera antes una decisión explícita de concentrarla ahí."' },
+      62: { cat: "Bogotá", title: "Slide 62 • ¿Qué está mal en Corabastos?", desc: '"¿Qué está mal en Corabastos? La pregunta no debería ser..."' },
+      63: { cat: "Bogotá", title: "Slide 63 • La Pregunta Central sobre Corabastos", desc: '"...Sino: ¿En qué otros nodos de la red de Kennedy ya ocurrió esa misma concentración silenciosa de poder de decisión?"' },
+      64: { cat: "Cierre", title: "Slide 64 • Gracias por Ver", desc: "Diapositiva final de agradecimiento de la exposición." },
+      65: { cat: "Cierre", title: "Slide 65 • Cierre", desc: "Contracarátula del documento." }
+    };
+
+    let currentSlideIdx = 1;
+
+    function getSlideSrc(idx) {
+      return `slides/slide_${idx}.png`;
+    }
+
+    function updateDeckViewer() {
+      const img = document.getElementById('deck-slide-img');
+      const badge = document.getElementById('current-slide-badge');
+      const title = document.getElementById('deck-slide-title');
+      const category = document.getElementById('deck-slide-category');
+      const desc = document.getElementById('deck-slide-desc');
+
+      const info = slideInfo[currentSlideIdx] || { cat: "Slide", title: `Slide ${currentSlideIdx}`, desc: "" };
+
+      img.src = getSlideSrc(currentSlideIdx);
+      badge.innerText = `Diapositiva ${currentSlideIdx} / 65`;
+      title.innerText = info.title;
+      category.innerText = info.cat;
+      desc.innerText = info.desc;
+    }
+
+    function nextSlide() {
+      if (currentSlideIdx < 65) {
+        currentSlideIdx++;
+        updateDeckViewer();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlideIdx > 1) {
+        currentSlideIdx--;
+        updateDeckViewer();
+      }
+    }
+
+    function openDeckModal(idx) {
+      currentSlideIdx = idx;
+      updateDeckViewer();
+      document.getElementById('visor-deck').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Modal Zoom Logic
+    function openImageModal(src, caption) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImg');
+      const modalCaption = document.getElementById('modalCaption');
+
+      modalImg.src = src;
+      modalCaption.innerText = caption || 'Vista de Diapositiva';
+      modal.classList.remove('hidden');
+    }
+
+    function closeImageModal() {
+      document.getElementById('imageModal').classList.add('hidden');
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeImageModal();
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Init
+    window.addEventListener('DOMContentLoaded', () => {
+      initNetworkPhysics();
+      setupCanvasInteractivity();
+      renderAnimatedNetwork();
+      updateDeckViewer();
+    });
+  </script>
+</body>
+</html>
