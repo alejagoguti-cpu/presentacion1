@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hong Kong & Shenzhen — Topologías de la Densidad y el Poder (62 Secciones Nodal-Espaciales)</title>
+  <title>Hong Kong & Shenzhen — Topologías de la Densidad y el Poder (Defensa de Maestría)</title>
   
   <!-- Tipografías de Alta Gama -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,24 +16,16 @@
 
   <style>
     /* ==========================================================================
-       ESTÉTICA EDITORIAL ARQUITECTÓNICA DE MAESTRÍA (DOBLE PANEL HUD + MAPA API)
+       ESTÉTICA EDITORIAL PURA (DISEÑO ADAPTATIVO: MAPA SATELITAL / RED REAL)
        ========================================================================== */
     :root {
-      --bg-pure: #ffffff;
-      --bg-surface: #fbfcfe;
-      --bg-subtle: #f4f6fb;
       --bg-dark: #080c16;
+      --bg-card: #0f172a;
       
-      --text-main: #0c121e;
-      --text-body: #2d3748;
-      --text-muted: #5a6a85;
+      --text-pure: #ffffff;
       --text-silver: #cbd5e1;
-      --text-faint: #94a3b8;
-      
-      --accent-hk: #0284c7;        /* Azul Hong Kong */
-      --accent-sz: #7c3aed;        /* Violeta Shenzhen */
-      --accent-ct: #d97706;        /* Ámbar Çatalhöyük */
-      --accent-bg: #059669;        /* Esmeralda Bogotá */
+      --text-muted: #94a3b8;
+      --text-faint: #64748b;
       
       --cat-eco: #f43f5e;
       --cat-urb: #0284c7;
@@ -41,8 +33,10 @@
       --cat-soc: #f59e0b;
       --cat-gov: #8b5cf6;
       
-      --border-delicate: rgba(15, 23, 42, 0.08);
-      --border-dark: rgba(255, 255, 255, 0.12);
+      --accent-hk: #38bdf8;
+      --accent-sz: #a78bfa;
+      --accent-ct: #fbbf24;
+      --accent-bg: #34d399;
       
       --font-serif: "Playfair Display", Georgia, serif;
       --font-sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -60,14 +54,14 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background-color: #0b0f19;
-      color: #ffffff;
+      background-color: var(--bg-dark);
+      color: var(--text-pure);
       font-family: var(--font-sans);
       -webkit-font-smoothing: antialiased;
     }
 
     /* ==========================================================================
-       CABECERA SUPERIOR DISCRETA
+       CABECERA SUPERIOR
        ========================================================================== */
     .arch-header {
       position: fixed;
@@ -76,7 +70,7 @@
       width: 100%;
       height: 56px;
       padding: 0 2.5rem;
-      background: rgba(11, 15, 25, 0.95);
+      background: rgba(8, 12, 22, 0.95);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -106,7 +100,7 @@
     }
 
     .authors-text {
-      font-family: var(--font-sans);
+      font-family: var(--font-body);
       font-size: 0.84rem;
       font-weight: 500;
       color: var(--text-silver);
@@ -122,7 +116,7 @@
       font-family: var(--font-mono);
       font-size: 0.74rem;
       font-weight: 600;
-      color: #38bdf8;
+      color: var(--accent-hk);
       background: rgba(56, 189, 248, 0.1);
       border: 1px solid rgba(56, 189, 248, 0.25);
       padding: 4px 12px;
@@ -154,8 +148,8 @@
 
     .nav-arrow-btn:hover {
       background: rgba(255, 255, 255, 0.2);
-      border-color: #38bdf8;
-      color: #38bdf8;
+      border-color: var(--accent-hk);
+      color: var(--accent-hk);
     }
 
     .progress-bar-line {
@@ -170,7 +164,7 @@
     }
 
     /* ==========================================================================
-       ESCENARIO PRINCIPAL (100VH SIN SCROLL MOLESTO)
+       ESCENARIO PRINCIPAL (100VH)
        ========================================================================== */
     .main-deck-stage {
       width: 100vw;
@@ -182,10 +176,10 @@
       position: relative;
     }
 
-    /* Encabezado del Slide Actual */
+    /* Encabezado del Slide */
     .slide-header-strip {
       margin-bottom: 0.6rem;
-      animation: fadeInHead 0.4s ease;
+      animation: fadeInHead 0.35s ease;
     }
 
     @keyframes fadeInHead {
@@ -202,12 +196,12 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--text-silver);
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.2rem;
     }
 
     .slide-num-pill {
       font-weight: 600;
-      color: #38bdf8;
+      color: var(--accent-hk);
       display: flex;
       align-items: center;
       gap: 0.4rem;
@@ -215,7 +209,7 @@
 
     .slide-title-text {
       font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+      font-size: clamp(1.6rem, 2.3vw, 2.2rem);
       font-weight: 600;
       line-height: 1.15;
       color: #ffffff;
@@ -231,18 +225,70 @@
     }
 
     /* ==========================================================================
-       GRID DE DOBLE PANEL: MAPA SATELITAL VIVO (IZQ) + RED TOPOLÓGICA 3D (DER)
+       CONTENEDOR DE CONTENIDO (ADAPTATIVO SEGÚN TIPO DE SLIDE)
        ========================================================================== */
-    .split-panels-grid {
+    .stage-content-container {
       flex: 1;
-      display: grid;
-      grid-template-columns: 1.08fr 1fr;
-      gap: 1.4rem;
-      min-height: 0; /* Permite ajuste elástico al 100vh */
+      display: flex;
+      min-height: 0;
       margin-bottom: 0.4rem;
+      position: relative;
     }
 
-    /* PANEL IZQUIERDO: MAPA SATELITAL HD / LÁMINA */
+    /* MODO 1: RED SISTÉMICA COMPLETA HERO (SLIDE 7, 13, 25, 47, etc.) */
+    .hero-network-frame {
+      width: 100%;
+      height: 100%;
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .hero-network-frame.active {
+      display: flex;
+    }
+
+    .hero-network-img-box {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      background: #0b0f19;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: zoom-in;
+      overflow: hidden;
+      padding: 1rem;
+    }
+
+    .hero-network-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .hero-network-img-box:hover .hero-network-img {
+      transform: scale(1.02);
+    }
+
+    /* MODO 2: GRID DÚO (MAPA SATELITAL VIVO O LÁMINA + PANEL ANALÍTICO) */
+    .split-panels-grid {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 1.4rem;
+      min-height: 0;
+    }
+
+    /* Frame del Mapa Satelital HD */
     .map-panel-frame {
       background: #0f172a;
       border: 1px solid rgba(255, 255, 255, 0.12);
@@ -271,7 +317,7 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: #38bdf8;
+      color: var(--accent-hk);
       display: flex;
       align-items: center;
       gap: 0.45rem;
@@ -280,7 +326,7 @@
     .pulse-radar-dot {
       width: 8px;
       height: 8px;
-      background: #38bdf8;
+      background: var(--accent-hk);
       border-radius: 50%;
       box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7);
       animation: pulseRadar 1.8s infinite;
@@ -316,16 +362,16 @@
     .mode-btn:hover {
       background: rgba(255, 255, 255, 0.18);
       color: #ffffff;
-      border-color: #38bdf8;
+      border-color: var(--accent-hk);
     }
 
     .mode-btn.active {
-      background: #38bdf8;
+      background: var(--accent-hk);
       color: #0b0f19;
-      border-color: #38bdf8;
+      border-color: var(--accent-hk);
     }
 
-    /* Contenedor del Mapa Leaflet */
+    /* Mapa Leaflet */
     .leaflet-map-box {
       flex: 1;
       width: 100%;
@@ -341,7 +387,6 @@
       background: #090d16;
     }
 
-    /* Contenedor de Lámina Alternativa */
     .static-slide-box {
       position: absolute;
       inset: 41px 0 0 0;
@@ -353,9 +398,7 @@
       z-index: 40;
     }
 
-    .static-slide-box.active {
-      display: flex;
-    }
+    .static-slide-box.active { display: flex; }
 
     .static-slide-box img {
       max-width: 100%;
@@ -364,7 +407,6 @@
       cursor: zoom-in;
     }
 
-    /* Overlay con Metadatos Geográficos */
     .geo-telemetry-badge {
       position: absolute;
       bottom: 10px;
@@ -382,12 +424,12 @@
     }
 
     .geo-telemetry-badge span {
-      color: #38bdf8;
+      color: var(--accent-hk);
       font-weight: 600;
     }
 
-    /* PANEL DERECHO: RED TOPOLÓGICA 3D INTERACTIVA */
-    .network-panel-frame {
+    /* Panel Derecho: Matriz / Análisis Territorial */
+    .analysis-panel-frame {
       background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -396,87 +438,76 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5);
-      position: relative;
+      padding: 1.25rem 1.4rem;
     }
 
-    .network-canvas-box {
+    .analysis-card-title {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-hk);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .analysis-body-content {
       flex: 1;
-      width: 100%;
-      height: 100%;
-      min-height: 260px;
-      position: relative;
-      background: radial-gradient(circle at center, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.9) 100%);
-      cursor: grab;
-      user-select: none;
-    }
-
-    .network-canvas-box:active { cursor: grabbing; }
-
-    .network-canvas-box canvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    /* Leyenda de Categorías en Esquina */
-    .category-legend-float {
-      position: absolute;
-      top: 10px;
-      right: 12px;
       display: flex;
       flex-direction: column;
-      gap: 3px;
-      z-index: 20;
-      pointer-events: none;
-      background: rgba(11, 15, 25, 0.7);
-      padding: 5px 8px;
-      border-radius: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      justify-content: center;
+      gap: 1rem;
     }
 
-    .legend-chip {
+    .metrics-grid-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+
+    .metric-data-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 8px;
+      padding: 0.75rem 0.9rem;
+    }
+
+    .metric-data-val {
+      font-family: var(--font-sans);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.1;
+      margin-bottom: 2px;
+    }
+
+    .metric-data-lbl {
       font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      color: rgba(255, 255, 255, 0.8);
-    }
-
-    .legend-chip .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-    }
-
-    /* Banner de Telemetría e Inspección de Nodos */
-    .node-inspector-strip {
-      padding: 0.5rem 0.9rem;
-      background: rgba(11, 15, 25, 0.9);
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      line-height: 1.4;
-      color: var(--text-silver);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .node-inspector-strip strong {
-      color: #38bdf8;
-      font-family: var(--font-mono);
-      text-transform: uppercase;
+      font-size: 0.66rem;
       letter-spacing: 0.06em;
-      font-size: 0.74rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .quote-callout-box {
+      background: rgba(56, 189, 248, 0.06);
+      border-left: 3px solid var(--accent-hk);
+      padding: 0.8rem 1rem;
+      border-radius: 0 8px 8px 0;
+      font-family: var(--font-body);
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: var(--text-silver);
+      font-style: italic;
     }
 
     /* ==========================================================================
-       BARRA INFERIOR DE FILTROS & TEASERS
+       BARRA INFERIOR
        ========================================================================== */
     .footer-control-bar {
       display: flex;
@@ -489,39 +520,26 @@
       font-size: 0.72rem;
     }
 
-    .category-filter-capsules {
+    .legend-chips-group {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.7rem;
     }
 
-    .filter-capsule {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 20px;
-      padding: 3px 10px;
-      color: var(--text-silver);
-      cursor: pointer;
-      transition: all 0.15s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.66rem;
-      font-weight: 600;
+    .legend-mini-chip {
+      font-size: 0.65rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
+      color: var(--text-silver);
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
-    .filter-capsule:hover {
-      background: rgba(255, 255, 255, 0.16);
-      border-color: #38bdf8;
-      color: #ffffff;
-    }
-
-    .filter-capsule.active {
-      background: rgba(56, 189, 248, 0.2);
-      border-color: #38bdf8;
-      color: #38bdf8;
+    .legend-mini-chip .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
     }
 
     .next-teaser-btn {
@@ -537,7 +555,7 @@
     }
 
     .next-teaser-btn:hover {
-      color: #38bdf8;
+      color: var(--accent-hk);
       transform: translateX(3px);
     }
 
@@ -546,14 +564,12 @@
       font-size: 0.9rem;
     }
 
-    /* ==========================================================================
-       MODAL LIGHTBOX
-       ========================================================================== */
+    /* Modal Lightbox */
     .lightbox-modal {
       position: fixed;
       inset: 0;
-      background: rgba(8, 12, 22, 0.92);
-      backdrop-filter: blur(10px);
+      background: rgba(8, 12, 22, 0.94);
+      backdrop-filter: blur(12px);
       z-index: 2000;
       display: none;
       align-items: center;
@@ -565,8 +581,8 @@
 
     .lightbox-box {
       position: relative;
-      max-width: 90vw;
-      max-height: 88vh;
+      max-width: 92vw;
+      max-height: 90vh;
       background: #0f172a;
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 12px;
@@ -576,7 +592,7 @@
     }
 
     .lightbox-header {
-      padding: 0.6rem 1rem;
+      padding: 0.65rem 1.2rem;
       background: #1e293b;
       display: flex;
       align-items: center;
@@ -587,7 +603,7 @@
 
     .lightbox-box img {
       max-width: 100%;
-      max-height: calc(85vh - 50px);
+      max-height: calc(88vh - 50px);
       object-fit: contain;
     }
 
@@ -628,94 +644,117 @@
         <div class="slide-num-pill" id="slidePill">
           <span>●</span> SLIDE 01
         </div>
-        <div id="slideCategory" style="color: var(--text-silver);">01. INTRODUCCIÓN</div>
+        <div id="slideCategory">01. INTRODUCCIÓN</div>
       </div>
       <h1 class="slide-title-text" id="slideTitle">Hong Kong & Shenzhen</h1>
       <p class="slide-sub-text" id="slideSubtitle">¿Qué modelo de ciudad es mejor: el de Hong Kong o el de Shenzhen?</p>
     </div>
 
-    <!-- Grid de Doble Panel (Mapa Satelital Vivo + Red 3D) -->
-    <div class="split-panels-grid">
+    <!-- Contenedor Dinámico Adaptativo -->
+    <div class="stage-content-container">
       
-      <!-- Panel Izquierdo: Mapa Satelital HD API / Lámina -->
-      <div class="map-panel-frame">
+      <!-- MODO 1: RED SISTÉMICA COMPLETA DE INVESTIGACIÓN (SLIDE 7, 13, 25, 47, etc.) -->
+      <div class="hero-network-frame" id="heroNetworkFrame">
         <div class="panel-top-bar">
           <div class="panel-label">
             <span class="pulse-radar-dot"></span>
-            <span id="mapPanelTitle">🛰️ Satélite Vivo (Leaflet HD)</span>
+            <span id="heroNetworkLabel">RED SISTÉMICA COMPLETA (5 DIMENSIONES)</span>
           </div>
           <div class="panel-mode-toggles">
-            <button class="mode-btn active" id="btnSatellite" onclick="setMapLayer('satellite')">🛰️ Satélite HD</button>
-            <button class="mode-btn" id="btnDark" onclick="setMapLayer('dark')">🌑 Blueprint</button>
-            <button class="mode-btn" id="btnSlideImg" onclick="toggleSlideImg()">🖼️ Lámina</button>
-            <button class="mode-btn" onclick="recenterMap()" title="Centrar cámara">🎯 Foco</button>
-            <button class="mode-btn" onclick="openLightbox()" title="Ampliar">🔍</button>
+            <button class="mode-btn active" onclick="openLightbox()">🔍 Inspeccionar en Alta Resolución</button>
           </div>
         </div>
-
-        <!-- Contenedor del Mapa Leaflet -->
-        <div class="leaflet-map-box">
-          <div id="liveMap"></div>
-          
-          <!-- Badge de Coordenadas & Telemetría Geográfica -->
-          <div class="geo-telemetry-badge" id="geoBadge">
-            Coordenadas: <span id="geoCoords">22.4200° N, 114.1200° E</span> • Foco: <span id="geoTarget">Delta del Río Perla</span>
-          </div>
-        </div>
-
-        <!-- Lámina Estática Alternativa -->
-        <div class="static-slide-box" id="staticSlideBox" onclick="openLightbox()">
-          <img id="staticSlideImg" src="slides/slide_1.png" alt="Lámina Arquitectónica" />
+        <div class="hero-network-img-box" onclick="openLightbox()">
+          <img id="heroNetworkImg" class="hero-network-img" src="slides/slide_7.png" alt="Red Sistémica Completa" />
         </div>
       </div>
 
-      <!-- Panel Derecho: Red Topológica 3D Interactiva -->
-      <div class="network-panel-frame">
-        <div class="panel-top-bar">
-          <div class="panel-label" style="color: #818cf8;">
-            <span>✦</span> <span id="networkTitle">RED TOPOLÓGICA NODAL</span>
+      <!-- MODO 2: GRID DÚO (MAPA SATELITAL VIVO O LÁMINA + MATRIZ ANALÍTICA) -->
+      <div class="split-panels-grid" id="splitPanelsGrid">
+        
+        <!-- Panel Izquierdo: Mapa Satelital HD API / Lámina -->
+        <div class="map-panel-frame">
+          <div class="panel-top-bar">
+            <div class="panel-label">
+              <span class="pulse-radar-dot"></span>
+              <span id="mapPanelTitle">🛰️ Satélite Vivo (Leaflet HD)</span>
+            </div>
+            <div class="panel-mode-toggles">
+              <button class="mode-btn active" id="btnSatellite" onclick="setMapLayer('satellite')">🛰️ Satélite HD</button>
+              <button class="mode-btn" id="btnDark" onclick="setMapLayer('dark')">🌑 Blueprint</button>
+              <button class="mode-btn" id="btnSlideImg" onclick="toggleSlideImg()">🖼️ Lámina</button>
+              <button class="mode-btn" onclick="recenterMap()" title="Centrar cámara">🎯 Foco</button>
+              <button class="mode-btn" onclick="openLightbox()" title="Ampliar">🔍</button>
+            </div>
           </div>
-          <div class="panel-mode-toggles">
-            <button class="mode-btn" onclick="triggerPulse()">⚡ Pulso</button>
-            <button class="mode-btn" id="orbitBtn" onclick="toggleOrbit()">🌀 Órbita</button>
-            <button class="mode-btn" onclick="resetNetwork()">⟲ Reset</button>
+
+          <!-- Mapa Leaflet -->
+          <div class="leaflet-map-box">
+            <div id="liveMap"></div>
+            <div class="geo-telemetry-badge" id="geoBadge">
+              Coordenadas: <span id="geoCoords">22.4200° N, 114.1200° E</span> • Foco: <span id="geoTarget">Delta del Río Perla</span>
+            </div>
+          </div>
+
+          <!-- Lámina Estática Alternativa -->
+          <div class="static-slide-box" id="staticSlideBox" onclick="openLightbox()">
+            <img id="staticSlideImg" src="slides/slide_1.png" alt="Lámina Arquitectónica" />
           </div>
         </div>
 
-        <!-- Canvas 3D -->
-        <div class="network-canvas-box" id="networkCanvasBox">
-          <canvas id="stageCanvas"></canvas>
+        <!-- Panel Derecho: Matriz / Análisis Territorial -->
+        <div class="analysis-panel-frame" id="analysisPanelFrame">
+          <div>
+            <div class="analysis-card-title">✦ ANÁLISIS ESTRUCTURAL & GOBERNANZA</div>
+            <div style="font-family: var(--font-body); font-size: 0.88rem; color: var(--text-silver); line-height: 1.45;" id="analysisSummary">
+              Síntesis del modelo urbano, concentración de decisión y balance socioecológico.
+            </div>
+          </div>
 
-          <!-- Leyenda de Categorías Flotante -->
-          <div class="category-legend-float">
-            <div class="legend-chip"><span class="dot" style="background: var(--cat-eco);"></span> Economía</div>
-            <div class="legend-chip"><span class="dot" style="background: var(--cat-urb);"></span> Urbanismo</div>
-            <div class="legend-chip"><span class="dot" style="background: var(--cat-env);"></span> Ambiente</div>
-            <div class="legend-chip"><span class="dot" style="background: var(--cat-soc);"></span> Sociedad</div>
-            <div class="legend-chip"><span class="dot" style="background: var(--cat-gov);"></span> Gobernanza</div>
+          <div class="analysis-body-content">
+            <div class="metrics-grid-2x2" id="metricsGrid">
+              <div class="metric-data-card">
+                <div class="metric-data-val" id="m1Val">7.5 M</div>
+                <div class="metric-data-lbl" id="m1Lbl">Población</div>
+              </div>
+              <div class="metric-data-card">
+                <div class="metric-data-val" id="m2Val">2,755</div>
+                <div class="metric-data-lbl" id="m2Lbl">Densidad (Hab/km²)</div>
+              </div>
+              <div class="metric-data-card">
+                <div class="metric-data-val" id="m3Val">90%</div>
+                <div class="metric-data-lbl" id="m3Lbl">Transporte Público</div>
+              </div>
+              <div class="metric-data-card">
+                <div class="metric-data-val" id="m4Val">40%</div>
+                <div class="metric-data-lbl" id="m4Lbl">Suelo Protegido</div>
+              </div>
+            </div>
+
+            <div class="quote-callout-box" id="quoteCallout">
+              «Pensar la densidad no es contar rascacielos; es comprender la capacidad viva de una sociedad para negociar su propio destino en el espacio.»
+            </div>
+          </div>
+
+          <div style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-faint); display: flex; align-items: center; justify-content: space-between;">
+            <span id="footerCapLabel">Investigación de Maestría</span>
+            <span>Alejandra Gómez • Ana Casas • Juan Trujillo</span>
           </div>
         </div>
 
-        <!-- Banner de Telemetría Dinámica -->
-        <div class="node-inspector-strip" id="nodeInspector">
-          <span style="color: #38bdf8; font-size: 0.9rem;">ⓘ</span>
-          <div id="inspectorText">
-            Selecciona o arrastra cualquier nodo en 3D para examinar indicadores e interconexiones.
-          </div>
-        </div>
       </div>
 
     </div>
 
-    <!-- Barra Inferior de Filtros & Navegación -->
+    <!-- Barra Inferior de Navegación & Leyenda -->
     <div class="footer-control-bar">
-      <div class="category-filter-capsules">
-        <span style="color: var(--text-faint); margin-right: 4px;">Filtros:</span>
-        <button class="filter-capsule" onclick="filterNetwork('urbanismo', this)">🏙️ Urbanismo</button>
-        <button class="filter-capsule" onclick="filterNetwork('economia', this)">📊 Economía</button>
-        <button class="filter-capsule" onclick="filterNetwork('ambiente', this)">🌿 Medio Ambiente</button>
-        <button class="filter-capsule" onclick="filterNetwork('sociedad', this)">👥 Sociedad</button>
-        <button class="filter-capsule" onclick="filterNetwork('gobernanza', this)">🛡️ Gobernanza</button>
+      <div class="legend-chips-group">
+        <span style="color: var(--text-faint); margin-right: 2px;">Dimensiones:</span>
+        <span class="legend-mini-chip"><span class="dot" style="background: var(--cat-eco);"></span> Economía</span>
+        <span class="legend-mini-chip"><span class="dot" style="background: var(--cat-urb);"></span> Urbanismo</span>
+        <span class="legend-mini-chip"><span class="dot" style="background: var(--cat-env);"></span> Ambiente</span>
+        <span class="legend-mini-chip"><span class="dot" style="background: var(--cat-soc);"></span> Sociedad</span>
+        <span class="legend-mini-chip"><span class="dot" style="background: var(--cat-gov);"></span> Gobernanza</span>
       </div>
 
       <div class="next-teaser-btn" id="nextTeaserBtn" onclick="nextSlide()">
@@ -738,7 +777,7 @@
 
   <script>
     // ==========================================================================
-    // 1. DATASET DE 62 SECCIONES CRONOLÓGICAS
+    // 1. DATASETS
     // ==========================================================================
 const SECTIONS = [
       {
@@ -1707,6 +1746,9 @@ const SECTIONS = [
 
     const GEO_DATA = {"1": {"lat": 22.42, "lng": 114.12, "zoom": 11, "name": "Delta del R\u00edo Perla (Hong Kong & Shenzhen)", "poly": [[22.25, 113.85], [22.58, 113.85], [22.58, 114.4], [22.25, 114.4]]}, "2": {"lat": 22.3193, "lng": 114.1694, "zoom": 12, "name": "Hong Kong (Victoria Harbour & Kowloon)", "poly": [[22.26, 114.12], [22.35, 114.12], [22.35, 114.24], [22.26, 114.24]]}, "3": {"lat": 22.3193, "lng": 114.1694, "zoom": 10, "name": "China \u2192 Cant\u00f3n \u2192 Hong Kong", "poly": [[22.15, 113.7], [22.6, 113.7], [22.6, 114.45], [22.15, 114.45]]}, "4": {"lat": 22.2855, "lng": 114.1577, "zoom": 14, "name": "Central & Puerto Hist\u00f3rico de Victoria", "poly": [[22.275, 114.145], [22.295, 114.145], [22.295, 114.175], [22.275, 114.175]]}, "5": {"lat": 22.293, "lng": 114.172, "zoom": 14, "name": "Victoria Harbour & Skyline Kowloon", "poly": [[22.28, 114.155], [22.305, 114.155], [22.305, 114.19], [22.28, 114.19]]}, "6": {"lat": 22.3193, "lng": 114.1694, "zoom": 13, "name": "Topolog\u00eda Urbana & Densidad de Hong Kong", "poly": [[22.29, 114.14], [22.34, 114.14], [22.34, 114.2], [22.29, 114.2]]}, "7": {"lat": 22.38, "lng": 114.18, "zoom": 12, "name": "Hong Kong: Parques Rurales & Red de Gobernanza", "poly": [[22.35, 114.1], [22.42, 114.1], [22.42, 114.24], [22.35, 114.24]]}, "8": {"lat": 22.5431, "lng": 114.0579, "zoom": 12, "name": "Shenzhen (Centro Metropolitano)", "poly": [[22.51, 113.9], [22.58, 113.9], [22.58, 114.15], [22.51, 114.15]]}, "9": {"lat": 22.5431, "lng": 114.0579, "zoom": 12, "name": "Zona Econ\u00f3mica Especial de Shenzhen (1980)", "poly": [[22.5, 113.88], [22.57, 113.88], [22.57, 114.18], [22.5, 114.18]]}, "10": {"lat": 22.54, "lng": 114.05, "zoom": 13, "name": "Transformaci\u00f3n Rural a Metr\u00f3polis (Shenzhen)", "poly": [[22.52, 114.02], [22.56, 114.02], [22.56, 114.08], [22.52, 114.08]]}, "11": {"lat": 22.5362, "lng": 114.0545, "zoom": 15, "name": "Futian CBD & Rascacielos Ping An", "poly": [[22.528, 114.045], [22.545, 114.045], [22.545, 114.065], [22.528, 114.065]]}, "12": {"lat": 22.5362, "lng": 114.0545, "zoom": 15, "name": "N\u00facleo Corporativo & Bolsa ChiNext (Futian)", "poly": [[22.528, 114.045], [22.545, 114.045], [22.545, 114.065], [22.528, 114.065]]}, "13": {"lat": 22.5408, "lng": 113.9497, "zoom": 13, "name": "Nanshan Hi-Tech District & Cl\u00fasteres Tecnol\u00f3gicos", "poly": [[22.52, 113.92], [22.56, 113.92], [22.56, 113.97], [22.52, 113.97]]}, "14": {"lat": 22.45, "lng": 114.08, "zoom": 11, "name": "Frontera y Sutura Hong Kong - Shenzhen", "poly": [[22.4, 113.98], [22.55, 113.98], [22.55, 114.2], [22.4, 114.2]]}, "15": {"lat": 22.42, "lng": 114.1, "zoom": 11, "name": "Comparaci\u00f3n de Modelos: Common Law vs. Estado-Corporativo", "poly": [[22.3, 113.95], [22.56, 113.95], [22.56, 114.25], [22.3, 114.25]]}, "16": {"lat": 22.39, "lng": 114.14, "zoom": 12, "name": "Parques Rurales de Hong Kong (40% Protegido)", "poly": [[22.36, 114.11], [22.42, 114.11], [22.42, 114.18], [22.36, 114.18]]}, "17": {"lat": 22.328, "lng": 114.162, "zoom": 16, "name": "Sham Shui Po & Viviendas Subdivididas (Cage Homes)", "poly": [[22.322, 114.156], [22.334, 114.156], [22.334, 114.168], [22.322, 114.168]]}, "18": {"lat": 22.28, "lng": 114.1588, "zoom": 15, "name": "Central District: Sistema de Arrendamiento Leasehold", "poly": [[22.274, 114.152], [22.286, 114.152], [22.286, 114.165], [22.274, 114.165]]}, "19": {"lat": 22.292, "lng": 114.205, "zoom": 14, "name": "Sede ICAC & Estabilidad Institucional", "poly": [[22.285, 114.195], [22.298, 114.195], [22.298, 114.215], [22.285, 114.215]]}, "20": {"lat": 22.428, "lng": 114.212, "zoom": 15, "name": "Hong Kong Science Park (Pak Shek Kok)", "poly": [[22.422, 114.205], [22.435, 114.205], [22.435, 114.22], [22.422, 114.22]]}, "21": {"lat": 22.2855, "lng": 114.1577, "zoom": 14, "name": "Bolsa HKEX & Distrito Financiero Admiralty", "poly": [[22.278, 114.15], [22.29, 114.15], [22.29, 114.168], [22.278, 114.168]]}, "22": {"lat": 22.4862, "lng": 114.0378, "zoom": 14, "name": "Reserva Natural de Mai Po & Sitio Ramsar", "poly": [[22.475, 114.025], [22.498, 114.025], [22.498, 114.05], [22.475, 114.05]]}, "23": {"lat": 22.3193, "lng": 114.1694, "zoom": 13, "name": "Kowloon & Hong Kong Island: Demograf\u00eda & Fiscalidad", "poly": [[22.29, 114.14], [22.34, 114.14], [22.34, 114.2], [22.29, 114.2]]}, "24": {"lat": 22.2988, "lng": 113.9877, "zoom": 13, "name": "Proyecto Lantau Tomorrow Vision (Reclamaci\u00f3n Marina)", "poly": [[22.27, 113.94], [22.32, 113.94], [22.32, 114.04], [22.27, 114.04]]}, "25": {"lat": 22.428, "lng": 114.212, "zoom": 15, "name": "Ecosistema I+D: Parque Cient\u00edfico HKSTP", "poly": [[22.422, 114.205], [22.435, 114.205], [22.435, 114.22], [22.422, 114.22]]}, "26": {"lat": 22.5408, "lng": 113.9497, "zoom": 14, "name": "Nanshan: Intensidad de I+D (6.46% del PIB)", "poly": [[22.525, 113.93], [22.555, 113.93], [22.555, 113.965], [22.525, 113.965]]}, "27": {"lat": 22.5408, "lng": 113.9497, "zoom": 13, "name": "Shenzhen: 20 Cl\u00fasteres Industriales Estrat\u00e9gicos", "poly": [[22.51, 113.9], [22.57, 113.9], [22.57, 113.98], [22.51, 113.98]]}, "28": {"lat": 22.5484, "lng": 114.0863, "zoom": 16, "name": "Distrito Electr\u00f3nico de Huaqiangbei", "poly": [[22.543, 114.08], [22.554, 114.08], [22.554, 114.093], [22.543, 114.093]]}, "29": {"lat": 22.5328, "lng": 113.9355, "zoom": 15, "name": "Sedes Corporativas: Tencent, DJI, Huawei & BYD", "poly": [[22.525, 113.925], [22.54, 113.925], [22.54, 113.945], [22.525, 113.945]]}, "30": {"lat": 22.5362, "lng": 114.0545, "zoom": 15, "name": "Bolsa de Valores ChiNext (Futian)", "poly": [[22.53, 114.048], [22.542, 114.048], [22.542, 114.06], [22.53, 114.06]]}, "31": {"lat": 22.5385, "lng": 113.9685, "zoom": 16, "name": "Aldeas Urbanas (Baishizhou & Gangxia)", "poly": [[22.532, 113.96], [22.545, 113.96], [22.545, 113.977], [22.532, 113.977]]}, "32": {"lat": 22.55, "lng": 114.02, "zoom": 13, "name": "Shenzhen: Poblaci\u00f3n Flotante & R\u00e9gimen Hukou", "poly": [[22.52, 113.98], [22.58, 113.98], [22.58, 114.06], [22.52, 114.06]]}, "33": {"lat": 22.5431, "lng": 114.0579, "zoom": 14, "name": "Reforma del Suelo Urbano de 2013 (Shenzhen)", "poly": [[22.53, 114.04], [22.555, 114.04], [22.555, 114.075], [22.53, 114.075]]}, "34": {"lat": 22.5431, "lng": 114.0579, "zoom": 14, "name": "Gobernanza Estatal-Corporativa & SASAC", "poly": [[22.53, 114.04], [22.555, 114.04], [22.555, 114.075], [22.53, 114.075]]}, "35": {"lat": 22.52, "lng": 114.03, "zoom": 14, "name": "Programa Sponge City (Ciudad Esponja Futian)", "poly": [[22.505, 114.01], [22.535, 114.01], [22.535, 114.05], [22.505, 114.05]]}, "36": {"lat": 22.5238, "lng": 114.0135, "zoom": 15, "name": "Reserva Natural de Manglares de Futian", "poly": [[22.518, 114.005], [22.53, 114.005], [22.53, 114.025], [22.518, 114.025]]}, "37": {"lat": 22.51, "lng": 113.95, "zoom": 13, "name": "Litoral de la Bah\u00eda de Shenzhen & Riesgo Costero", "poly": [[22.485, 113.92], [22.535, 113.92], [22.535, 113.98], [22.485, 113.98]]}, "38": {"lat": 22.5312, "lng": 113.8967, "zoom": 14, "name": "Zona de Cooperaci\u00f3n Qianhai (ZEE Especial)", "poly": [[22.515, 113.88], [22.545, 113.88], [22.545, 113.915], [22.515, 113.915]]}, "39": {"lat": 22.5158, "lng": 114.0754, "zoom": 15, "name": "Lok Ma Chau Loop (Parque HSITP Transfronterizo)", "poly": [[22.508, 114.065], [22.522, 114.065], [22.522, 114.085], [22.508, 114.085]]}, "40": {"lat": 22.75, "lng": 114.2, "zoom": 11, "name": "Sistema de Trasvase Dongjiang (83 km Acueducto)", "poly": [[22.65, 114.1], [22.85, 114.1], [22.85, 114.3], [22.65, 114.3]]}, "41": {"lat": 22.598, "lng": 114.5427, "zoom": 14, "name": "Central Nuclear de Daya Bay (Pen\u00ednsula de Dapeng)", "poly": [[22.585, 114.53], [22.61, 114.53], [22.61, 114.555], [22.585, 114.555]]}, "42": {"lat": 22.518, "lng": 114.07, "zoom": 13, "name": "Conexi\u00f3n de Metro y Puntos de Control Transfronterizos", "poly": [[22.505, 114.05], [22.53, 114.05], [22.53, 114.09], [22.505, 114.09]]}, "43": {"lat": 22.5158, "lng": 114.0754, "zoom": 14, "name": "Blueprint de Innovaci\u00f3n y Tecnolog\u00eda 2022", "poly": [[22.505, 114.06], [22.525, 114.06], [22.525, 114.09], [22.505, 114.09]]}, "44": {"lat": 22.35, "lng": 113.85, "zoom": 9, "name": "\u00c1rea de la Gran Bah\u00eda (Guangdong-Hong Kong-Macao)", "poly": [[21.8, 113.2], [23.1, 113.2], [23.1, 114.6], [21.8, 114.6]]}, "45": {"lat": 22.8, "lng": 114.3, "zoom": 10, "name": "Estr\u00e9s H\u00eddrico y Cuenca del R\u00edo Dongjiang (2021)", "poly": [[22.6, 114.0], [23.0, 114.0], [23.0, 114.5], [22.6, 114.5]]}, "46": {"lat": 22.45, "lng": 114.05, "zoom": 11, "name": "Simbiosis Territorial: Hong Kong - Shenzhen", "poly": [[22.35, 113.95], [22.55, 113.95], [22.55, 114.15], [22.35, 114.15]]}, "47": {"lat": 22.45, "lng": 114.05, "zoom": 11, "name": "Red Territorial Integrada de la Gran Bah\u00eda", "poly": [[22.35, 113.95], [22.55, 113.95], [22.55, 114.15], [22.35, 114.15]]}, "48": {"lat": 37.6675, "lng": 32.8283, "zoom": 16, "name": "\u00c7atalh\u00f6y\u00fck (Konya, Turqu\u00eda) \u2014 Malla Celular 7500 a.C.", "poly": [[37.663, 32.823], [37.672, 32.823], [37.672, 32.834], [37.663, 32.834]]}, "49": {"lat": 37.6675, "lng": 32.8283, "zoom": 17, "name": "\u00c7atalh\u00f6y\u00fck: Cero Calles & Circulaci\u00f3n por Techos", "poly": [[37.665, 32.825], [37.67, 32.825], [37.67, 32.832], [37.665, 32.832]]}, "50": {"lat": 37.6675, "lng": 32.8283, "zoom": 16, "name": "\u00c7atalh\u00f6y\u00fck: Autoorganizaci\u00f3n Horizontal P2P", "poly": [[37.663, 32.823], [37.672, 32.823], [37.672, 32.834], [37.663, 32.834]]}, "51": {"lat": 37.6675, "lng": 32.8283, "zoom": 16, "name": "\u00c7atalh\u00f6y\u00fck: Ausencia de Monumentos & Palacios", "poly": [[37.663, 32.823], [37.672, 32.823], [37.672, 32.834], [37.663, 32.834]]}, "52": {"lat": 37.6675, "lng": 32.8283, "zoom": 17, "name": "\u00c7atalh\u00f6y\u00fck: Estructura Dom\u00e9stica Continua", "poly": [[37.665, 32.825], [37.67, 32.825], [37.67, 32.832], [37.665, 32.832]]}, "53": {"lat": 37.6675, "lng": 32.8283, "zoom": 16, "name": "\u00c7atalh\u00f6y\u00fck: Topolog\u00eda Sin Jerarqu\u00eda Espacial", "poly": [[37.663, 32.823], [37.672, 32.823], [37.672, 32.834], [37.663, 32.834]]}, "54": {"lat": 37.6675, "lng": 32.8283, "zoom": 16, "name": "\u00c7atalh\u00f6y\u00fck: Resiliencia Arqueol\u00f3gica", "poly": [[37.663, 32.823], [37.672, 32.823], [37.672, 32.834], [37.663, 32.834]]}, "55": {"lat": 37.6675, "lng": 32.8283, "zoom": 15, "name": "Lecci\u00f3n de \u00c7atalh\u00f6y\u00fck para la Metr\u00f3polis Contempor\u00e1nea", "poly": [[37.66, 32.818], [37.675, 32.818], [37.675, 32.838], [37.66, 32.838]]}, "56": {"lat": 4.6293, "lng": -74.1578, "zoom": 16, "name": "Corabastos & Localidad de Kennedy (Bogot\u00e1)", "poly": [[4.623, -74.165], [4.636, -74.165], [4.636, -74.15], [4.623, -74.15]]}, "57": {"lat": 4.6338, "lng": -74.1652, "zoom": 16, "name": "Barrio Patio Bonito (Autogesti\u00f3n Comunitaria 1985)", "poly": [[4.628, -74.172], [4.64, -74.172], [4.64, -74.158], [4.628, -74.158]]}, "58": {"lat": 4.6293, "lng": -74.1578, "zoom": 15, "name": "Corabastos Regional (12.000 ton/d\u00eda de Alimentos)", "poly": [[4.62, -74.168], [4.638, -74.168], [4.638, -74.148], [4.62, -74.148]]}, "59": {"lat": 4.63, "lng": -74.155, "zoom": 15, "name": "Concentraci\u00f3n Silenciosa del Poder en Nodos Log\u00edsticos", "poly": [[4.622, -74.164], [4.638, -74.164], [4.638, -74.146], [4.622, -74.146]]}, "60": {"lat": 4.6293, "lng": -74.1578, "zoom": 16, "name": "La Pregunta Incorrecta: S\u00edntomas vs. Concentraci\u00f3n", "poly": [[4.623, -74.165], [4.636, -74.165], [4.636, -74.15], [4.623, -74.15]]}, "61": {"lat": 4.631, "lng": -74.16, "zoom": 15, "name": "La Pregunta Correcta: Interfaz Institucional con JAC & POT", "poly": [[4.622, -74.17], [4.64, -74.17], [4.64, -74.15], [4.622, -74.15]]}, "62": {"lat": 22.42, "lng": 114.1, "zoom": 10, "name": "Topolog\u00eda Global del Poder Urbano (S\u00edntesis Final)", "poly": [[22.2, 113.8], [22.6, 113.8], [22.6, 114.4], [22.2, 114.4]]}};
 
+    const GEO_DATA = {"1": {"lat": 22.42, "lng": 114.12, "zoom": 11, "name": "Delta del R\u00edo Perla (Hong Kong & Shenzhen)", "poly": [[22.25, 113.85], [22.58, 113.85], [22.58, 114.4], [22.25, 114.4]]}, "2": {"lat": 22.3193, "lng": 114.1694, "zoom": 12, "name": "Hong Kong (Victoria Harbour & Kowloon)", "poly": [[22.26, 114.12], [22.35, 114.12], [22.35, 114.24], [22.26, 114.24]]}, "3": {"lat": 22.3193, "lng": 114.1694, "zoom": 10, "name": "China \u2192 Cant\u00f3n \u2192 Hong Kong", "poly": [[22.15, 113.7], [22.6, 113.7], [22.6, 114.45], [22.15, 114.45]]}, "4": {"lat": 22.2855, "lng": 114.1577, "zoom": 14, "name": "Central & Puerto Hist\u00f3rico de Victoria", "poly": [[22.275, 114.145], [22.295, 114.145], [22.295, 114.175], [22.275, 114.175]]}, "5": {"lat": 22.293, "lng": 114.172, "zoom": 14, "name": "Victoria Harbour & Skyline Kowloon", "poly": [[22.28, 114.155], [22.305, 114.155], [22.305, 114.19], [22.28, 114.19]]}, "6": {"lat": 22.3193, "lng": 114.1694, "zoom": 13, "name": "Topolog\u00eda Urbana & Densidad de Hong Kong", "poly": [[22.29, 114.14], [22.34, 114.14], [22.34, 114.2], [22.29, 114.2]]}, "7": {"lat": 22.38, "lng": 114.18, "zoom": 12, "name": "Hong Kong: Parques Rurales & Red de Gobernanza", "poly": [[22.35, 114.1], [22.42, 114.1], [22.42, 114.24], [22.35, 114.24]]}, "8": {"lat": 22.5431, "lng": 114.0579, "zoom": 12, "name": "Shenzhen (Centro Metropolitano)", "poly": [[22.51, 113.9], [22.58, 113.9], [22.58, 114.15], [22.51, 114.15]]}, "9": {"lat": 22.5431, "lng": 114.0579, "zoom": 12, "name": "Zona Econ\u00f3mica Especial de Shenzhen (1980)", "poly": [[22.5, 113.88], [22.57, 113.88], [22.57, 114.18], [22.5, 114.18]]}, "10": {"lat": 22.54, "lng": 114.05, "zoom": 13, "name": "Transformaci\u00f3n Rural a Metr\u00f3polis (Shenzhen)", "poly": [[22.52, 114.02], [22.56, 114.02], [22.56, 114.08], [22.52, 114.08]]}, "11": {"lat": 22.5362, "lng": 114.0545, "zoom": 15, "name": "Futian CBD & Rascacielos Ping An", "poly": [[22.528, 114.045], [22.545, 114.045], [22.545, 114.065], [22.528, 114.065]]}, "12": {"lat": 22.5362, "lng": 114.0545, "zoom": 15, "name": "N\u00facleo Corporativo & Bolsa ChiNext (Futian)", "poly": [[22.528, 114.045], [22.545, 114.045], [22.545, 114.065], [22.528, 114.065]]}, "13": {"lat": 22.5408, "lng": 113.9497, "zoom": 13, "name": "Nanshan Hi-Tech District & Cl\u00fasteres Tecnol\u00f3gicos", "poly": [[22.52, 113.92], [22.56, 113.92], [22.56, 113.97], [22.52, 113.97]]}, "14": {"lat": 22.45, "lng": 114.08, "zoom": 11, "name": "Frontera y Sutura Hong Kong - Shenzhen", "poly": [[22.4, 113.98], [22.55, 113.98], [22.55, 114.2], [22.4, 114.2]]}, "15": {"lat": 22.42, "lng": 114.1, "zoom": 11, "name": "Comparaci\u00f3n de Modelos: Common Law vs. Estado-Corporativo", "poly": [[22.3, 113.95], [22.56, 113.95], [22.56, 114.25], [22.3, 114.25]]}, "16": {"lat": 22.39, "lng": 114.14, "zoom": 12, "name": "Parques Rurales de Hong Kong (40% Protegido)", "poly": [[22.36, 114.11], [22.42, 114.11], [22.42, 114.18], [22.36, 114.18]]}, "17": {"lat": 22.328, "lng": 114.162, "zoom": 16, "name": "Sham Shui Po & Viviendas Subdivididas (Cage Homes)", "poly": [[22.322, 114.156], [22.334, 114.156], [22.334, 114.168], [22.322, 114.168]]}, "18": {"lat": 22.28, "lng": 114.1588, "zoom": 15, "name": "Central District: Sistema de Arrendamiento Leasehold", "poly": [[22.274, 114.152], [22.286, 114.152], [22.286, 114.165], [22.274, 114.165]]}, "19": {"lat": 22.292, "lng": 114.205, "zoom": 14, "name": "Sede ICAC & Estabilidad Institucional", "poly": [[22.285, 114.195], [22.298, 114.195], [22.298, 114.215], [22.285, 114.215]]}, "20": {"lat": 22.428, "lng": 114.212, "zoom": 15, "name": "Hong Kong Science Park (Pak Shek Kok)", "poly": [[22.422, 114.205], [22.435, 114.205], [22.435, 114.22], [22.422, 114.22]]}, "21": {"lat": 22.2855, "lng": 114.1577, "zoom": 14, "name": "Bolsa HKEX & Distrito Financiero Admiralty", "poly": [[22.278, 114.15], [22.29, 114.15], [22.29, 114.168], [22.278, 114.168]]}, "22": {"lat": 22.4862, "lng": 114.0378, "zoom": 14, "name": "Reserva Natural de Mai Po & Sitio Ramsar", "poly": [[22.475, 114.025], [22.498, 114.025], [22.498, 114.05], [22.475, 114.05]]}, "23": {"lat": 22.3193, "lng": 114.1694, "zoom": 13, "name": "Kowloon & Hong Kong Island: Demograf\u00eda & Fiscalidad", "poly": [[22.29, 114.14], [22.34, 114.14], [22.34, 114.2], [22.29, 114.2]]}, "24": {"lat": 22.2988, "lng": 113.9877, "zoom": 13, "name": "Proyecto Lantau Tomorrow Vision (Reclamaci\u00f3n Marina)", "poly": [[22.27, 113.94], [22.32, 113.94], [22.32, 114.04], [22.27, 114.04]]}, "25": {"lat": 22.428, "lng": 114.212, "zoom": 15, "name": "Ecosistema I+D: Parque Cient\u00edfico HKSTP", "poly": [[22.422, 114.205], [22.435, 114.205], [22.435, 114.22], [22.422, 114.22]]}, "26": {"lat": 22.5408, "lng": 113.9497, "zoom": 14, "name": "Nanshan: Intensidad de I+D (6.46% del PIB)", "poly": [[22.525, 113.93], [22.555, 113.93], [22.555, 113.965], [22.525, 113.965]]}, "27": {"lat": 22.5408, "lng": 113.9497, "zoom": 13, "name": "Shenzhen: 20 Cl\u00fasteres Industriales Estrat\u00e9gicos", "poly": [[22.51, 113.9], [22.57, 113.9], [22.57, 113.98], [22.51, 113.98]]}, "28": {"lat": 22.5484, "lng": 114.0863, "zoom": 16, "name": "Distrito Electr\u00f3nico de Huaqiangbei", "poly": [[22.543, 114.08], [22.554, 114.08], [22.554, 114.093], [22.543, 114.093]]}, "29": {"lat": 22.5328, "lng": 113.9355, "zoom": 15, "name": "Sedes Corporativas: Tencent, DJI, Huawei & BYD", "poly": [[22.525, 113.925], [22.54, 113.925], [22.54, 113.945], [22.525, 113.945]]}, "30": {"lat": 22.5362, "lng": 114.0545, "zoom": 15, "name": "Bolsa de Valores ChiNext (Futian)", "poly": [[22.53, 114.048], [22.542, 114.048], [22.542, 114.06], [22.53, 114.06]]}, "31": {"lat": 22.5385, "lng": 113.9685, "zoom": 16, "name": "Aldeas Urbanas (Baishizhou & Gangxia)", "poly": [[22.532, 113.96], [22.545, 113.96], [22.545, 113.977], [22.532, 113.977]]}, "32": {"lat": 22.55, "lng": 114.02, "zoom": 13, "name": "Shenzhen: Poblaci\u00f3n Flotante & R\u00e9gimen Hukou", "poly": [[22.52, 113.98], [22.58, 113.98], [22.58, 114.06], [22.52, 114.06]]}, "33": {"lat": 22.5431, "lng": 114.0579, "zoom": 14, "name": "Reforma del Suelo Urbano de 2013 (Shenzhen)", "poly": [[22.53, 114.04], [22.555, 114.04], [22.555, 114.075], [22.53, 114.075]]}, "34": {"lat": 22.5431, "lng": 114.0579, "zoom": 14, "name": "Gobernanza Estatal-Corporativa & SASAC", "poly": [[22.53, 114.04], [22.555, 114.04], [22.555, 114.075], [22.53, 114.075]]}, "35": {"lat": 22.52, "lng": 114.03, "zoom": 14, "name": "Programa Sponge City (Ciudad Esponja Futian)", "poly": [[22.505, 114.01], [22.535, 114.01], [22.535, 114.05], [22.505, 114.05]]}, "36": {"lat": 22.5238, "lng": 114.0135, "zoom": 15, "name": "Reserva Natural de Manglares de Futian", "poly": [[22.518, 114.005], [22.53, 114.005], [22.53, 114.025], [22.518, 114.025]]}, "37": {"lat": 22.51, "lng": 113.95, "zoom": 13, "name": "Litoral de la Bah\u00eda de Shenzhen & Riesgo Costero", "poly": [[22.485, 113.92], [22.535, 113.92], [22.535, 113.98], [22.485, 113.98]]}, "38": {"lat": 22.5312, "lng": 113.8967, "zoom": 14, "name": "Zona de Cooperaci\u00f3n Qianhai (ZEE Especial)", "poly": [[22.515, 113.88], [22.545, 113.88], [22.545, 113.915], [22.515, 113.915]]}, "39": {"lat": 22.5158, "lng": 114.0754, "zoom": 15, "name": "Lok Ma Chau Loop (Parque HSITP Transfronterizo)", "poly": [[22.508, 114.065], [22.522, 114.065], [22.522, 114.085], [22.508, 114.085]]}, "40": {"lat": 22.75, "lng": 114.2, "zoom": 11, "name": "Sistema de Trasvase Dongjiang (83 km Acueducto)", "poly": [[22.65, 114.1], [22.85, 114.1], [22.85, 114.3], [22.65, 114.3]]}, "41": {"lat": 22.598, "lng": 114.5427, "zoom": 14, "name": "Central Nuclear de Daya Bay (Pen\u00ednsula de Dapeng)", "poly": [[22.585, 114.53], [22.61, 114.53], [22.61, 114.555], [22.585, 114.555]]}, "42": {"lat": 22.518, "lng": 114.07, "zoom": 13, "name": "Conexi\u00f3n de Metro y Puntos de Control Transfronterizos", "poly": [[22.505, 114.05], [22.53, 114.05], [22.53, 114.09], [22.505, 114.09]]}, "43": {"lat": 22.5158, "lng": 114.0754, "zoom": 14, "name": "Blueprint de Innovaci\u00f3n y Tecnolog\u00eda 2022", "poly": [[22.505, 114.06], [22.525, 114.06], [22.525, 114.09], [22.505, 114.09]]}, "44": {"lat": 22.35, "lng": 113.85, "zoom": 9, "name": "\u00c1rea de la Gran Bah\u00eda (Guangdong-Hong Kong-Macao)", "poly": [[21.8, 113.2], [23.1, 113.2], [23.1, 114.6], [21.8, 114.6]]}, "45": {"lat": 22.8, "lng": 114.3, "zoom": 10, "name": "Estr\u00e9s H\u00eddrico y Cuenca del R\u00edo Dongjiang (2021)", "poly": [[22.6, 114.0], [23.0, 114.0], [23.0, 114.5], [22.6, 114.5]]}, "46": {"lat": 22.45, "lng": 114.05, "zoom": 11, "name": "Simbiosis Territorial: Hong Kong - Shenzhen", "poly": [[22.35, 113.95], [22.55, 113.95], [22.55, 114.15], [22.35, 114.15]]}, "47": {"lat": 22.45, "lng": 114.05, "zoom": 11, "name": "Red Territorial Integrada de la Gran Bah\u00eda", "poly": [[22.35, 113.95], [22.55, 113.95], [22.55, 114.15], [22.35, 114.15]]}, "48": {"lat": 37.6675, "lng": 32.8283, "zoom": 16, "name": "\u00c7atalh\u00f6y\u00fck (Konya, Turqu\u00eda) \u2014 Malla Celular 7500 a.C.", "poly": [[37.663, 32.823], [37.672, 32.823], [37.672, 32.834], [37.663, 32.834]]}, "49": {"lat": 37.6675, "lng": 32.8283, "zoom": 17, "name": "\u00c7atalh\u00f6y\u00fck: Cero Calles & Circulaci\u00f3n por Techos", "poly": [[37.665, 32.825], [37.67, 32.825], [37.67, 32.832], [37.665, 32.832]]}, "50": {"lat": 37.6675, "lng": 32.8283, "zoom": 16, "name": "\u00c7atalh\u00f6y\u00fck: Autoorganizaci\u00f3n Horizontal P2P", "poly": [[37.663, 32.823], [37.672, 32.823], [37.672, 32.834], [37.663, 32.834]]}, "51": {"lat": 37.6675, "lng": 32.8283, "zoom": 16, "name": "\u00c7atalh\u00f6y\u00fck: Ausencia de Monumentos & Palacios", "poly": [[37.663, 32.823], [37.672, 32.823], [37.672, 32.834], [37.663, 32.834]]}, "52": {"lat": 37.6675, "lng": 32.8283, "zoom": 17, "name": "\u00c7atalh\u00f6y\u00fck: Estructura Dom\u00e9stica Continua", "poly": [[37.665, 32.825], [37.67, 32.825], [37.67, 32.832], [37.665, 32.832]]}, "53": {"lat": 37.6675, "lng": 32.8283, "zoom": 16, "name": "\u00c7atalh\u00f6y\u00fck: Topolog\u00eda Sin Jerarqu\u00eda Espacial", "poly": [[37.663, 32.823], [37.672, 32.823], [37.672, 32.834], [37.663, 32.834]]}, "54": {"lat": 37.6675, "lng": 32.8283, "zoom": 16, "name": "\u00c7atalh\u00f6y\u00fck: Resiliencia Arqueol\u00f3gica", "poly": [[37.663, 32.823], [37.672, 32.823], [37.672, 32.834], [37.663, 32.834]]}, "55": {"lat": 37.6675, "lng": 32.8283, "zoom": 15, "name": "Lecci\u00f3n de \u00c7atalh\u00f6y\u00fck para la Metr\u00f3polis Contempor\u00e1nea", "poly": [[37.66, 32.818], [37.675, 32.818], [37.675, 32.838], [37.66, 32.838]]}, "56": {"lat": 4.6293, "lng": -74.1578, "zoom": 16, "name": "Corabastos & Localidad de Kennedy (Bogot\u00e1)", "poly": [[4.623, -74.165], [4.636, -74.165], [4.636, -74.15], [4.623, -74.15]]}, "57": {"lat": 4.6338, "lng": -74.1652, "zoom": 16, "name": "Barrio Patio Bonito (Autogesti\u00f3n Comunitaria 1985)", "poly": [[4.628, -74.172], [4.64, -74.172], [4.64, -74.158], [4.628, -74.158]]}, "58": {"lat": 4.6293, "lng": -74.1578, "zoom": 15, "name": "Corabastos Regional (12.000 ton/d\u00eda de Alimentos)", "poly": [[4.62, -74.168], [4.638, -74.168], [4.638, -74.148], [4.62, -74.148]]}, "59": {"lat": 4.63, "lng": -74.155, "zoom": 15, "name": "Concentraci\u00f3n Silenciosa del Poder en Nodos Log\u00edsticos", "poly": [[4.622, -74.164], [4.638, -74.164], [4.638, -74.146], [4.622, -74.146]]}, "60": {"lat": 4.6293, "lng": -74.1578, "zoom": 16, "name": "La Pregunta Incorrecta: S\u00edntomas vs. Concentraci\u00f3n", "poly": [[4.623, -74.165], [4.636, -74.165], [4.636, -74.15], [4.623, -74.15]]}, "61": {"lat": 4.631, "lng": -74.16, "zoom": 15, "name": "La Pregunta Correcta: Interfaz Institucional con JAC & POT", "poly": [[4.622, -74.17], [4.64, -74.17], [4.64, -74.15], [4.622, -74.15]]}, "62": {"lat": 22.42, "lng": 114.1, "zoom": 10, "name": "Topolog\u00eda Global del Poder Urbano (S\u00edntesis Final)", "poly": [[22.2, 113.8], [22.6, 113.8], [22.6, 114.4], [22.2, 114.4]]}};
+    const SLIDE_TYPES = {"7": "network", "13": "network", "25": "network", "31": "network", "33": "network", "34": "network", "36": "network", "37": "network", "47": "network", "53": "network", "61": "network", "62": "network", "1": "map", "2": "map", "3": "map", "4": "map", "5": "map", "6": "map", "8": "map", "9": "map", "10": "map", "11": "map", "12": "map", "16": "map", "21": "map", "22": "map", "24": "map", "28": "map", "29": "map", "30": "map", "35": "map", "38": "map", "39": "map", "40": "map", "41": "map", "44": "map", "48": "map", "49": "map", "56": "map", "57": "map", "58": "map", "14": "case", "15": "case", "17": "case", "18": "case", "19": "case", "20": "case", "23": "case", "26": "case", "27": "case", "32": "case", "42": "case", "43": "case", "45": "case", "46": "case", "50": "case", "51": "case", "52": "case", "54": "case", "55": "case", "59": "case", "60": "case"};
+
     // ==========================================================================
     // 2. INICIALIZACIÓN DEL MAPA SATELITAL LEAFLET HD
     // ==========================================================================
@@ -1726,13 +1768,11 @@ const SECTIONS = [
 
       L.control.zoom({ position: 'topright' }).addTo(map);
 
-      // Capa Satelital Híbrida de Alta Definición (Google + Esri)
       satelliteLayer = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
         maxZoom: 20,
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
       }).addTo(map);
 
-      // Capa Blueprint Oscura Alternativa (CartoDB Dark Matter)
       darkLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
         maxZoom: 20,
         subdomains: 'abcd'
@@ -1756,7 +1796,7 @@ const SECTIONS = [
         document.getElementById('btnDark').classList.add('active');
         document.getElementById('mapPanelTitle').textContent = '🌑 Blueprint Arquitectónico';
       }
-      setTimeout(() => map.invalidateSize(), 100);
+      setTimeout(() => map && map.invalidateSize(), 100);
     }
 
     function toggleSlideImg() {
@@ -1776,23 +1816,18 @@ const SECTIONS = [
 
     function updateMapForSlide(slideNum) {
       const geo = GEO_DATA[slideNum] || GEO_DATA[1];
-      
-      // Actualizar Telemetría
       document.getElementById('geoCoords').textContent = `${geo.lat.toFixed(4)}° N, ${geo.lng.toFixed(4)}° E`;
       document.getElementById('geoTarget').textContent = geo.name;
 
-      // Volar la cámara suavemente a las coordenadas
       if (map) {
         map.flyTo([geo.lat, geo.lng], geo.zoom, {
           duration: 1.4,
           easeLinearity: 0.25
         });
 
-        // Eliminar polígono anterior si existe
         if (currentGeoPolygon) map.removeLayer(currentGeoPolygon);
         if (currentRadarMarker) map.removeLayer(currentRadarMarker);
 
-        // Dibujar polígono delimitador de foco
         if (geo.poly) {
           currentGeoPolygon = L.polygon(geo.poly, {
             color: '#38bdf8',
@@ -1804,7 +1839,6 @@ const SECTIONS = [
           }).addTo(map);
         }
 
-        // Añadir marcador de radar
         const pulseIcon = L.divIcon({
           className: 'pulse-icon-container',
           html: `<div style="width: 14px; height: 14px; background: #38bdf8; border-radius: 50%; border: 2px solid #ffffff; box-shadow: 0 0 12px #38bdf8;"></div>`,
@@ -1812,8 +1846,7 @@ const SECTIONS = [
           iconAnchor: [7, 7]
         });
 
-        currentRadarMarker = L.marker([geo.lat, geo.lng], { icon: pulseIcon }).addTo(map)
-          .bindPopup(`<strong style="font-family: sans-serif; color: #0f172a;">${geo.name}</strong>`, { closeButton: false });
+        currentRadarMarker = L.marker([geo.lat, geo.lng], { icon: pulseIcon }).addTo(map);
       }
     }
 
@@ -1825,7 +1858,7 @@ const SECTIONS = [
     }
 
     // ==========================================================================
-    // 3. CONTROL DE ESTADO & NAVEGACIÓN ENTRE LAS 62 DIAPOSITIVAS
+    // 3. NAVEGACIÓN Y RENDERIZADO DINÁMICO
     // ==========================================================================
     let currentSlideNum = 1;
 
@@ -1835,10 +1868,20 @@ const SECTIONS = [
     const slideCategory = document.getElementById('slideCategory');
     const slideTitle = document.getElementById('slideTitle');
     const slideSubtitle = document.getElementById('slideSubtitle');
-    const networkTitle = document.getElementById('networkTitle');
     const staticSlideImg = document.getElementById('staticSlideImg');
+    const heroNetworkFrame = document.getElementById('heroNetworkFrame');
+    const heroNetworkImg = document.getElementById('heroNetworkImg');
+    const heroNetworkLabel = document.getElementById('heroNetworkLabel');
+    const splitPanelsGrid = document.getElementById('splitPanelsGrid');
     const nextTeaserBtn = document.getElementById('nextTeaserBtn');
-    const inspectorText = document.getElementById('inspectorText');
+
+    // Métricas
+    const m1Val = document.getElementById('m1Val'), m1Lbl = document.getElementById('m1Lbl');
+    const m2Val = document.getElementById('m2Val'), m2Lbl = document.getElementById('m2Lbl');
+    const m3Val = document.getElementById('m3Val'), m3Lbl = document.getElementById('m3Lbl');
+    const m4Val = document.getElementById('m4Val'), m4Lbl = document.getElementById('m4Lbl');
+    const quoteCallout = document.getElementById('quoteCallout');
+    const analysisSummary = document.getElementById('analysisSummary');
 
     function initSelector() {
       let html = '';
@@ -1849,26 +1892,100 @@ const SECTIONS = [
     }
     initSelector();
 
+    function updateMetrics(num, sec) {
+      if (num <= 15) {
+        m1Val.textContent = "7.5 M"; m1Lbl.textContent = "Población HK";
+        m2Val.textContent = "17.6 M"; m2Lbl.textContent = "Población SZ";
+        m3Val.textContent = "90%"; m3Lbl.textContent = "Transp. Público HK";
+        m4Val.textContent = "6.46%"; m4Lbl.textContent = "I+D Shenzhen (% PIB)";
+        analysisSummary.textContent = "Dilema de dos modelos metropolitanos: la densidad insular financiera bajo Common Law frente al dinamismo experimental manufacturero y tecnológico.";
+        quoteCallout.textContent = "«¿Qué modelo de ciudad es mejor: el de Hong Kong o el de Shenzhen? Dos respuestas territoriales a la gobernanza de la densidad.»";
+      } else if (num <= 25) {
+        m1Val.textContent = "40%"; m1Lbl.textContent = "Parques Rurales Protegidos";
+        m2Val.textContent = "0.54"; m2Lbl.textContent = "Coeficiente Gini";
+        m3Val.textContent = "220k"; m3Lbl.textContent = "Subdivided Cage Homes";
+        m4Val.textContent = "80%"; m4Lbl.textContent = "Dependencia Agua Dongjiang";
+        analysisSummary.textContent = "Hong Kong: Estructura de suelo leasehold (1997), alta concentración vertical y tensión distributiva entre reservas fiscales e infravivienda.";
+        quoteCallout.textContent = "«La hiperdensidad vertical coexiste con un 40% de suelo verde intocable por ley estatutaria colonial.»";
+      } else if (num <= 37) {
+        m1Val.textContent = "6.46%"; m1Lbl.textContent = "Gasto I+D (% PIB)";
+        m2Val.textContent = "90%"; m2Lbl.textContent = "I+D Financiado por Empresas";
+        m3Val.textContent = "20"; m3Lbl.textContent = "Clústeres Estratégicos";
+        m4Val.textContent = "90%"; m4Lbl.textContent = "Hardware Global (Huaqiangbei)";
+        analysisSummary.textContent = "Shenzhen: Del modelo Shanzhai a la innovación propia de frontera. Régimen dual de suelo, comités vecinales y aldeas urbanas como Baishizhou.";
+        quoteCallout.textContent = "«El modelo estatal-corporativo moviliza capital en ChiNext y articula aldeas urbanas como amortiguador social.»";
+      } else if (num <= 47) {
+        m1Val.textContent = "87 ha"; m1Lbl.textContent = "Lok Ma Chau Loop (HSITP)";
+        m2Val.textContent = "83 km"; m2Lbl.textContent = "Acueducto Dongjiang";
+        m3Val.textContent = "1994"; m3Lbl.textContent = "Central Nuclear Daya Bay";
+        m4Val.textContent = "2021"; m4Lbl.textContent = "Plan Qianhai ZEE";
+        analysisSummary.textContent = "Zonas de Sutura: Las infraestructuras críticas compartidas revelan una simbiosis socioecológica irreversible por encima de las fronteras políticas.";
+        quoteCallout.textContent = "«La centralización de infraestructuras para ganar eficiencia económica también concentra el riesgo regional.»";
+      } else if (num <= 55) {
+        m1Val.textContent = "7500 a.C."; m1Lbl.textContent = "Antigüedad Malla Neolítica";
+        m2Val.textContent = "10.000"; m2Lbl.textContent = "Habitantes";
+        m3Val.textContent = "0"; m3Lbl.textContent = "Calles / Palacios";
+        m4Val.textContent = "P2P"; m4Lbl.textContent = "Acceso por Techos";
+        analysisSummary.textContent = "Çatalhöyük: La primera gran densidad humana demostró que una comunidad masiva puede autoorganizarse sin clases dominantes ni jerarquía espacial.";
+        quoteCallout.textContent = "«La densidad celular continua: habitar sin monumentos de poder, donde cada cubierta es el espacio público compartido.»";
+      } else {
+        m1Val.textContent = "12.000"; m1Lbl.textContent = "ton/día Alimentos";
+        m2Val.textContent = "6.500"; m2Lbl.textContent = "Locales Comerciales";
+        m3Val.textContent = "1985"; m3Lbl.textContent = "Fundación Patio Bonito";
+        m4Val.textContent = "Art. 566"; m4Lbl.textContent = "POT Actuaciones Estratégicas";
+        analysisSummary.textContent = "Bogotá (Kennedy, Patio Bonito y Corabastos): La concentración silenciosa de capacidad decisoria y la urgencia de interfaces vinculantes con las JAC.";
+        quoteCallout.textContent = "«La pregunta no es qué está mal en Corabastos, sino en qué otros nodos territoriales ya ocurrió esa misma concentración silenciosa.»";
+      }
+    }
+
     function renderSlide(num) {
       currentSlideNum = num;
       const sec = SECTIONS.find(s => s.num === num) || SECTIONS[0];
       const idx = SECTIONS.indexOf(sec);
+      const slideType = SLIDE_TYPES[num] || "map";
 
-      // Progreso
+      // Progreso y selector
       const progress = ((num) / SECTIONS.length) * 100;
       progressBar.style.width = `${progress}%`;
       slideSelector.value = num;
 
-      // Encabezados
+      // Textos
       slidePill.innerHTML = `<span>●</span> SLIDE ${String(num).padStart(2, '0')}`;
       slideCategory.textContent = sec.category;
       slideTitle.textContent = sec.title;
       slideSubtitle.textContent = sec.subtitle;
-      networkTitle.textContent = sec.label.toUpperCase();
       staticSlideImg.src = `slides/slide_${num}.png`;
 
-      // Inspector inicial
-      inspectorText.innerHTML = `Selecciona o arrastra cualquier nodo en 3D para examinar indicadores de <strong>${sec.title}</strong>.`;
+      // ADAPTACIÓN DE VISTA SEGÚN TIPO DE SLIDE
+      if (slideType === "network") {
+        // Slide de Red Completa -> Mostrar solo la red real de investigación en toda la pantalla
+        heroNetworkFrame.classList.add('active');
+        splitPanelsGrid.style.display = 'none';
+        heroNetworkImg.src = `slides/slide_${num}.png`;
+        heroNetworkLabel.textContent = sec.title.toUpperCase();
+      } else {
+        // Slide de Mapa o Caso -> Mostrar Grid Dúo (Mapa Satelital / Lámina + Matriz Analítica)
+        heroNetworkFrame.classList.remove('active');
+        splitPanelsGrid.style.display = 'grid';
+
+        if (slideType === "case") {
+          // Activar lámina directamente
+          document.getElementById('staticSlideBox').classList.add('active');
+          document.getElementById('btnSlideImg').classList.add('active');
+          document.getElementById('btnSatellite').classList.remove('active');
+          document.getElementById('btnDark').classList.remove('active');
+        } else {
+          // Activar mapa satelital vivo
+          document.getElementById('staticSlideBox').classList.remove('active');
+          document.getElementById('btnSlideImg').classList.remove('active');
+          document.getElementById('btnSatellite').classList.add('active');
+          document.getElementById('btnDark').classList.remove('active');
+          updateMapForSlide(num);
+        }
+      }
+
+      // Actualizar Métricas
+      updateMetrics(num, sec);
 
       // Teaser Siguiente
       const nextSec = SECTIONS[idx + 1];
@@ -1878,307 +1995,20 @@ const SECTIONS = [
       } else {
         nextTeaserBtn.innerHTML = `<span>FIN DE LA PRESENTACIÓN</span>`;
       }
-
-      // Actualizar Mapa Satelital
-      updateMapForSlide(num);
-
-      // Cargar Datos en Motor 3D
-      if (window.engine) {
-        window.engine.loadSection(idx);
-      }
     }
 
     function jumpToSlide(num) {
       if (num >= 1 && num <= 62) renderSlide(num);
     }
 
-    function nextSlide() {
-      if (currentSlideNum < 62) jumpToSlide(currentSlideNum + 1);
-    }
-
     function prevSlide() {
       if (currentSlideNum > 1) jumpToSlide(currentSlideNum - 1);
     }
 
-    // ==========================================================================
-    // 4. MOTOR TOPOLÓGICO 3D DE ALTA FIDELIDAD
-    // ==========================================================================
-    class StageEngine {
-      constructor() {
-        this.canvas = document.getElementById('stageCanvas');
-        this.ctx = this.canvas.getContext('2d');
-        this.angleX = 0.22;
-        this.angleY = 0.35;
-        this.autoRotate = true;
-        this.isDraggingBg = false;
-        this.draggedNode = null;
-        this.hoveredNode = null;
-        this.shockwaves = [];
-        this.lastMouse = { x: 0, y: 0 };
-        this.currentIdx = 0;
-        this.data = null;
-        this.rgb = [2, 132, 199];
-
-        this.initEvents();
-        this.resize();
-      }
-
-      loadSection(idx) {
-        this.currentIdx = idx;
-        this.data = JSON.parse(JSON.stringify(SECTIONS[idx]));
-        this.rgb = SECTIONS[idx].rgb;
-        this.shockwaves = [];
-        this.triggerPulse();
-      }
-
-      resize() {
-        const box = this.canvas.parentElement;
-        this.width = box.clientWidth || 500;
-        this.height = box.clientHeight || 350;
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        this.canvas.width = Math.floor(this.width * dpr);
-        this.canvas.height = Math.floor(this.height * dpr);
-        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
-        this.ctx.scale(dpr, dpr);
-      }
-
-      initEvents() {
-        window.addEventListener('resize', () => this.resize());
-
-        this.canvas.addEventListener('mousedown', (e) => this.onMouseDown(e));
-        window.addEventListener('mousemove', (e) => this.onMouseMove(e));
-        window.addEventListener('mouseup', () => this.onMouseUp());
-        this.canvas.addEventListener('click', (e) => this.onClick(e));
-      }
-
-      project(p) {
-        const cosY = Math.cos(this.angleY), sinY = Math.sin(this.angleY);
-        const x1 = p.x * cosY - p.z * sinY;
-        const z1 = p.z * cosY + p.x * sinY;
-
-        const cosX = Math.cos(this.angleX), sinX = Math.sin(this.angleX);
-        const y2 = p.y * cosX - z1 * sinX;
-        const z2 = z1 * cosX + p.y * sinX;
-
-        const fov = 380;
-        const scale = fov / (fov + z2);
-        return {
-          x: this.width / 2 + x1 * scale,
-          y: this.height / 2 + y2 * scale,
-          scale: Math.max(0.2, scale),
-          z2: z2
-        };
-      }
-
-      getNodeUnderCursor(mx, my) {
-        if (!this.data) return null;
-        let best = null;
-        let minDist = 26;
-        this.data.nodes.forEach(n => {
-          const proj = this.project(n);
-          const dist = Math.hypot(proj.x - mx, proj.y - my);
-          if (dist < n.r * proj.scale + 12 && dist < minDist) {
-            minDist = dist;
-            best = n;
-          }
-        });
-        return best;
-      }
-
-      onMouseDown(e) {
-        const rect = this.canvas.getBoundingClientRect();
-        const mx = e.clientX - rect.left;
-        const my = e.clientY - rect.top;
-
-        const targetNode = this.getNodeUnderCursor(mx, my);
-        if (targetNode) {
-          this.draggedNode = targetNode;
-        } else {
-          this.isDraggingBg = true;
-          this.lastMouse = { x: e.clientX, y: e.clientY };
-        }
-      }
-
-      onMouseMove(e) {
-        const rect = this.canvas.getBoundingClientRect();
-        const mx = e.clientX - rect.left;
-        const my = e.clientY - rect.top;
-
-        if (this.draggedNode) {
-          const cosY = Math.cos(-this.angleY), sinY = Math.sin(-this.angleY);
-          const dx = (mx - this.width / 2) * 1.5;
-          const dy = (my - this.height / 2) * 1.5;
-          this.draggedNode.x = dx * cosY - 0 * sinY;
-          this.draggedNode.y = dy;
-          this.draggedNode.z = 0 * cosY + dx * sinY;
-          return;
-        }
-
-        if (this.isDraggingBg) {
-          const dx = e.clientX - this.lastMouse.x;
-          const dy = e.clientY - this.lastMouse.y;
-          this.angleY += dx * 0.007;
-          this.angleX -= dy * 0.007;
-          this.lastMouse = { x: e.clientX, y: e.clientY };
-        } else {
-          const node = this.getNodeUnderCursor(mx, my);
-          this.hoveredNode = node;
-          if (node) {
-            inspectorText.innerHTML = `<strong>${node.label}</strong>: ${node.desc}`;
-          }
-        }
-      }
-
-      onMouseUp() {
-        this.isDraggingBg = false;
-        this.draggedNode = null;
-      }
-
-      onClick(e) {
-        const rect = this.canvas.getBoundingClientRect();
-        const mx = e.clientX - rect.left;
-        const my = e.clientY - rect.top;
-        const node = this.getNodeUnderCursor(mx, my);
-
-        if (node) {
-          inspectorText.innerHTML = `<strong>${node.label}</strong>: ${node.desc}`;
-          this.triggerPulse();
-        }
-      }
-
-      triggerPulse() {
-        this.shockwaves.push({ radius: 5, maxRadius: 280, alpha: 1 });
-      }
-
-      resetNodes() {
-        if (this.data) {
-          this.data = JSON.parse(JSON.stringify(SECTIONS[this.currentIdx]));
-          this.shockwaves = [];
-          this.triggerPulse();
-        }
-      }
-
-      render() {
-        if (!this.data) return;
-
-        if (this.autoRotate && !this.isDraggingBg && !this.draggedNode) {
-          this.angleY += 0.004;
-        }
-
-        this.ctx.clearRect(0, 0, this.width, this.height);
-
-        // Ondas de choque
-        for (let i = this.shockwaves.length - 1; i >= 0; i--) {
-          const sw = this.shockwaves[i];
-          sw.radius += 4;
-          sw.alpha *= 0.95;
-
-          this.ctx.beginPath();
-          this.ctx.arc(this.width / 2, this.height / 2, sw.radius, 0, Math.PI * 2);
-          this.ctx.strokeStyle = `rgba(${this.rgb[0]}, ${this.rgb[1]}, ${this.rgb[2]}, ${sw.alpha * 0.6})`;
-          this.ctx.lineWidth = 1.8;
-          this.ctx.stroke();
-
-          if (sw.alpha < 0.02) this.shockwaves.splice(i, 1);
-        }
-
-        // Aristas
-        this.data.links.forEach(([i, j]) => {
-          const n1 = this.data.nodes[i];
-          const n2 = this.data.nodes[j];
-          if (!n1 || !n2) return;
-
-          const p1 = this.project(n1);
-          const p2 = this.project(n2);
-
-          const isConnected = (this.hoveredNode && (this.hoveredNode.id === n1.id || this.hoveredNode.id === n2.id));
-
-          this.ctx.beginPath();
-          this.ctx.moveTo(p1.x, p1.y);
-          this.ctx.lineTo(p2.x, p2.y);
-
-          if (isConnected) {
-            this.ctx.strokeStyle = `rgba(${this.rgb[0]}, ${this.rgb[1]}, ${this.rgb[2]}, 0.95)`;
-            this.ctx.lineWidth = 2.4;
-          } else {
-            this.ctx.strokeStyle = `rgba(${this.rgb[0]}, ${this.rgb[1]}, ${this.rgb[2]}, 0.3)`;
-            this.ctx.lineWidth = 1.2;
-          }
-          this.ctx.stroke();
-        });
-
-        // Nodos con Glow
-        const sorted = [...this.data.nodes].map(n => ({ node: n, proj: this.project(n) }))
-          .sort((a, b) => a.proj.z2 - b.proj.z2);
-
-        sorted.forEach(({ node, proj }) => {
-          const isHovered = this.hoveredNode && this.hoveredNode.id === node.id;
-          const r = node.r * proj.scale * (isHovered ? 1.35 : 1);
-
-          this.ctx.beginPath();
-          this.ctx.arc(proj.x, proj.y, r * 2.2, 0, Math.PI * 2);
-          this.ctx.fillStyle = `rgba(${this.rgb[0]}, ${this.rgb[1]}, ${this.rgb[2]}, ${isHovered ? 0.4 : 0.15})`;
-          this.ctx.fill();
-
-          this.ctx.beginPath();
-          this.ctx.arc(proj.x, proj.y, r, 0, Math.PI * 2);
-          const grad = this.ctx.createRadialGradient(
-            proj.x - r * 0.35, proj.y - r * 0.35, r * 0.1,
-            proj.x, proj.y, r
-          );
-          grad.addColorStop(0, '#ffffff');
-          grad.addColorStop(0.4, `rgb(${this.rgb[0]}, ${this.rgb[1]}, ${this.rgb[2]})`);
-          grad.addColorStop(1, `rgba(${this.rgb[0] * 0.4}, ${this.rgb[1] * 0.4}, ${this.rgb[2] * 0.4}, 1)`);
-          this.ctx.fillStyle = grad;
-          this.ctx.fill();
-
-          this.ctx.strokeStyle = '#ffffff';
-          this.ctx.lineWidth = isHovered ? 2 : 1;
-          this.ctx.stroke();
-
-          this.ctx.font = `600 ${Math.max(10, Math.floor(12 * proj.scale))}px "Space Grotesk", sans-serif`;
-          this.ctx.fillStyle = isHovered ? '#ffffff' : 'rgba(255, 255, 255, 0.85)';
-          this.ctx.textAlign = 'center';
-          this.ctx.fillText(node.label, proj.x, proj.y + r + 14 * proj.scale);
-        });
-      }
+    function nextSlide() {
+      if (currentSlideNum < 62) jumpToSlide(currentSlideNum + 1);
     }
 
-    // Inicialización Principal
-    window.addEventListener('DOMContentLoaded', () => {
-      initLeafletMap();
-      window.engine = new StageEngine();
-      renderSlide(1);
-
-      function loop() {
-        if (window.engine) window.engine.render();
-        requestAnimationFrame(loop);
-      }
-      loop();
-    });
-
-    function triggerPulse() {
-      if (window.engine) window.engine.triggerPulse();
-    }
-
-    function toggleOrbit() {
-      if (window.engine) {
-        window.engine.autoRotate = !window.engine.autoRotate;
-        document.getElementById('orbitBtn').classList.toggle('active', window.engine.autoRotate);
-      }
-    }
-
-    function resetNetwork() {
-      if (window.engine) window.engine.resetNodes();
-    }
-
-    function filterNetwork(cat, btn) {
-      document.querySelectorAll('.filter-capsule').forEach(b => b.classList.remove('active'));
-      if (btn) btn.classList.add('active');
-      triggerPulse();
-    }
-
-    // Lightbox
     function openLightbox() {
       document.getElementById('lightboxTitle').textContent = `Slide ${currentSlideNum}: ${SECTIONS[currentSlideNum-1].title}`;
       document.getElementById('lightboxImg').src = `slides/slide_${currentSlideNum}.png`;
@@ -2189,7 +2019,7 @@ const SECTIONS = [
       document.getElementById('lightboxModal').classList.remove('active');
     }
 
-    // Navegación con Teclado
+    // Teclado
     document.addEventListener('keydown', (e) => {
       if (document.getElementById('lightboxModal').classList.contains('active')) {
         if (e.key === 'Escape') closeLightbox();
@@ -2202,6 +2032,11 @@ const SECTIONS = [
           prevSlide();
         }
       }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initLeafletMap();
+      renderSlide(1);
     });
   </script>
 </body>
