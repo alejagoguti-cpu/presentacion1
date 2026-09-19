@@ -16,11 +16,12 @@
 
   <style>
     /* ==========================================================================
-       SISTEMA DE DISEÑO EDITORIAL: MINIMALISTA, BLANCO PURO & REDES VIVAS
+       SISTEMA DE DISEÑO EDITORIAL: MINIMALISTA, BLANCO PURO & DINÁMICO
        ========================================================================== */
     :root {
       --bg-pure: #ffffff;
       --bg-surface: #fafbfe;
+      --bg-card: #ffffff;
       --bg-subtle: #f4f6fb;
       
       --text-main: #0c121e;
@@ -88,7 +89,7 @@
       pointer-events: none;
       z-index: 1;
       transform: translate(-50%, -50%);
-      background: radial-gradient(circle, rgba(14, 165, 233, 0.045) 0%, rgba(168, 85, 247, 0.02) 40%, transparent 70%);
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.05) 0%, rgba(168, 85, 247, 0.02) 40%, transparent 70%);
       will-change: left, top;
     }
 
@@ -220,81 +221,220 @@
     }
 
     /* ==========================================================================
-       00. HERO MONUMENTAL (SLIDE 1 EXACTA COMO PIEZA CENTRAL)
+       00. HERO DINÁMICO & CINEMÁTICO (SLIDE 1 CON TILT 3D Y CONSTELACIÓN VIVA)
        ========================================================================== */
     .hero-box {
-      padding: 3.5rem 0 4.5rem;
+      padding: 3.5rem 0 5rem;
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 3rem;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
       align-items: center;
       border-bottom: 1px solid var(--border-delicate);
       margin-bottom: 4rem;
+      position: relative;
+    }
+
+    /* Canvas Generativo de Fondo del Hero */
+    #heroConstellationCanvas {
+      position: absolute;
+      top: 0;
+      left: -10vw;
+      width: 120vw;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.65;
     }
 
     @media (max-width: 920px) {
-      .hero-box { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-box { grid-template-columns: 1fr; gap: 2.5rem; }
     }
 
-    .hero-artwork {
+    .hero-artwork-stage {
       position: relative;
-      border-radius: 14px;
-      padding: 8px;
-      background: linear-gradient(135deg, #ffffff, #f1f5f9);
+      perspective: 1200px;
+      z-index: 2;
+    }
+
+    .hero-artwork-card {
+      position: relative;
+      border-radius: 16px;
+      padding: 10px;
+      background: linear-gradient(135deg, #ffffff, #f8fafc);
       border: 1px solid var(--border-delicate);
-      box-shadow: 0 16px 40px -10px rgba(15, 23, 42, 0.08);
+      box-shadow: 
+        0 25px 60px -15px rgba(15, 23, 42, 0.12),
+        0 8px 24px -6px rgba(2, 132, 199, 0.08);
       cursor: zoom-in;
-      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+      overflow: hidden;
     }
 
-    .hero-artwork:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 24px 50px -12px rgba(2, 132, 199, 0.16);
+    .hero-artwork-card:hover {
+      box-shadow: 
+        0 35px 80px -20px rgba(2, 132, 199, 0.22),
+        0 12px 30px -8px rgba(124, 58, 237, 0.15);
     }
 
-    .hero-artwork img {
+    .hero-artwork-card img {
       width: 100%;
       height: auto;
       display: block;
+      border-radius: 10px;
+      transform: translateZ(20px);
+    }
+
+    /* Brillo holográfico interactivo */
+    .hero-artwork-sheen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.5) 0%, transparent 60%);
+      opacity: 0;
+      mix-blend-mode: overlay;
+      transition: opacity 0.3s ease;
+    }
+
+    .hero-artwork-card:hover .hero-artwork-sheen {
+      opacity: 1;
+    }
+
+    /* Badge de Portada con Faro Pulsante */
+    .hero-live-badge {
+      position: absolute;
+      top: 22px;
+      left: 22px;
+      transform: translateZ(35px);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-delicate);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .live-beacon {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #0284c7;
+      box-shadow: 0 0 10px #0284c7;
+      animation: beaconPulse 2s infinite ease-in-out;
+    }
+
+    @keyframes beaconPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+
+    /* Pastillas Flotantes de Micro-Datos en 3D */
+    .floating-data-pill {
+      position: absolute;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border-delicate);
+      padding: 4px 12px;
       border-radius: 8px;
+      box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.08);
+      pointer-events: none;
+      animation: floatPill 6s infinite ease-in-out;
+    }
+
+    .pill-pos-1 {
+      bottom: -15px;
+      right: 15px;
+      animation-delay: 0s;
+      border-color: rgba(2, 132, 199, 0.3);
+    }
+
+    .pill-pos-2 {
+      top: 40%;
+      left: -20px;
+      animation-delay: -3s;
+      border-color: rgba(124, 58, 237, 0.3);
+    }
+
+    @keyframes floatPill {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(1deg); }
+    }
+
+    @media (max-width: 600px) {
+      .floating-data-pill { display: none; }
+    }
+
+    .hero-text-stage {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
     }
 
     .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       font-family: var(--font-mono);
-      font-size: 0.72rem;
+      font-size: 0.74rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--accent-hk);
       font-weight: 600;
-      margin-bottom: 0.5rem;
     }
 
     .hero-title {
       font-family: var(--font-serif);
-      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-size: clamp(2.5rem, 4.8vw, 3.8rem);
       font-weight: 700;
-      line-height: 1.1;
+      line-height: 1.08;
       letter-spacing: -0.02em;
       color: var(--text-main);
-      margin-bottom: 1rem;
     }
 
-    .hero-title em {
+    .shimmer-gradient {
+      background: linear-gradient(135deg, #0284c7 0%, #7c3aed 50%, #0284c7 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textShimmer 5s linear infinite;
       font-style: italic;
       font-weight: 400;
-      color: var(--accent-hk);
+    }
+
+    @keyframes textShimmer {
+      to { background-position: 200% center; }
     }
 
     .hero-brief {
-      font-size: 1.12rem;
-      line-height: 1.75;
+      font-size: 1.14rem;
+      line-height: 1.8;
       color: var(--text-muted);
-      margin-bottom: 1.5rem;
     }
 
     .hero-authors-card {
-      padding: 1rem 1.4rem;
-      border-radius: 10px;
+      padding: 1.1rem 1.4rem;
+      border-radius: 12px;
       background: var(--bg-surface);
       border: 1px solid var(--border-delicate);
       display: flex;
@@ -308,11 +448,12 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text-faint);
+      font-weight: 600;
     }
 
     .hero-authors-list {
       font-family: var(--font-sans);
-      font-size: 0.98rem;
+      font-size: 1.02rem;
       font-weight: 600;
       color: var(--text-main);
       display: flex;
@@ -323,6 +464,31 @@
     .hero-authors-list span::before {
       content: "• ";
       color: var(--accent-hk);
+    }
+
+    .hero-cta-btn {
+      align-self: flex-start;
+      margin-top: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #0284c7, #7c3aed);
+      color: #ffffff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.25);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(2, 132, 199, 0.4);
     }
 
     /* ==========================================================================
@@ -834,7 +1000,6 @@
       pointer-events: none;
     }
 
-    /* HUD Flotante de Telemetría Dinámica */
     .canvas-inspector {
       position: absolute;
       top: 14px;
@@ -960,7 +1125,7 @@
     }
 
     .colophon-author-card {
-      padding: 1rem 1.8rem;
+      padding: 1.25rem 2.5rem;
       background: var(--bg-surface);
       border: 1px solid var(--border-delicate);
       border-radius: 12px;
@@ -997,29 +1162,51 @@
   <!-- CONTENEDOR PRINCIPAL -->
   <main class="essay-main">
 
-    <!-- 00. PORTADA HERO (SLIDE 1 EXACTA) -->
+    <!-- 00. PORTADA HERO DINÁMICO & CINEMÁTICO (SLIDE 1 CON TILT 3D Y CONSTELACIÓN VIVA) -->
     <section id="prologo" class="hero-box">
-      <div class="hero-artwork" onclick="openFullPlate(1, 'Portada Oficial — Hong Kong & Shenzhen')">
-        <img src="./slides/slide_1.png" alt="Hong Kong & Shenzhen - Portada Oficial" />
+      <!-- Canvas de Constelación Generativa de Fondo -->
+      <canvas id="heroConstellationCanvas"></canvas>
+
+      <!-- Tarjeta 3D Tilt con Slide 1 Oficial -->
+      <div class="hero-artwork-stage">
+        <div class="hero-artwork-card" id="heroCard3D" onclick="openFullPlate(1, 'Portada Oficial — Hong Kong & Shenzhen')">
+          <div class="hero-live-badge">
+            <span class="live-beacon"></span> Portada Oficial • Slide 01
+          </div>
+          <img src="./slides/slide_1.png" alt="Hong Kong & Shenzhen - Portada Oficial" />
+          <div class="hero-artwork-sheen" id="heroSheen"></div>
+        </div>
+
+        <!-- Micro-pills flotantes en 3D Parallax -->
+        <div class="floating-data-pill pill-pos-1">📍 Delta del Río Perla • HSR 14 min</div>
+        <div class="floating-data-pill pill-pos-2">🌐 Corredor Simbiótico Bipolar</div>
       </div>
 
-      <div>
-        <div class="hero-tag">Investigación Urbana & Arquitectónica</div>
+      <!-- Texto Hero Dinámico -->
+      <div class="hero-text-stage">
+        <div class="hero-tag">
+          <span>✦</span> Investigación Urbana & Arquitectónica
+        </div>
         <h1 class="hero-title">
-          Topologías de la <em>Densidad</em> y el Poder
+          Topologías de la <span class="shimmer-gradient">Densidad</span> y el Poder
         </h1>
         <p class="hero-brief">
           ¿Quién concentra la capacidad de decisión cuando la ciudad se digitaliza? Un fotoensayo visual entre la simbiosis transfronteriza de <strong>Hong Kong y Shenzhen</strong>, la memoria celular de <strong>Çatalhöyük</strong> y la resistencia territorial en <strong>Bogotá (Kennedy, Patio Bonito y Corabastos)</strong>.
         </p>
 
         <div class="hero-authors-card">
-          <div class="hero-authors-title">Equipo de Investigación & Autoría</div>
+          <div class="hero-authors-title">Equipo de Investigación & Autoría Colectiva</div>
           <div class="hero-authors-list">
             <span>Alejandra Gómez</span>
             <span>Ana Casas</span>
             <span>Juan Trujillo</span>
           </div>
         </div>
+
+        <a href="#sat-map-sec" class="hero-cta-btn">
+          <span>✦ Explorar Cartografía & Redes 3D</span>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </a>
       </div>
     </section>
 
@@ -1395,7 +1582,7 @@
     </div>
   </div>
 
-  <!-- SCRIPTS: MAPA SATELITAL CON TRANSICIÓN REAL Y MOTOR 3D ULTRA-INTERACTIVO -->
+  <!-- SCRIPTS: MAPA SATELITAL CON TRANSICIÓN REAL, MOTOR 3D Y HERO DINÁMICO -->
   <script>
     // ==========================================================================
     // 1. HAZ DE LUZ DEL CURSOR
@@ -1416,7 +1603,102 @@
     renderCursor();
 
     // ==========================================================================
-    // 2. MAPA SATELITAL INTERACTIVO CON DELIMITACIONES VECTORIALES
+    // 2. HERO DINÁMICO: TILT 3D PARALLAX EN SLIDE 1 & CONSTELACIÓN DE FONDO
+    // ==========================================================================
+    const heroCard = document.getElementById('heroCard3D');
+    const heroSheen = document.getElementById('heroSheen');
+
+    if (heroCard) {
+      const heroStage = heroCard.parentElement;
+
+      heroStage.addEventListener('mousemove', (e) => {
+        const rect = heroCard.getBoundingClientRect();
+        const cardX = e.clientX - rect.left - rect.width / 2;
+        const cardY = e.clientY - rect.top - rect.height / 2;
+
+        const rotateX = -(cardY / (rect.height / 2)) * 14;
+        const rotateY = (cardX / (rect.width / 2)) * 14;
+
+        heroCard.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+
+        if (heroSheen) {
+          const sheenX = ((e.clientX - rect.left) / rect.width) * 100;
+          const sheenY = ((e.clientY - rect.top) / rect.height) * 100;
+          heroSheen.style.background = `radial-gradient(circle at ${sheenX}% ${sheenY}%, rgba(255, 255, 255, 0.6) 0%, rgba(2, 132, 199, 0.15) 35%, transparent 65%)`;
+        }
+      });
+
+      heroStage.addEventListener('mouseleave', () => {
+        heroCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      });
+    }
+
+    // Canvas de Constelación Geométrica del Hero
+    const heroCanvas = document.getElementById('heroConstellationCanvas');
+    if (heroCanvas) {
+      const hCtx = heroCanvas.getContext('2d');
+      let hcw = heroCanvas.clientWidth || 1000;
+      let hch = heroCanvas.clientHeight || 500;
+
+      function resizeHeroCanvas() {
+        hcw = heroCanvas.parentElement.clientWidth || 1000;
+        hch = heroCanvas.parentElement.clientHeight || 500;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        heroCanvas.width = Math.floor(hcw * dpr);
+        heroCanvas.height = Math.floor(hch * dpr);
+        hCtx.setTransform(1, 0, 0, 1, 0, 0);
+        hCtx.scale(dpr, dpr);
+      }
+      window.addEventListener('resize', resizeHeroCanvas);
+      resizeHeroCanvas();
+
+      const heroNodes = Array.from({ length: 32 }, () => ({
+        x: Math.random() * hcw,
+        y: Math.random() * hch,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        r: Math.random() * 3 + 1.5
+      }));
+
+      function renderHeroConstellation() {
+        hCtx.clearRect(0, 0, hcw, hch);
+
+        // Actualizar física y rebotar
+        heroNodes.forEach(node => {
+          node.x += node.vx;
+          node.y += node.vy;
+          if (node.x < 0 || node.x > hcw) node.vx *= -1;
+          if (node.y < 0 || node.y > hch) node.vy *= -1;
+
+          // Dibujar punto
+          hCtx.beginPath();
+          hCtx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
+          hCtx.fillStyle = 'rgba(2, 132, 199, 0.4)';
+          hCtx.fill();
+        });
+
+        // Conectar aristas cercanas
+        for (let i = 0; i < heroNodes.length; i++) {
+          for (let j = i + 1; j < heroNodes.length; j++) {
+            const dist = Math.hypot(heroNodes[i].x - heroNodes[j].x, heroNodes[i].y - heroNodes[j].y);
+            if (dist < 140) {
+              hCtx.beginPath();
+              hCtx.moveTo(heroNodes[i].x, heroNodes[i].y);
+              hCtx.lineTo(heroNodes[j].x, heroNodes[j].y);
+              hCtx.strokeStyle = `rgba(2, 132, 199, ${(1 - dist / 140) * 0.22})`;
+              hCtx.lineWidth = 1;
+              hCtx.stroke();
+            }
+          }
+        }
+
+        requestAnimationFrame(renderHeroConstellation);
+      }
+      renderHeroConstellation();
+    }
+
+    // ==========================================================================
+    // 3. MAPA SATELITAL INTERACTIVO CON DELIMITACIONES VECTORIALES
     // ==========================================================================
     const TERRITORIES = [
       {
@@ -1532,7 +1814,7 @@
     });
 
     // ==========================================================================
-    // 3. MODELOS Y RENDERIZADO 3D EN CANVAS (ULTRA-INTERACTIVO CON FÍSICA Y ARRASTRE)
+    // 4. MODELOS Y RENDERIZADO 3D EN CANVAS (ULTRA-INTERACTIVO CON FÍSICA Y ARRASTRE)
     // ==========================================================================
     const TOPOLOGIES = [
       // 0: HK-SZ
@@ -1624,7 +1906,7 @@
       if (!canvas || !box) return null;
 
       const ctx = canvas.getContext('2d');
-      const topo = JSON.parse(JSON.stringify(TOPOLOGIES[idx])); // Copia editable
+      const topo = JSON.parse(JSON.stringify(TOPOLOGIES[idx]));
 
       let cw = box.clientWidth || 800;
       let ch = box.clientHeight || 480;
@@ -1646,7 +1928,6 @@
       let shockCenter = { x: 0, y: 0 };
       let flowSpeed = 1.0;
 
-      // Partículas de polvo cósmico / atmosférico 3D
       const dustMotes = Array.from({ length: 45 }, () => ({
         x: (Math.random() - 0.5) * 500,
         y: (Math.random() - 0.5) * 400,
@@ -1671,13 +1952,11 @@
       window.addEventListener('resize', resize);
       resize();
 
-      // Interacción con mouse y drag individual de nodos
       box.addEventListener('mousedown', (e) => {
         const rect = box.getBoundingClientRect();
         const mx = e.clientX - rect.left;
         const my = e.clientY - rect.top;
 
-        // Detectar si se hizo clic sobre un nodo
         let clickedNode = null;
         projectedNodes.forEach(pn => {
           const d = Math.hypot(pn.px - mx, pn.py - my);
@@ -1693,7 +1972,6 @@
           updateInspectorHUD(clickedNode.raw);
         } else {
           isDraggingCamera = true;
-          // Disparar onda de choque en el punto del clic
           shockTime = 0;
           shockCenter = { x: mx, y: my };
         }
@@ -1713,7 +1991,6 @@
         const my = e.clientY - rect.top;
 
         if (isDraggingNode && draggedNodeId !== null) {
-          // Desplazar nodo arrastrado en el espacio 3D
           const node = topo.nodes.find(n => n.id === draggedNodeId);
           if (node) {
             const dx = (e.clientX - lastMouseX) * (1.2 / zoom);
@@ -1734,7 +2011,6 @@
           lastMouseY = e.clientY;
         }
 
-        // Raycasting de hover
         if (mx >= 0 && mx <= cw && my >= 0 && my <= ch) {
           let nearest = null, minDist = 26;
           projectedNodes.forEach(pn => {
@@ -1789,7 +2065,6 @@
         const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
         const cx = cw / 2, cy = ch / 2, fov = 460;
 
-        // 1. Polvo cósmico en 3D
         dustMotes.forEach(mote => {
           const x1 = mote.x * cosY - mote.z * sinY;
           const z1 = mote.x * sinY + mote.z * cosY;
@@ -1807,7 +2082,6 @@
           }
         });
 
-        // 2. Proyección de nodos
         projectedNodes = topo.nodes.map(n => {
           const x1 = n.x * cosY - n.z * sinY;
           const z1 = n.x * sinY + n.z * cosY;
@@ -1826,7 +2100,6 @@
 
         const activeNode = (hoveredNode !== null ? hoveredNode : selectedNode);
 
-        // 3. Aristas orgánicas con curvas de Bézier y resaltado X-Ray
         topo.links.forEach(([fromId, toId]) => {
           const nA = projectedNodes[fromId], nB = projectedNodes[toId];
           if (!nA || !nB) return;
@@ -1847,7 +2120,6 @@
           ctx.stroke();
         });
 
-        // 4. Fotones de flujo con estelas
         pulses.forEach(p => {
           p.progress += p.speed * flowSpeed;
           if (p.progress > 1) p.progress = 0;
@@ -1870,7 +2142,6 @@
           ctx.fill();
         });
 
-        // 5. Onda de choque (Shockwave Pulse)
         if (shockTime < 2.5) {
           shockTime += 0.035;
           const swR = shockTime * 200;
@@ -1882,14 +2153,12 @@
           ctx.stroke();
         }
 
-        // 6. Nodos esféricos ordenados por profundidad (Z-sorted) con anillos orbitales
         const sorted = [...projectedNodes].sort((a, b) => b.depth - a.depth);
         sorted.forEach(pNode => {
           const isAct = (activeNode === pNode.id);
           const isDim = (activeNode !== null && !isAct);
           const baseR = pNode.raw.r * pNode.scale * (isAct ? 1.35 : 1.0);
 
-          // Anillos orbitales concéntricos para hubs principales
           if (pNode.raw.r >= 12) {
             ctx.beginPath();
             ctx.arc(pNode.px, pNode.py, baseR * 1.8 + Math.sin(time * 2 + pNode.id) * 3, 0, Math.PI * 2);
@@ -1898,7 +2167,6 @@
             ctx.stroke();
           }
 
-          // Halo exterior
           const halo = ctx.createRadialGradient(pNode.px, pNode.py, baseR * 0.2, pNode.px, pNode.py, baseR * 2.8);
           halo.addColorStop(0, `rgba(${topo.accentRgb[0]}, ${topo.accentRgb[1]}, ${topo.accentRgb[2]}, ${pNode.alpha * (isAct ? 0.5 : 0.2)})`);
           halo.addColorStop(1, 'rgba(255, 255, 255, 0)');
@@ -1907,7 +2175,6 @@
           ctx.fillStyle = halo;
           ctx.fill();
 
-          // Núcleo del nodo
           const core = ctx.createRadialGradient(pNode.px - baseR*0.3, pNode.py - baseR*0.3, baseR*0.1, pNode.px, pNode.py, baseR);
           core.addColorStop(0, '#ffffff');
           core.addColorStop(0.6, `rgba(${topo.accentRgb[0]}, ${topo.accentRgb[1]}, ${topo.accentRgb[2]}, ${isDim ? 0.4 : 0.9})`);
@@ -1920,7 +2187,6 @@
           ctx.lineWidth = 1.5 * pNode.scale;
           ctx.stroke();
 
-          // Etiqueta tipográfica
           if (pNode.scale > 0.55 || isAct) {
             ctx.font = `${isAct ? '700' : '600'} ${Math.max(10, Math.round(11 * pNode.scale))}px "Space Grotesk", sans-serif`;
             ctx.fillStyle = isAct ? '#0c121e' : `rgba(12, 18, 30, ${pNode.alpha * (isDim ? 0.35 : 0.85)})`;
@@ -1973,7 +2239,7 @@
     function resetStageNodes(i) { if (engines[i]) engines[i].resetNodes(); }
 
     // ==========================================================================
-    // 4. MODAL LIGHTBOX PARA LÁMINAS
+    // 5. MODAL LIGHTBOX PARA LÁMINAS
     // ==========================================================================
     const modal = document.getElementById('lightboxModal');
     const modalImg = document.getElementById('lightboxImg');
