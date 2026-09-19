@@ -11,12 +11,12 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Leaflet CSS & JS para Cartografía Satelital Fluida -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <style>
     /* ==========================================================================
-       SISTEMA DE DISEÑO EDITORIAL: MINIMALISTA, SATELITAL & VISUAL
+       SISTEMA DE DISEÑO EDITORIAL: MINIMALISTA, BLANCO PURO & REDES VIVAS
        ========================================================================== */
     :root {
       --bg-pure: #ffffff;
@@ -55,7 +55,6 @@
       scrollbar-color: rgba(2, 132, 199, 0.35) #f8fafc;
     }
 
-    /* Scrollbar sutil */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -83,8 +82,8 @@
     /* Haz de luz de seguimiento del cursor suave */
     #cursorGlow {
       position: fixed;
-      width: 450px;
-      height: 450px;
+      width: 480px;
+      height: 480px;
       border-radius: 50%;
       pointer-events: none;
       z-index: 1;
@@ -93,7 +92,6 @@
       will-change: left, top;
     }
 
-    /* Atmósfera de luz ambiental */
     .ambient-atmosphere {
       position: fixed;
       top: 0;
@@ -103,9 +101,9 @@
       pointer-events: none;
       z-index: 0;
       background: 
-        radial-gradient(at 10% 10%, rgba(56, 189, 248, 0.03) 0px, transparent 45%),
-        radial-gradient(at 90% 20%, rgba(167, 139, 250, 0.03) 0px, transparent 45%),
-        radial-gradient(at 50% 85%, rgba(251, 191, 36, 0.02) 0px, transparent 45%);
+        radial-gradient(at 10% 10%, rgba(56, 189, 248, 0.035) 0px, transparent 45%),
+        radial-gradient(at 90% 20%, rgba(167, 139, 250, 0.035) 0px, transparent 45%),
+        radial-gradient(at 50% 85%, rgba(251, 191, 36, 0.025) 0px, transparent 45%);
     }
 
     /* ==========================================================================
@@ -328,7 +326,7 @@
     }
 
     /* ==========================================================================
-       MAPA SATELITAL INTERACTIVO CON DELIMITACIÓN Y TRANSICIÓN CINEMATOGRÁFICA
+       MAPA SATELITAL INTERACTIVO CON DELIMITACIÓN EN TRANSICIÓN
        ========================================================================== */
     .satellite-explorer-section {
       margin: 4rem 0 5rem;
@@ -441,7 +439,6 @@
       z-index: 2;
     }
 
-    /* Cartela flotante de telemetría y delimitación */
     .map-telemetry-panel {
       position: absolute;
       top: 18px;
@@ -648,7 +645,7 @@
     }
 
     /* ==========================================================================
-       MATRIZ COMPARATIVA CONDENSADA & ELEGANTE
+       MATRIZ COMPARATIVA CONDENSADA
        ========================================================================== */
     .condensed-matrix {
       margin: 2rem 0;
@@ -700,20 +697,20 @@
     .matrix-table tr:last-child td { border-bottom: none; }
 
     /* ==========================================================================
-       LABORATORIO 3D DE REDES ORGÁNICAS
+       LABORATORIO 3D DE REDES ULTRA-INTERACTIVAS Y VIVAS
        ========================================================================== */
     .network-stage-frame {
-      border-radius: 16px;
+      border-radius: 18px;
       background: #ffffff;
       border: 1px solid var(--border-delicate);
-      box-shadow: 0 10px 30px -6px rgba(15, 23, 42, 0.05);
+      box-shadow: 0 12px 35px -6px rgba(15, 23, 42, 0.06);
       overflow: hidden;
       margin: 2.5rem 0;
       position: relative;
     }
 
     .stage-bar {
-      padding: 0.8rem 1.25rem;
+      padding: 0.85rem 1.35rem;
       background: var(--bg-surface);
       border-bottom: 1px solid var(--border-delicate);
       display: flex;
@@ -728,7 +725,7 @@
       align-items: center;
       gap: 0.6rem;
       font-family: var(--font-mono);
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -737,7 +734,7 @@
     .stage-controls {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
       flex-wrap: wrap;
     }
 
@@ -748,12 +745,16 @@
       font-family: var(--font-mono);
       font-size: 0.74rem;
       color: var(--text-muted);
+      background: #ffffff;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border-delicate);
     }
 
     .speed-range {
       -webkit-appearance: none;
       appearance: none;
-      width: 90px;
+      width: 80px;
       height: 4px;
       border-radius: 999px;
       background: #e2e8f0;
@@ -763,8 +764,8 @@
     .speed-range::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 14px;
-      height: 14px;
+      width: 13px;
+      height: 13px;
       border-radius: 50%;
       background: var(--accent-hk);
       cursor: pointer;
@@ -775,28 +776,39 @@
       font-size: 0.72rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      font-weight: 500;
+      font-weight: 600;
       padding: 5px 12px;
       border-radius: 6px;
       background: #ffffff;
       border: 1px solid var(--border-delicate);
       color: var(--text-main);
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
       transition: all 0.2s ease;
     }
 
     .stage-btn:hover {
       border-color: var(--accent-hk);
       color: var(--accent-hk);
+      box-shadow: 0 2px 8px var(--glow-cyan);
+    }
+
+    .stage-btn.active {
+      background: var(--text-main);
+      color: #ffffff;
+      border-color: var(--text-main);
     }
 
     .canvas-box {
       position: relative;
       width: 100%;
-      height: 460px;
-      background: radial-gradient(circle at center, #ffffff 45%, #f8fafc 100%);
+      height: 480px;
+      background: radial-gradient(circle at center, #ffffff 40%, #f8fafc 100%);
       cursor: grab;
       overflow: hidden;
+      user-select: none;
     }
 
     .canvas-box:active { cursor: grabbing; }
@@ -809,34 +821,38 @@
 
     .canvas-note {
       position: absolute;
-      bottom: 10px;
+      bottom: 12px;
       left: 14px;
       font-family: var(--font-mono);
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       color: var(--text-faint);
-      background: rgba(255, 255, 255, 0.9);
-      padding: 3px 8px;
-      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(6px);
+      padding: 4px 10px;
+      border-radius: 6px;
       border: 1px solid var(--border-delicate);
       pointer-events: none;
     }
 
+    /* HUD Flotante de Telemetría Dinámica */
     .canvas-inspector {
       position: absolute;
-      top: 12px;
+      top: 14px;
       right: 14px;
-      max-width: 300px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
+      max-width: 320px;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--border-delicate);
-      border-radius: 10px;
-      padding: 10px 14px;
-      box-shadow: 0 8px 20px -3px rgba(0, 0, 0, 0.08);
-      font-size: 0.84rem;
+      border-radius: 12px;
+      padding: 12px 16px;
+      box-shadow: 0 10px 28px -4px rgba(15, 23, 42, 0.1);
+      font-size: 0.86rem;
+      line-height: 1.5;
       pointer-events: none;
       opacity: 0;
-      transform: translateY(-4px);
-      transition: all 0.2s ease;
+      transform: translateY(-6px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .canvas-inspector.show {
@@ -844,8 +860,17 @@
       transform: translateY(0);
     }
 
+    .inspector-title {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
     /* ==========================================================================
-       MODAL LIGHTBOX DE ALTA RESOLUCIÓN
+       MODAL LIGHTBOX
        ========================================================================== */
     .lightbox-wrap {
       position: fixed;
@@ -963,7 +988,7 @@
       <a href="#prologo" class="nav-item">00. Portada</a>
       <a href="#sat-map-sec" class="nav-item">🛰️ Mapa Satelital</a>
       <a href="#acto-01" class="nav-item">01. HK ⇄ SZ</a>
-      <a href="#acto-02" class="nav-item">02. El Dilema del Poder</a>
+      <a href="#acto-02" class="nav-item">02. El Poder</a>
       <a href="#acto-03" class="nav-item">03. Çatalhöyük</a>
       <a href="#acto-04" class="nav-item">04. Bogotá</a>
     </nav>
@@ -1050,7 +1075,7 @@
       </div>
 
       <p class="essay-lead">
-        En 1842, <strong>Hong Kong</strong> pasó a control británico tras la Guerra del Opio. Ante la escasez de suelo plano y la protección estricta del 40% de parques orográficos, configuró un <strong>modelo vertical hipercompacto sobre estaciones de transporte masivo (TOD)</strong>. A escasos kilómetros, en 1980, <strong>Shenzhen</strong> fue declarada Zona Económica Especial (ZEE), convirtiéndose en cuatro décadas en la capital global del hardware y la innovación algorítmica.
+        En 1842, <strong>Hong Kong</strong> pasó a control británico tras la Guerra del Opio. Ante la escasez de suelo plano y la protección estricta del 40% de parques orográficos, configuró un <strong>modelo vertical hipercompacto sobre estaciones de transporte masivo (TOD)</strong>. A escasos kilómetros, en 1980, <strong>Shenzhen</strong> fue declarada Zona Económica Especial (ZEE), convirtiéndose en cuatro décadas en la fábrica global de hardware.
       </p>
 
       <!-- Láminas Fotográficas: Hong Kong y Shenzhen -->
@@ -1092,19 +1117,20 @@
           </div>
           <div class="stage-controls">
             <div class="speed-box">
-              <span>Flujo:</span>
+              <span>Velocidad:</span>
               <input type="range" class="speed-range" id="speed0" min="0.2" max="3" step="0.1" value="1.0" />
               <span id="speedVal0">1.0x</span>
             </div>
-            <button class="stage-btn" onclick="triggerStagePulse(0)">⚡ Pulso Transfronterizo</button>
-            <button class="stage-btn" onclick="resetStageView(0)">⟲ Vista 3D</button>
+            <button class="stage-btn" onclick="triggerStagePulse(0)">⚡ Pulso Shockwave</button>
+            <button class="stage-btn" onclick="toggleAutoRotate(0, this)">🌀 Auto-Órbita</button>
+            <button class="stage-btn" onclick="resetStageNodes(0)">⟲ Reset Nodos</button>
           </div>
         </div>
         <div class="canvas-box" id="viewBox0">
           <canvas id="stageCanvas0"></canvas>
-          <div class="canvas-note">Arrastra para rotar 360° • Rueda para Zoom</div>
+          <div class="canvas-note">🖱️ Arrastra fondo para Rotar 360° • Arrastra Nodos individuales con física • Clic en nodo para fijar datos</div>
           <div class="canvas-inspector" id="inspect0">
-            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-hk); font-weight: 600;" id="inspectTitle0">Nodo</div>
+            <div class="inspector-title" id="inspectTitle0" style="color: var(--accent-hk);">Nodo</div>
             <div id="inspectDesc0" style="color: var(--text-muted);">Información.</div>
           </div>
         </div>
@@ -1190,19 +1216,20 @@
           </div>
           <div class="stage-controls">
             <div class="speed-box">
-              <span>Flujo:</span>
+              <span>Velocidad:</span>
               <input type="range" class="speed-range" id="speed1" min="0.2" max="3" step="0.1" value="1.2" />
               <span id="speedVal1">1.2x</span>
             </div>
-            <button class="stage-btn" onclick="triggerStagePulse(1)">⚡ Pulso de Control</button>
-            <button class="stage-btn" onclick="resetStageView(1)">⟲ Vista 3D</button>
+            <button class="stage-btn" onclick="triggerStagePulse(1)">⚡ Pulso Shockwave</button>
+            <button class="stage-btn" onclick="toggleAutoRotate(1, this)">🌀 Auto-Órbita</button>
+            <button class="stage-btn" onclick="resetStageNodes(1)">⟲ Reset Nodos</button>
           </div>
         </div>
         <div class="canvas-box" id="viewBox1">
           <canvas id="stageCanvas1"></canvas>
-          <div class="canvas-note">Arrastra para rotar 360° • Rueda para Zoom</div>
+          <div class="canvas-note">🖱️ Arrastra fondo para Rotar 360° • Arrastra Nodos individuales con física • Clic en nodo para fijar datos</div>
           <div class="canvas-inspector" id="inspect1">
-            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-sz); font-weight: 600;" id="inspectTitle1">Nodo</div>
+            <div class="inspector-title" id="inspectTitle1" style="color: var(--accent-sz);">Nodo</div>
             <div id="inspectDesc1" style="color: var(--text-muted);">Información.</div>
           </div>
         </div>
@@ -1249,19 +1276,20 @@
           </div>
           <div class="stage-controls">
             <div class="speed-box">
-              <span>Flujo:</span>
+              <span>Velocidad:</span>
               <input type="range" class="speed-range" id="speed2" min="0.2" max="3" step="0.1" value="0.9" />
               <span id="speedVal2">0.9x</span>
             </div>
-            <button class="stage-btn" onclick="triggerStagePulse(2)">⚡ Pulso Comunitario</button>
-            <button class="stage-btn" onclick="resetStageView(2)">⟲ Vista 3D</button>
+            <button class="stage-btn" onclick="triggerStagePulse(2)">⚡ Pulso Shockwave</button>
+            <button class="stage-btn" onclick="toggleAutoRotate(2, this)">🌀 Auto-Órbita</button>
+            <button class="stage-btn" onclick="resetStageNodes(2)">⟲ Reset Nodos</button>
           </div>
         </div>
         <div class="canvas-box" id="viewBox2">
           <canvas id="stageCanvas2"></canvas>
-          <div class="canvas-note">Arrastra para rotar 360° • Rueda para Zoom</div>
+          <div class="canvas-note">🖱️ Arrastra fondo para Rotar 360° • Arrastra Nodos individuales con física • Clic en nodo para fijar datos</div>
           <div class="canvas-inspector" id="inspect2">
-            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-ct); font-weight: 600;" id="inspectTitle2">Nodo</div>
+            <div class="inspector-title" id="inspectTitle2" style="color: var(--accent-ct);">Nodo</div>
             <div id="inspectDesc2" style="color: var(--text-muted);">Información.</div>
           </div>
         </div>
@@ -1321,19 +1349,20 @@
           </div>
           <div class="stage-controls">
             <div class="speed-box">
-              <span>Flujo:</span>
+              <span>Velocidad:</span>
               <input type="range" class="speed-range" id="speed3" min="0.2" max="3" step="0.1" value="1.4" />
               <span id="speedVal3">1.4x</span>
             </div>
-            <button class="stage-btn" onclick="triggerStagePulse(3)">⚡ Pulso Logístico</button>
-            <button class="stage-btn" onclick="resetStageView(3)">⟲ Vista 3D</button>
+            <button class="stage-btn" onclick="triggerStagePulse(3)">⚡ Pulso Shockwave</button>
+            <button class="stage-btn" onclick="toggleAutoRotate(3, this)">🌀 Auto-Órbita</button>
+            <button class="stage-btn" onclick="resetStageNodes(3)">⟲ Reset Nodos</button>
           </div>
         </div>
         <div class="canvas-box" id="viewBox3">
           <canvas id="stageCanvas3"></canvas>
-          <div class="canvas-note">Arrastra para rotar 360° • Rueda para Zoom</div>
+          <div class="canvas-note">🖱️ Arrastra fondo para Rotar 360° • Arrastra Nodos individuales con física • Clic en nodo para fijar datos</div>
           <div class="canvas-inspector" id="inspect3">
-            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-bg); font-weight: 600;" id="inspectTitle3">Nodo</div>
+            <div class="inspector-title" id="inspectTitle3" style="color: var(--accent-bg);">Nodo</div>
             <div id="inspectDesc3" style="color: var(--text-muted);">Información.</div>
           </div>
         </div>
@@ -1374,7 +1403,7 @@
     </div>
   </div>
 
-  <!-- SCRIPTS: MAPA SATELITAL CON TRANSICIÓN REAL Y MOTOR 3D -->
+  <!-- SCRIPTS: MAPA SATELITAL CON TRANSICIÓN REAL Y MOTOR 3D ULTRA-INTERACTIVO -->
   <script>
     // ==========================================================================
     // 1. HAZ DE LUZ DEL CURSOR
@@ -1458,20 +1487,16 @@
     let currentPoly = null;
 
     function initSatelliteMap() {
-      // Inicializar mapa de Leaflet con capas satelitales híbridas de Google
       map = L.map('satelliteMap', {
         zoomControl: false,
         attributionControl: false
       }).setView(TERRITORIES[0].coords, TERRITORIES[0].zoom);
 
-      // Google Satellite Hybrid Tiles
       L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
         maxZoom: 20
       }).addTo(map);
 
-      // Control de zoom sutil
       L.control.zoom({ position: 'bottomright' }).addTo(map);
-
       drawTerritoryBoundary(0);
     }
 
@@ -1484,7 +1509,7 @@
         weight: 3,
         opacity: 0.95,
         fillColor: t.color,
-        fillOpacity: 0.15,
+        fillOpacity: 0.18,
         dashArray: '6, 6'
       }).addTo(map);
     }
@@ -1494,8 +1519,6 @@
       if (btn) btn.classList.add('active');
 
       const t = TERRITORIES[idx];
-      
-      // Transición cinemática fluida con flyTo
       map.flyTo(t.coords, t.zoom, {
         animate: true,
         duration: 2.2,
@@ -1504,7 +1527,6 @@
 
       drawTerritoryBoundary(idx);
 
-      // Actualizar telemetría
       document.getElementById('telemetryBadge').textContent = t.badge;
       document.getElementById('telemetryBadge').style.color = t.color;
       document.getElementById('telemetryTitle').textContent = t.name;
@@ -1518,25 +1540,25 @@
     });
 
     // ==========================================================================
-    // 3. MODELOS Y RENDERIZADO 3D EN CANVAS (ORGÁNICOS Y VIVOS)
+    // 3. MODELOS Y RENDERIZADO 3D EN CANVAS (ULTRA-INTERACTIVO CON FÍSICA Y ARRASTRE)
     // ==========================================================================
     const TOPOLOGIES = [
       // 0: HK-SZ
       {
         accentRgb: [2, 132, 199],
         nodes: [
-          { id: 0, x: -160, y: -40, z: 20, r: 12, label: 'Central HK (CBD)', desc: 'Finanzas globales y verticalidad extrema.' },
-          { id: 1, x: -210, y: 30, z: -30, r: 7, label: 'Kowloon', desc: 'Hiperdensidad urbana compacta.' },
-          { id: 2, x: -130, y: 70, z: 40, r: 6, label: 'Victoria Peak', desc: 'Contención orográfica y parques rurales.' },
-          { id: 3, x: -180, y: -90, z: -10, r: 7, label: 'Lantau Airport', desc: 'Hub aeroportuario internacional.' },
-          { id: 4, x: -90, y: -10, z: 0, r: 8, label: 'West Kowloon HSR', desc: 'Terminal de tren de alta velocidad.' },
-          { id: 5, x: 160, y: 40, z: -20, r: 12, label: 'Futian CBD (SZ)', desc: 'Centro financiero de Shenzhen.' },
-          { id: 6, x: 210, y: -30, z: 30, r: 8, label: 'Nanshan Tech', desc: 'Sede de gigantes del hardware.' },
-          { id: 7, x: 130, y: -80, z: -40, r: 7, label: 'Qianhai Zone', desc: 'Zona piloto de cooperación legal.' },
-          { id: 8, x: 190, y: 90, z: 10, r: 6, label: 'Luohu Port', desc: 'Histórico cruce fronterizo peatonal.' },
-          { id: 9, x: 90, y: 10, z: 0, r: 8, label: 'Futian HSR', desc: 'Enlace de alta velocidad con HK.' },
-          { id: 10, x: 0, y: -50, z: 30, r: 6, label: 'Shenzhen Bay Bridge', desc: 'Puente vehicular sobre el Delta.' },
-          { id: 11, x: 0, y: 50, z: -30, r: 7, label: 'Lok Ma Chau Loop', desc: 'Parque de innovación transfronterizo.' }
+          { id: 0, x: -160, y: -40, z: 20, r: 13, label: 'Central HK (CBD)', desc: 'Finanzas globales, Common Law y verticalidad extrema.' },
+          { id: 1, x: -210, y: 30, z: -30, r: 8, label: 'Kowloon', desc: 'Hiperdensidad urbana compacta y vivienda intensiva.' },
+          { id: 2, x: -130, y: 70, z: 40, r: 7, label: 'Victoria Peak', desc: 'Contención orográfica y parques rurales protegidos.' },
+          { id: 3, x: -180, y: -90, z: -10, r: 8, label: 'Lantau Airport', desc: 'Hub aeroportuario internacional y logística global.' },
+          { id: 4, x: -90, y: -10, z: 0, r: 9, label: 'West Kowloon HSR', desc: 'Terminal de tren de alta velocidad a Guangzhou.' },
+          { id: 5, x: 160, y: 40, z: -20, r: 13, label: 'Futian CBD (SZ)', desc: 'Centro financiero e institucional de Shenzhen.' },
+          { id: 6, x: 210, y: -30, z: 30, r: 9, label: 'Nanshan Tech', desc: 'Sede de gigantes del hardware: Tencent, DJI, ZTE.' },
+          { id: 7, x: 130, y: -80, z: -40, r: 8, label: 'Qianhai Zone', desc: 'Zona piloto de cooperación jurídica y financiera.' },
+          { id: 8, x: 190, y: 90, z: 10, r: 7, label: 'Luohu Port', desc: 'Histórico cruce fronterizo peatonal e intercambio.' },
+          { id: 9, x: 90, y: 10, z: 0, r: 9, label: 'Futian HSR', desc: 'Enlace de alta velocidad con Hong Kong a 14 min.' },
+          { id: 10, x: 0, y: -50, z: 30, r: 7, label: 'Shenzhen Bay Bridge', desc: 'Puente vehicular continuo sobre el Delta.' },
+          { id: 11, x: 0, y: 50, z: -30, r: 8, label: 'Lok Ma Chau Loop', desc: 'Parque de innovación e investigación transfronteriza.' }
         ],
         links: [
           [0,1],[0,2],[0,3],[0,4],[1,4],[3,4],
@@ -1548,15 +1570,15 @@
       {
         accentRgb: [124, 58, 237],
         nodes: [
-          { id: 0, x: 0, y: 0, z: 0, r: 14, label: 'Matriz Estatal Shenzhen', desc: 'Plataforma de big data y planificación directiva.' },
-          { id: 1, x: 140, y: 0, z: 30, r: 8, label: 'Nanshan Hardware Hub', desc: 'Laboratorios de robótica e IA.' },
-          { id: 2, x: 0, y: 130, z: -40, r: 8, label: 'Futian Capital', desc: 'Bolsa ChiNext y servicios corporativos.' },
-          { id: 3, x: -140, y: 0, z: 30, r: 8, label: 'Bao’an Manufacturing', desc: 'Fábricas de escala global.' },
-          { id: 4, x: 0, y: -130, z: -40, r: 8, label: 'Longgang Cyber Campus', desc: 'Campus tecnológicos e infraestructura.' },
-          { id: 5, x: 100, y: 100, z: 60, r: 6, label: 'Baishizhou (Village)', desc: 'Chengzhongcun: vivienda asequible no-hukou.' },
-          { id: 6, x: -100, y: 100, z: -60, r: 6, label: 'Gangxia (Village)', desc: 'Colectivos rurales y resistencia barrial.' },
-          { id: 7, x: -100, y: -100, z: 60, r: 6, label: 'Xiasha (Village)', desc: 'Economía popular de soporte.' },
-          { id: 8, x: 100, y: -100, z: -60, r: 6, label: 'Dafen Village', desc: 'Producción artística y cultural.' }
+          { id: 0, x: 0, y: 0, z: 0, r: 15, label: 'Matriz Estatal Shenzhen', desc: 'Plataforma de big data y planificación directiva.' },
+          { id: 1, x: 140, y: 0, z: 30, r: 9, label: 'Nanshan Hardware Hub', desc: 'Laboratorios de robótica, IA y microelectrónica.' },
+          { id: 2, x: 0, y: 130, z: -40, r: 9, label: 'Futian Capital', desc: 'Bolsa ChiNext y servicios corporativos avanzados.' },
+          { id: 3, x: -140, y: 0, z: 30, r: 9, label: 'Bao’an Manufacturing', desc: 'Fábricas de escala global y producción 24/7.' },
+          { id: 4, x: 0, y: -130, z: -40, r: 9, label: 'Longgang Cyber Campus', desc: 'Campus tecnológicos e infraestructura de servidores.' },
+          { id: 5, x: 100, y: 100, z: 60, r: 7, label: 'Baishizhou (Village)', desc: 'Chengzhongcun: vivienda asequible para no-hukou.' },
+          { id: 6, x: -100, y: 100, z: -60, r: 7, label: 'Gangxia (Village)', desc: 'Colectivos rurales y resistencia barrial en el CBD.' },
+          { id: 7, x: -100, y: -100, z: 60, r: 7, label: 'Xiasha (Village)', desc: 'Economía popular y redes vecinales de soporte.' },
+          { id: 8, x: 100, y: -100, z: -60, r: 7, label: 'Dafen Village', desc: 'Producción artística y clúster pictórico global.' }
         ],
         links: [
           [0,1],[0,2],[0,3],[0,4],
@@ -1572,9 +1594,9 @@
           x: (i % 4 - 1.5) * 85 + (Math.sin(i) * 15),
           y: (Math.floor(i / 4) - 1.5) * 80 + (Math.cos(i) * 15),
           z: (Math.sin(i * 1.7) * 45),
-          r: 7 + (i % 3),
+          r: 8 + (i % 3),
           label: `Célula Doméstica ${String.fromCharCode(65 + i)}`,
-          desc: 'Vivienda adosada con acceso por cubierta.'
+          desc: 'Unidad de hábitat continuo; acceso por cubierta y fogón ritual.'
         })),
         links: [
           [0,1],[1,2],[2,3],[4,5],[5,6],[6,7],[8,9],[9,10],[10,11],[12,13],
@@ -1586,14 +1608,14 @@
       {
         accentRgb: [5, 150, 105],
         nodes: [
-          { id: 0, x: 0, y: 0, z: 0, r: 15, label: 'Corabastos (Nodo Central)', desc: '12.000 ton/día de alimentos; concentración logística.' },
-          { id: 1, x: -120, y: -60, z: 40, r: 9, label: 'Patio Bonito', desc: 'Barrio autogestionado en 1985; alta densidad popular.' },
-          { id: 2, x: 120, y: -40, z: -30, r: 9, label: 'El Amparo', desc: 'Bodegas de acopio y comercio informal continuo.' },
-          { id: 3, x: -60, y: 120, z: -40, r: 8, label: 'Av. Ciudad de Cali', desc: 'Eje troncal de transporte masivo.' },
-          { id: 4, x: 70, y: 110, z: 50, r: 8, label: 'Av. Las Américas', desc: 'Corredor de conexión con el centro.' },
-          { id: 5, x: -160, y: 50, z: -20, r: 7, label: 'María Paz', desc: 'Reciclaje de residuos y comercio vecinal.' },
-          { id: 6, x: 170, y: 60, z: 20, r: 7, label: 'Llano Grande', desc: 'Logística pesada de transporte intermunicipal.' },
-          { id: 7, x: 0, y: -140, z: 30, r: 7, label: 'Ronda Río Bogotá', desc: 'Límite ecológico y amortiguación hídrica.' }
+          { id: 0, x: 0, y: 0, z: 0, r: 16, label: 'Corabastos (Nodo Central)', desc: '12.000 ton/día de alimentos; concentración logística de Colombia.' },
+          { id: 1, x: -120, y: -60, z: 40, r: 10, label: 'Patio Bonito', desc: 'Barrio autogestionado en 1985; alta densidad popular.' },
+          { id: 2, x: 120, y: -40, z: -30, r: 10, label: 'El Amparo', desc: 'Bodegas de acopio y comercio informal continuo 24h.' },
+          { id: 3, x: -60, y: 120, z: -40, r: 9, label: 'Av. Ciudad de Cali', desc: 'Eje troncal de transporte masivo y movilidad.' },
+          { id: 4, x: 70, y: 110, z: 50, r: 9, label: 'Av. Las Américas', desc: 'Corredor de conexión con el centro histórico.' },
+          { id: 5, x: -160, y: 50, z: -20, r: 8, label: 'María Paz', desc: 'Reciclaje de residuos y comercio vecinal.' },
+          { id: 6, x: 170, y: 60, z: 20, r: 8, label: 'Llano Grande', desc: 'Logística pesada de transporte intermunicipal.' },
+          { id: 7, x: 0, y: -140, z: 30, r: 8, label: 'Ronda Río Bogotá', desc: 'Límite ecológico y amortiguación hídrica.' }
         ],
         links: [
           [0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],
@@ -1610,28 +1632,44 @@
       if (!canvas || !box) return null;
 
       const ctx = canvas.getContext('2d');
-      const topo = TOPOLOGIES[idx];
+      const topo = JSON.parse(JSON.stringify(TOPOLOGIES[idx])); // Copia editable
 
       let cw = box.clientWidth || 800;
-      let ch = box.clientHeight || 460;
+      let ch = box.clientHeight || 480;
       let dpr = Math.min(window.devicePixelRatio || 1, 2);
 
       let rotX = 0.32;
       let rotY = 0.5 + idx * 0.45;
       let targetRotX = rotX, targetRotY = rotY;
       let zoom = 1.0, targetZoom = 1.0;
-      let isDragging = false, lastMouseX = 0, lastMouseY = 0;
+      let isAutoRotating = true;
+
+      let isDraggingCamera = false;
+      let isDraggingNode = false;
+      let draggedNodeId = null;
+      let lastMouseX = 0, lastMouseY = 0;
       let hoveredNode = null;
+      let selectedNode = null;
       let shockTime = 999;
+      let shockCenter = { x: 0, y: 0 };
       let flowSpeed = 1.0;
 
+      // Partículas de polvo cósmico / atmosférico 3D
+      const dustMotes = Array.from({ length: 45 }, () => ({
+        x: (Math.random() - 0.5) * 500,
+        y: (Math.random() - 0.5) * 400,
+        z: (Math.random() - 0.5) * 450,
+        r: Math.random() * 2 + 1,
+        speed: Math.random() * 0.5 + 0.2
+      }));
+
       const pulses = topo.links.map(([fromId, toId], i) => ({
-        from: fromId, to: toId, progress: (i * 0.16) % 1.0, speed: 0.005 + (i % 3) * 0.002
+        from: fromId, to: toId, progress: (i * 0.16) % 1.0, speed: 0.006 + (i % 3) * 0.002
       }));
 
       function resize() {
         cw = box.clientWidth || 800;
-        ch = box.clientHeight || 460;
+        ch = box.clientHeight || 480;
         dpr = Math.min(window.devicePixelRatio || 1, 2);
         canvas.width = Math.floor(cw * dpr);
         canvas.height = Math.floor(ch * dpr);
@@ -1641,14 +1679,62 @@
       window.addEventListener('resize', resize);
       resize();
 
-      box.addEventListener('mousedown', (e) => { isDragging = true; lastMouseX = e.clientX; lastMouseY = e.clientY; });
-      window.addEventListener('mouseup', () => { isDragging = false; });
+      // Interacción con mouse y drag individual de nodos
+      box.addEventListener('mousedown', (e) => {
+        const rect = box.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+
+        // Detectar si se hizo clic sobre un nodo
+        let clickedNode = null;
+        projectedNodes.forEach(pn => {
+          const d = Math.hypot(pn.px - mx, pn.py - my);
+          if (d < pn.raw.r * pn.scale + 12) {
+            clickedNode = pn;
+          }
+        });
+
+        if (clickedNode) {
+          isDraggingNode = true;
+          draggedNodeId = clickedNode.id;
+          selectedNode = clickedNode.id;
+          updateInspectorHUD(clickedNode.raw);
+        } else {
+          isDraggingCamera = true;
+          // Disparar onda de choque en el punto del clic
+          shockTime = 0;
+          shockCenter = { x: mx, y: my };
+        }
+        lastMouseX = e.clientX;
+        lastMouseY = e.clientY;
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDraggingCamera = false;
+        isDraggingNode = false;
+        draggedNodeId = null;
+      });
+
       box.addEventListener('mousemove', (e) => {
         const rect = box.getBoundingClientRect();
         const mx = e.clientX - rect.left;
         const my = e.clientY - rect.top;
 
-        if (isDragging) {
+        if (isDraggingNode && draggedNodeId !== null) {
+          // Desplazar nodo arrastrado en el espacio 3D
+          const node = topo.nodes.find(n => n.id === draggedNodeId);
+          if (node) {
+            const dx = (e.clientX - lastMouseX) * (1.2 / zoom);
+            const dy = (e.clientY - lastMouseY) * (1.2 / zoom);
+            node.x += dx * Math.cos(-rotY) - dy * Math.sin(-rotX);
+            node.y += dy;
+          }
+          lastMouseX = e.clientX;
+          lastMouseY = e.clientY;
+          return;
+        }
+
+        if (isDraggingCamera) {
           targetRotY += (e.clientX - lastMouseX) * 0.007;
           targetRotX += (e.clientY - lastMouseY) * 0.007;
           targetRotX = Math.max(-1.4, Math.min(1.4, targetRotX));
@@ -1656,35 +1742,42 @@
           lastMouseY = e.clientY;
         }
 
+        // Raycasting de hover
         if (mx >= 0 && mx <= cw && my >= 0 && my <= ch) {
-          let nearest = null, minDist = 24;
+          let nearest = null, minDist = 26;
           projectedNodes.forEach(pn => {
             const d = Math.hypot(pn.px - mx, pn.py - my);
             if (d < minDist) { minDist = d; nearest = pn; }
           });
 
-          const ins = document.getElementById(`inspect${idx}`);
-          const insT = document.getElementById(`inspectTitle${idx}`);
-          const insD = document.getElementById(`inspectDesc${idx}`);
-
           if (nearest && nearest.raw) {
             hoveredNode = nearest.raw.id;
-            if (ins && insT && insD) {
-              insT.textContent = nearest.raw.label;
-              insD.textContent = nearest.raw.desc;
-              ins.classList.add('show');
-            }
+            updateInspectorHUD(nearest.raw);
           } else {
             hoveredNode = null;
-            if (ins) ins.classList.remove('show');
+            if (selectedNode === null) {
+              const ins = document.getElementById(`inspect${idx}`);
+              if (ins) ins.classList.remove('show');
+            }
           }
         }
       });
 
+      function updateInspectorHUD(rawNode) {
+        const ins = document.getElementById(`inspect${idx}`);
+        const insT = document.getElementById(`inspectTitle${idx}`);
+        const insD = document.getElementById(`inspectDesc${idx}`);
+        if (ins && insT && insD) {
+          insT.textContent = rawNode.label;
+          insD.textContent = rawNode.desc;
+          ins.classList.add('show');
+        }
+      }
+
       box.addEventListener('wheel', (e) => {
         e.preventDefault();
         targetZoom += e.deltaY * -0.001;
-        targetZoom = Math.max(0.65, Math.min(1.75, targetZoom));
+        targetZoom = Math.max(0.65, Math.min(1.85, targetZoom));
       }, { passive: false });
 
       let projectedNodes = [];
@@ -1695,45 +1788,74 @@
         rotX += (targetRotX - rotX) * 0.08;
         rotY += (targetRotY - rotY) * 0.08;
         zoom += (targetZoom - zoom) * 0.08;
-        if (!isDragging) targetRotY += 0.0012;
+        if (!isDraggingCamera && !isDraggingNode && isAutoRotating) {
+          targetRotY += 0.0015;
+        }
 
         ctx.clearRect(0, 0, cw, ch);
         const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
         const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
-        const cx = cw / 2, cy = ch / 2, fov = 450;
+        const cx = cw / 2, cy = ch / 2, fov = 460;
 
+        // 1. Polvo cósmico en 3D
+        dustMotes.forEach(mote => {
+          const x1 = mote.x * cosY - mote.z * sinY;
+          const z1 = mote.x * sinY + mote.z * cosY;
+          const y2 = mote.y * cosX - z1 * sinX;
+          const z2 = mote.y * sinX + z1 * cosX;
+          const depth = z2 + 350;
+          if (depth > 10) {
+            const sc = (fov / depth) * zoom;
+            const px = cx + x1 * sc;
+            const py = cy + y2 * sc;
+            ctx.beginPath();
+            ctx.arc(px, py, mote.r * sc, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${topo.accentRgb[0]}, ${topo.accentRgb[1]}, ${topo.accentRgb[2]}, ${Math.max(0.05, Math.min(0.25, (sc-0.3)*0.4))})`;
+            ctx.fill();
+          }
+        });
+
+        // 2. Proyección de nodos
         projectedNodes = topo.nodes.map(n => {
           const x1 = n.x * cosY - n.z * sinY;
           const z1 = n.x * sinY + n.z * cosY;
           const y2 = n.y * cosX - z1 * sinX;
           const z2 = n.y * sinX + z1 * cosX;
-          const floatY = y2 + Math.sin(time * 1.5 + n.id) * 3;
+          const floatY = y2 + Math.sin(time * 1.5 + n.id) * 3.5;
           const depth = z2 + 350;
           const scale = Math.max(0.1, (fov / Math.max(1, depth)) * zoom);
           return {
             id: n.id, raw: n,
             px: cx + x1 * scale, py: cy + floatY * scale,
             scale, depth,
-            alpha: Math.max(0.2, Math.min(1, (scale - 0.4) * 1.6))
+            alpha: Math.max(0.25, Math.min(1, (scale - 0.35) * 1.6))
           };
         });
 
-        // 1. Aristas Bézier
+        const activeNode = (hoveredNode !== null ? hoveredNode : selectedNode);
+
+        // 3. Aristas orgánicas con curvas de Bézier y resaltado X-Ray
         topo.links.forEach(([fromId, toId]) => {
           const nA = projectedNodes[fromId], nB = projectedNodes[toId];
           if (!nA || !nB) return;
-          const isH = (hoveredNode === fromId || hoveredNode === toId);
+          const isConnected = (activeNode === fromId || activeNode === toId);
+          const isDimmed = (activeNode !== null && !isConnected);
+
           ctx.beginPath();
           ctx.moveTo(nA.px, nA.py);
           const midX = (nA.px + nB.px) * 0.5;
           const midY = (nA.py + nB.py) * 0.5 - (nA.depth - nB.depth) * 0.08;
           ctx.quadraticCurveTo(midX, midY, nB.px, nB.py);
-          ctx.strokeStyle = `rgba(${topo.accentRgb[0]}, ${topo.accentRgb[1]}, ${topo.accentRgb[2]}, ${(nA.alpha + nB.alpha) * 0.5 * (isH ? 1 : 0.4)})`;
-          ctx.lineWidth = (isH ? 2.5 : 1.2) * ((nA.scale + nB.scale) * 0.5);
+
+          let strokeAlpha = (nA.alpha + nB.alpha) * 0.5 * (isConnected ? 0.9 : 0.35);
+          if (isDimmed) strokeAlpha *= 0.25;
+
+          ctx.strokeStyle = `rgba(${topo.accentRgb[0]}, ${topo.accentRgb[1]}, ${topo.accentRgb[2]}, ${strokeAlpha})`;
+          ctx.lineWidth = (isConnected ? 2.6 : 1.2) * ((nA.scale + nB.scale) * 0.5);
           ctx.stroke();
         });
 
-        // 2. Fotones
+        // 4. Fotones de flujo con estelas
         pulses.forEach(p => {
           p.progress += p.speed * flowSpeed;
           if (p.progress > 1) p.progress = 0;
@@ -1746,42 +1868,70 @@
           const py = (1-t)*(1-t)*nA.py + 2*(1-t)*t*midY + t*t*nB.py;
           const pScale = (1-t)*nA.scale + t*nB.scale;
 
-          const g = ctx.createRadialGradient(px, py, 0, px, py, 7 * pScale);
+          const isConnected = (activeNode === p.from || activeNode === p.to);
+          const g = ctx.createRadialGradient(px, py, 0, px, py, (isConnected ? 9 : 6) * pScale);
           g.addColorStop(0, `rgba(${topo.accentRgb[0]}, ${topo.accentRgb[1]}, ${topo.accentRgb[2]}, 0.95)`);
           g.addColorStop(1, 'rgba(255, 255, 255, 0)');
-          ctx.beginPath(); ctx.arc(px, py, 4.5 * pScale, 0, Math.PI * 2); ctx.fillStyle = g; ctx.fill();
+          ctx.beginPath();
+          ctx.arc(px, py, (isConnected ? 5.5 : 4) * pScale, 0, Math.PI * 2);
+          ctx.fillStyle = g;
+          ctx.fill();
         });
 
-        // 3. Shockwave
+        // 5. Onda de choque (Shockwave Pulse)
         if (shockTime < 2.5) {
           shockTime += 0.035;
+          const swR = shockTime * 200;
+          const swA = Math.max(0, 1 - shockTime/2.5);
           ctx.beginPath();
-          ctx.arc(cx, cy, shockTime * 180, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(${topo.accentRgb[0]}, ${topo.accentRgb[1]}, ${topo.accentRgb[2]}, ${Math.max(0, 1 - shockTime/2.5) * 0.6})`;
-          ctx.lineWidth = 3; ctx.stroke();
+          ctx.arc(shockCenter.x, shockCenter.y, swR, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(${topo.accentRgb[0]}, ${topo.accentRgb[1]}, ${topo.accentRgb[2]}, ${swA * 0.5})`;
+          ctx.lineWidth = 2.5;
+          ctx.stroke();
         }
 
-        // 4. Nodos Z-sorted
+        // 6. Nodos esféricos ordenados por profundidad (Z-sorted) con anillos orbitales
         const sorted = [...projectedNodes].sort((a, b) => b.depth - a.depth);
         sorted.forEach(pNode => {
-          const isH = hoveredNode === pNode.id;
-          const baseR = pNode.raw.r * pNode.scale * (isH ? 1.35 : 1.0);
+          const isAct = (activeNode === pNode.id);
+          const isDim = (activeNode !== null && !isAct);
+          const baseR = pNode.raw.r * pNode.scale * (isAct ? 1.35 : 1.0);
 
-          const halo = ctx.createRadialGradient(pNode.px, pNode.py, baseR * 0.2, pNode.px, pNode.py, baseR * 2.6);
-          halo.addColorStop(0, `rgba(${topo.accentRgb[0]}, ${topo.accentRgb[1]}, ${topo.accentRgb[2]}, ${pNode.alpha * (isH ? 0.45 : 0.18)})`);
+          // Anillos orbitales concéntricos para hubs principales
+          if (pNode.raw.r >= 12) {
+            ctx.beginPath();
+            ctx.arc(pNode.px, pNode.py, baseR * 1.8 + Math.sin(time * 2 + pNode.id) * 3, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(${topo.accentRgb[0]}, ${topo.accentRgb[1]}, ${topo.accentRgb[2]}, ${pNode.alpha * 0.25})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+
+          // Halo exterior
+          const halo = ctx.createRadialGradient(pNode.px, pNode.py, baseR * 0.2, pNode.px, pNode.py, baseR * 2.8);
+          halo.addColorStop(0, `rgba(${topo.accentRgb[0]}, ${topo.accentRgb[1]}, ${topo.accentRgb[2]}, ${pNode.alpha * (isAct ? 0.5 : 0.2)})`);
           halo.addColorStop(1, 'rgba(255, 255, 255, 0)');
-          ctx.beginPath(); ctx.arc(pNode.px, pNode.py, baseR * 2.6, 0, Math.PI * 2); ctx.fillStyle = halo; ctx.fill();
+          ctx.beginPath();
+          ctx.arc(pNode.px, pNode.py, baseR * 2.8, 0, Math.PI * 2);
+          ctx.fillStyle = halo;
+          ctx.fill();
 
+          // Núcleo del nodo
           const core = ctx.createRadialGradient(pNode.px - baseR*0.3, pNode.py - baseR*0.3, baseR*0.1, pNode.px, pNode.py, baseR);
           core.addColorStop(0, '#ffffff');
-          core.addColorStop(0.6, `rgba(${topo.accentRgb[0]}, ${topo.accentRgb[1]}, ${topo.accentRgb[2]}, 0.9)`);
-          core.addColorStop(1, `rgba(${topo.accentRgb[0]}, ${topo.accentRgb[1]}, ${topo.accentRgb[2]}, 0.95)`);
-          ctx.beginPath(); ctx.arc(pNode.px, pNode.py, baseR, 0, Math.PI * 2); ctx.fillStyle = core; ctx.fill();
-          ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 1.5 * pNode.scale; ctx.stroke();
+          core.addColorStop(0.6, `rgba(${topo.accentRgb[0]}, ${topo.accentRgb[1]}, ${topo.accentRgb[2]}, ${isDim ? 0.4 : 0.9})`);
+          core.addColorStop(1, `rgba(${topo.accentRgb[0]}, ${topo.accentRgb[1]}, ${topo.accentRgb[2]}, ${isDim ? 0.5 : 0.95})`);
+          ctx.beginPath();
+          ctx.arc(pNode.px, pNode.py, baseR, 0, Math.PI * 2);
+          ctx.fillStyle = core;
+          ctx.fill();
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 1.5 * pNode.scale;
+          ctx.stroke();
 
-          if (pNode.scale > 0.55 || isH) {
-            ctx.font = `${isH ? '600' : '500'} ${Math.max(10, Math.round(11 * pNode.scale))}px "Space Grotesk", sans-serif`;
-            ctx.fillStyle = isH ? '#0c121e' : `rgba(12, 18, 30, ${pNode.alpha * 0.85})`;
+          // Etiqueta tipográfica
+          if (pNode.scale > 0.55 || isAct) {
+            ctx.font = `${isAct ? '700' : '600'} ${Math.max(10, Math.round(11 * pNode.scale))}px "Space Grotesk", sans-serif`;
+            ctx.fillStyle = isAct ? '#0c121e' : `rgba(12, 18, 30, ${pNode.alpha * (isDim ? 0.35 : 0.85)})`;
             ctx.textAlign = 'center';
             ctx.fillText(pNode.raw.label, pNode.px, pNode.py + baseR + 13 * pNode.scale);
           }
@@ -1792,8 +1942,23 @@
       loop();
 
       return {
-        pulse: () => { shockTime = 0; },
-        reset: () => { targetRotX = 0.32; targetRotY = 0.5 + idx * 0.45; targetZoom = 1.0; },
+        pulse: () => { shockTime = 0; shockCenter = { x: cw/2, y: ch/2 }; },
+        toggleAutoRotate: (btn) => {
+          isAutoRotating = !isAutoRotating;
+          if (btn) btn.classList.toggle('active', isAutoRotating);
+        },
+        resetNodes: () => {
+          const original = TOPOLOGIES[idx];
+          topo.nodes.forEach((n, i) => {
+            n.x = original.nodes[i].x;
+            n.y = original.nodes[i].y;
+            n.z = original.nodes[i].z;
+          });
+          targetRotX = 0.32; targetRotY = 0.5 + idx * 0.45; targetZoom = 1.0;
+          selectedNode = null;
+          const ins = document.getElementById(`inspect${idx}`);
+          if (ins) ins.classList.remove('show');
+        },
         setSpeed: (s) => { flowSpeed = s; }
       };
     }
@@ -1812,7 +1977,8 @@
     }
 
     function triggerStagePulse(i) { if (engines[i]) engines[i].pulse(); }
-    function resetStageView(i) { if (engines[i]) engines[i].reset(); }
+    function toggleAutoRotate(i, btn) { if (engines[i]) engines[i].toggleAutoRotate(btn); }
+    function resetStageNodes(i) { if (engines[i]) engines[i].resetNodes(); }
 
     // ==========================================================================
     // 4. MODAL LIGHTBOX PARA LÁMINAS
